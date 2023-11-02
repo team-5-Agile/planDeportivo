@@ -1,5 +1,6 @@
 package mx.edu.itson.plan.negocio;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -122,5 +123,90 @@ public class Validaciones {
             // Lanzar la excepción personalizada
             throw new Exception("Fecha inválida: " + strFecha);
         }
+    }
+    /**
+     *  Método qué convierte una fecha de tpo LocalDate a dd/MM/yyyy
+     * @param fecha Representa la fecha inicial cómo objeto LocalDate
+     * @return devuelve la fecha convertida en String dd/MM/yyyy
+     * @throws Exception si la cadena no cuenta con un formato valido lanza una excepción
+     */
+    public String convertirFecha(LocalDate fecha) throws Exception {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String fechaFormateada = fecha.format(formatter);
+            return fechaFormateada;
+        } catch (DateTimeParseException e) {
+            // Lanzar la excepción personalizada
+            throw new Exception("Fecha inválida: " + fecha);
+        }
+        
+    }
+    /**
+     * Método que calcula el número de semanas de un periodo entre una fecha de
+     * inicio y una fecha fin.
+     *
+     * @param strFechaInicio Representa la fecha inicial
+     * @param strFechaFin Representa la fecha fin
+     * @return devuelve el número de semanas en el periodo ingresado
+     */
+    public Long calcPeriodo(String strFechaInicio, String strFechaFin) {
+        try {
+            LocalDate fechaInicio = convertirFecha(strFechaInicio);
+            LocalDate fechaFin = convertirFecha(strFechaFin);
+
+            if (!fechaInicio.getDayOfWeek().equals(DayOfWeek.MONDAY)) {
+                throw new Exception("La fecha inicial debe ser Lunes");
+            }
+            if (!fechaFin.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+                throw new Exception("La fecha final debe ser viernes");
+            }
+                    // se obtienen todas las fechas entre la fecha inicio y fin
+            return fechaInicio.datesUntil(fechaFin)
+                    // se filtran los lunes
+                    .filter(e -> e.getDayOfWeek() == DayOfWeek.MONDAY)
+                    // se cuentan los inicio de semanas para obtener el total 
+                    // semanas
+                    .count();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return 0L;
+    }
+
+    /**
+     * Método que calcula Fecha Fin de un periodo entre una fecha de inicio y un
+     * número de semanas
+     * @param strFechaInicio Representa la fecha inicial del periodo
+     * @param numSemanas Representa el número de semanas en el periodo
+     * @return devuelve la fecha fin del periodo
+     */
+    public LocalDate calcPeriodo(String strFechaInicio, Integer numSemanas) {
+        try {
+
+            LocalDate fechaInicio = convertirFecha(strFechaInicio);
+            LocalDate fechaFin = fechaInicio.plusWeeks(numSemanas)
+                    // se le quitan 3 días ala fecha final, es decir se vuelve
+                    // viernes.
+                    .minusDays(3);
+            // se valida si la fecha inicial es lunes,
+            if (!fechaInicio.getDayOfWeek().equals(DayOfWeek.MONDAY)) {
+                throw new Exception("La fecha inicial debe ser Lunes");
+            }
+            if (fechaFin == null) {
+                throw new Exception("Ocurrio un error al calcular la fecha fin");
+            }
+            if (!fechaFin.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+                throw new Exception("La fecha final debe ser viernes");
+            }
+
+            return fechaFin;
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+
+        }
+        return null;
     }
 }
