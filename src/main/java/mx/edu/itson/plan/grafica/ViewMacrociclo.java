@@ -31,7 +31,10 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlSetupFechasMacro = new javax.swing.JPanel();
+        lblEncabezadoMacro = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblDeporte = new javax.swing.JLabel();
+        lblRama = new javax.swing.JLabel();
         lblFechaFinMacro = new javax.swing.JLabel();
         lblSemanasMacro = new javax.swing.JLabel();
         lblMensajeMacro = new javax.swing.JLabel();
@@ -42,7 +45,41 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblFechaInicioMacro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Nuevo Macrociclo");
         setBackground(new java.awt.Color(255, 255, 255));
+
+        lblEncabezadoMacro.setBackground(new java.awt.Color(204, 204, 204));
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo.setText("Nuevo Macrociclo");
+
+        lblDeporte.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblDeporte.setText("Deporte");
+
+        lblRama.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblRama.setText("Rama");
+
+        javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
+        lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);
+        lblEncabezadoMacroLayout.setHorizontalGroup(
+            lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(lblTitulo)
+                .addGap(266, 266, 266)
+                .addComponent(lblDeporte)
+                .addGap(12, 12, 12)
+                .addComponent(lblRama))
+        );
+        lblEncabezadoMacroLayout.setVerticalGroup(
+            lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitulo)
+                    .addComponent(lblDeporte)
+                    .addComponent(lblRama)))
+        );
 
         lblFechaFinMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFechaFinMacro.setText("Fecha Fin:");
@@ -79,121 +116,55 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblFechaInicioMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFechaInicioMacro.setText("Fecha Incio:");
 
-        javax.swing.GroupLayout pnlSetupFechasMacroLayout = new javax.swing.GroupLayout(pnlSetupFechasMacro);
-        pnlSetupFechasMacro.setLayout(pnlSetupFechasMacroLayout);
-        pnlSetupFechasMacroLayout.setHorizontalGroup(
-            pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSetupFechasMacroLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSetupFechasMacroLayout.createSequentialGroup()
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lblDuracionMacro))
                     .addComponent(lblFechaInicioMacro)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSetupFechasMacroLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblFechaFinMacro)))
+                    .addComponent(lblFechaFinMacro, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMensajeMacro)
-                    .addGroup(pnlSetupFechasMacroLayout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSemanasMacro))
-                    .addGroup(pnlSetupFechasMacroLayout.createSequentialGroup()
-                        .addGroup(pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlSetupFechasMacroLayout.setVerticalGroup(
-            pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSetupFechasMacroLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDuracionMacro)
                     .addComponent(lblSemanasMacro))
                 .addGap(18, 18, 18)
                 .addComponent(lblMensajeMacro)
                 .addGap(15, 15, 15)
-                .addGroup(pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFechaInicioMacro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlSetupFechasMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFechaFinMacro))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlSetupFechasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 256, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(pnlSetupFechasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addGap(191, 191, 191))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNumSemanasMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasMacroKeyPressed
-        String fechaInicio = this.txtFechaInicioMacro.getText();
-        String numSemanas = this.txtNumSemanasMacro.getText();
-        if (evt.getKeyCode() != 10) {
-            return;
-        }
-        try {
-            Validaciones val = new Validaciones();
-            if (!val.isNumSemanaValido(numSemanas, 32, 52));
-            if (!fechaInicio.equals("")) {
-                if (!val.isFechaValida(fechaInicio));
-
-                LocalDate fin = val.calcPeriodo(fechaInicio, Integer.valueOf(numSemanas));
-                txtFechaFinMacro.setText(val.convertirFecha(fin));
-
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
-        }
-
-
-    }//GEN-LAST:event_txtNumSemanasMacroKeyPressed
-
-    private void txtFechaInicioMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaInicioMacroKeyPressed
-        String fechaInicio = this.txtFechaInicioMacro.getText();
-        String numSemanas = this.txtNumSemanasMacro.getText();
-                // validar si se a presionado enter
-
-        if (evt.getKeyCode() != 10) {
-            return;
-        }
-        try {
-
-            Validaciones val = new Validaciones();
-            val.isNumSemanaValido(numSemanas, 32, 52);
-            if (!fechaInicio.equals("")) {
-                if (!val.isFechaValida(fechaInicio)) {
-                }
-
-                LocalDate fin = val.calcPeriodo(fechaInicio, Integer.valueOf(numSemanas));
-                txtFechaFinMacro.setText(val.convertirFecha(fin));
-
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
-        }
-    }//GEN-LAST:event_txtFechaInicioMacroKeyPressed
 
     private void txtFechaFinMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaFinMacroKeyPressed
         String fechaInicio = this.txtFechaInicioMacro.getText();
@@ -216,6 +187,53 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFechaFinMacroKeyPressed
 
+    private void txtFechaInicioMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaInicioMacroKeyPressed
+        String fechaInicio = this.txtFechaInicioMacro.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+        // validar si se a presionado enter
+
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+
+            Validaciones val = new Validaciones();
+            val.isNumSemanaValido(numSemanas, 32, 52);
+            if (!fechaInicio.equals("")) {
+                if (!val.isFechaValida(fechaInicio)) {
+                }
+
+                LocalDate fin = val.calcPeriodo(fechaInicio, Integer.valueOf(numSemanas));
+                txtFechaFinMacro.setText(val.convertirFecha(fin));
+
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtFechaInicioMacroKeyPressed
+
+    private void txtNumSemanasMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasMacroKeyPressed
+        String fechaInicio = this.txtFechaInicioMacro.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            Validaciones val = new Validaciones();
+            if (!val.isNumSemanaValido(numSemanas, 32, 52));
+            if (!fechaInicio.equals("")) {
+                if (!val.isFechaValida(fechaInicio));
+
+                LocalDate fin = val.calcPeriodo(fechaInicio, Integer.valueOf(numSemanas));
+                txtFechaFinMacro.setText(val.convertirFecha(fin));
+
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+
+    }//GEN-LAST:event_txtNumSemanasMacroKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -227,7 +245,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -252,12 +270,15 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblDeporte;
     private javax.swing.JLabel lblDuracionMacro;
+    private javax.swing.JPanel lblEncabezadoMacro;
     private javax.swing.JLabel lblFechaFinMacro;
     private javax.swing.JLabel lblFechaInicioMacro;
     private javax.swing.JLabel lblMensajeMacro;
+    private javax.swing.JLabel lblRama;
     private javax.swing.JLabel lblSemanasMacro;
-    private javax.swing.JPanel pnlSetupFechasMacro;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtFechaFinMacro;
     private javax.swing.JTextField txtFechaInicioMacro;
     private javax.swing.JTextField txtNumSemanasMacro;
