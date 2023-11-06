@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 /**
  * <b>Validaciones Clase que contiene métodos para realizar validaciones
  * necesarias en el paquete negocio.</b>
+ *
  * @author José Alfredo Núñez
  */
 public class Validaciones {
@@ -23,22 +24,19 @@ public class Validaciones {
      *
      * @param strFecha Representa una fecha en formato String.
      * @return devuelve verdadero si strFecha cumple con la validación.
+     * @throws java.lang.Exception
      */
-    public boolean isFechaValida(String strFecha) {
-        try {
+    public boolean isFechaValida(String strFecha) throws Exception {
             Pattern pattern = Pattern.compile(FORMATO_FECHA, Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(strFecha);
-            
+
             if (!matcher.matches()) {
                 throw new Exception("Error, La Fecha debe ser en formato dd/mm/yyyy");
             }
-            
+
             convertirFecha(strFecha);
             return true;
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return false;
-        }
+       
 
     }
 
@@ -51,10 +49,9 @@ public class Validaciones {
      * @param max Representa el valor máximo aceptado.
      * @return devuelve verdadero si el valor pasa por todas las valifaciones y
      * falso en caso contrario.
+     * @throws java.lang.Exception
      */
-    public boolean isNumSemanaValido(String strSemanas, Integer min, Integer max) {
-        boolean isValida = false;
-        try {
+    public boolean isNumSemanaValido(String strSemanas, Integer min, Integer max) throws Exception {
             Pattern pattern = Pattern.compile(FORMATO_NUMSEMANAS, Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(strSemanas);
 
@@ -67,53 +64,59 @@ public class Validaciones {
 
             return true;
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + " ");
-            return false;
-        }
-      
     }
+
     /**
      * Método qué válida si la fecha ingresada es anterior a la fecha actual
+     *
      * @param strFecha Representa la fecha como cadena en formato dd/MM/yyyy
-     * @return devuelve verdadero si la fecha es anterior y falso en caso contrario
+     * @return devuelve verdadero si la fecha es anterior y falso en caso
+     * contrario
+     * @throws java.lang.Exception
      */
-    public boolean isFechaAnterior(String strFecha) {
+    public boolean isFechaAnterior(String strFecha) throws Exception {
 
         try {
             LocalDate hoy = LocalDate.now();
             LocalDate fecha = convertirFecha(strFecha);
             return hoy.isBefore(fecha);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return true;
+            throw new Exception("La fecha no puede ser anterior al día de hoy");
         }
     }
+
     /**
      * Método qué válida si la fecha Inicio es anterior a la fecha Fin
-     * @param strFechaInicio Representa la fecha inicial en una cadena en formato dd/MM/yyyy
-     * @param strFechaFin Representa la fecha Fin en una cadena en formato dd/MM/yyyy
-     * @return devuelve verdadero si la fecha Inicio es anterior a Fin y dalso en caso contrario
+     *
+     * @param strFechaInicio Representa la fecha inicial en una cadena en
+     * formato dd/MM/yyyy
+     * @param strFechaFin Representa la fecha Fin en una cadena en formato
+     * dd/MM/yyyy
+     * @return devuelve verdadero si la fecha Inicio es anterior a Fin y dalso
+     * en caso contrario
+     * @throws java.lang.Exception
      */
-    public boolean isFechaAnterior(String strFechaInicio,String strFechaFin) {
+    public boolean isFechaAnterior(String strFechaInicio, String strFechaFin) throws Exception {
 
         try {
             LocalDate fechaInicio = convertirFecha(strFechaInicio);
             LocalDate fechaFin = convertirFecha(strFechaFin);
             return fechaInicio.isBefore(fechaFin);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return true;
+            throw new Exception("La fecha fin: "+strFechaFin+" no puede ser anterior a"+ strFechaInicio );
         }
     }
-    
-    
+
     //TODO: Mover a otra clase
     /**
-     *  Método qué convierte una fecha ingresada en un cadena con formato dd/MM/yyyy
-     * @param strFecha Representa la fecha inicial en una cadena en formato dd/MM/yyyy
+     * Método qué convierte una fecha ingresada en un cadena con formato
+     * dd/MM/yyyy
+     *
+     * @param strFecha Representa la fecha inicial en una cadena en formato
+     * dd/MM/yyyy
      * @return devuelve la fecha convertida a un objeto LocalDate
-     * @throws Exception si la cadena no cuenta con un formato valido lanza una excepción
+     * @throws Exception si la cadena no cuenta con un formato valido lanza una
+     * excepción
      */
     public LocalDate convertirFecha(String strFecha) throws Exception {
         try {
@@ -124,11 +127,14 @@ public class Validaciones {
             throw new Exception("Fecha inválida: " + strFecha);
         }
     }
+
     /**
-     *  Método qué convierte una fecha de tpo LocalDate a dd/MM/yyyy
+     * Método qué convierte una fecha de tpo LocalDate a dd/MM/yyyy
+     *
      * @param fecha Representa la fecha inicial cómo objeto LocalDate
      * @return devuelve la fecha convertida en String dd/MM/yyyy
-     * @throws Exception si la cadena no cuenta con un formato valido lanza una excepción
+     * @throws Exception si la cadena no cuenta con un formato valido lanza una
+     * excepción
      */
     public String convertirFecha(LocalDate fecha) throws Exception {
         try {
@@ -139,8 +145,9 @@ public class Validaciones {
             // Lanzar la excepción personalizada
             throw new Exception("Fecha inválida: " + fecha);
         }
-        
+
     }
+
     /**
      * Método que calcula el número de semanas de un periodo entre una fecha de
      * inicio y una fecha fin.
@@ -148,9 +155,9 @@ public class Validaciones {
      * @param strFechaInicio Representa la fecha inicial
      * @param strFechaFin Representa la fecha fin
      * @return devuelve el número de semanas en el periodo ingresado
+     * @throws java.lang.Exception
      */
-    public Long calcPeriodo(String strFechaInicio, String strFechaFin) {
-        try {
+    public Long calcPeriodo(String strFechaInicio, String strFechaFin) throws Exception {
             LocalDate fechaInicio = convertirFecha(strFechaInicio);
             LocalDate fechaFin = convertirFecha(strFechaFin);
 
@@ -160,7 +167,7 @@ public class Validaciones {
             if (!fechaFin.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
                 throw new Exception("La fecha final debe ser viernes");
             }
-                    // se obtienen todas las fechas entre la fecha inicio y fin
+            // se obtienen todas las fechas entre la fecha inicio y fin
             return fechaInicio.datesUntil(fechaFin)
                     // se filtran los lunes
                     .filter(e -> e.getDayOfWeek() == DayOfWeek.MONDAY)
@@ -168,22 +175,18 @@ public class Validaciones {
                     // semanas
                     .count();
 
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-
-        return 0L;
     }
 
     /**
      * Método que calcula Fecha Fin de un periodo entre una fecha de inicio y un
      * número de semanas
+     *
      * @param strFechaInicio Representa la fecha inicial del periodo
      * @param numSemanas Representa el número de semanas en el periodo
      * @return devuelve la fecha fin del periodo
+     * @throws java.lang.Exception
      */
-    public LocalDate calcPeriodo(String strFechaInicio, Integer numSemanas) {
-        try {
+    public LocalDate calcPeriodo(String strFechaInicio, Integer numSemanas) throws Exception {
 
             LocalDate fechaInicio = convertirFecha(strFechaInicio);
             LocalDate fechaFin = fechaInicio.plusWeeks(numSemanas)
@@ -201,12 +204,6 @@ public class Validaciones {
                 throw new Exception("La fecha final debe ser viernes");
             }
 
-            return fechaFin;
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-
-        }
-        return null;
+            return fechaFin;   
     }
 }
