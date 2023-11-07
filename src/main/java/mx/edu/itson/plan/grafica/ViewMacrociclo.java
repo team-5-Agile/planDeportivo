@@ -395,7 +395,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                                 .addComponent(lblMensajeMacro)))))
                 .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
-                .addGap(247, 247, 247)
+                .addGap(206, 206, 206)
                 .addComponent(btnCalcularPorcentajes)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -430,14 +430,15 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                             .addComponent(lblFechaFinMacro))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblArrow)
-                                .addGap(61, 61, 61)))
-                        .addComponent(btnCalcularPorcentajes)
-                        .addGap(48, 48, 48))))
+                                .addGap(132, 132, 132))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCalcularPorcentajes)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
 
         pack();
