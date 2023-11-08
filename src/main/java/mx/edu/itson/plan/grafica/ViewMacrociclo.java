@@ -45,10 +45,10 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblDuracionMacro = new javax.swing.JLabel();
         lblFechaInicioMacro = new javax.swing.JLabel();
         pnlPeriodos = new javax.swing.JPanel();
-        txtPorcientoPreparatorio = new javax.swing.JTextField();
-        txtPorcientoCompetitivo = new javax.swing.JTextField();
         txtNumSemanasPreparatorio = new javax.swing.JTextField();
         txtNumSemanasCompetitivo = new javax.swing.JTextField();
+        txtPorcientoPreparatorio = new javax.swing.JTextField();
+        txtPorcientoCompetitivo = new javax.swing.JTextField();
         lblPreparatorio = new javax.swing.JLabel();
         lblCompetitivo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -156,9 +156,9 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblFechaInicioMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFechaInicioMacro.setText("Fecha Incio:");
 
-        txtPorcientoPreparatorio.addActionListener(new java.awt.event.ActionListener() {
+        txtNumSemanasPreparatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPorcientoPreparatorioActionPerformed(evt);
+                txtNumSemanasPreparatorioActionPerformed(evt);
             }
         });
 
@@ -172,10 +172,10 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         jLabel1.setText("Seleccione la proporción \nque se le asignará a cada periodo");
 
         lblPorciento3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPorciento3.setText("=");
+        lblPorciento3.setText("semanas");
 
         lblPorciento5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPorciento5.setText("=");
+        lblPorciento5.setText("semanas");
 
         lblPorciento6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPorciento6.setText("% ");
@@ -188,36 +188,33 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         pnlPeriodosLayout.setHorizontalGroup(
             pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
                         .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPeriodosLayout.createSequentialGroup()
                                 .addComponent(lblPreparatorio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNumSemanasPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPorcientoPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
                                 .addComponent(lblCompetitivo)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtNumSemanasCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtPorcientoCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPeriodosLayout.createSequentialGroup()
-                                .addComponent(lblPorciento3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPorcientoPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblPorciento7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNumSemanasPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlPeriodosLayout.createSequentialGroup()
-                                .addComponent(lblPorciento5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPorcientoCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblPorciento6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNumSemanasCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlPeriodosLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(lblPorciento6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPorciento7)))
-                        .addContainerGap())
+                            .addComponent(lblPorciento5)
+                            .addComponent(lblPorciento3))
+                        .addContainerGap(38, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(76, 76, 76))))
@@ -228,18 +225,18 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPorcientoPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumSemanasPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcientoPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPreparatorio)
                     .addComponent(lblPorciento3)
                     .addComponent(lblPorciento7))
                 .addGap(18, 18, 18)
                 .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPorcientoCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumSemanasCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCompetitivo)
                     .addComponent(lblPorciento5)
                     .addComponent(lblPorciento6)
-                    .addComponent(txtNumSemanasCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPorcientoCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -252,10 +249,10 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         });
 
         lblPorciento.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPorciento.setText("% ");
+        lblPorciento.setText("semanas");
 
         lblPorciento2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPorciento2.setText("%");
+        lblPorciento2.setText("semanas");
 
         lbltxt.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbltxt.setText("Etapas del periodo Preparatorio ");
@@ -267,10 +264,10 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblGeneral.setText("General");
 
         lblPorciento1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPorciento1.setText("=");
+        lblPorciento1.setText("%");
 
         lblPorciento4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPorciento4.setText("=");
+        lblPorciento4.setText("%");
 
         javax.swing.GroupLayout pnlEtapasLayout = new javax.swing.GroupLayout(pnlEtapas);
         pnlEtapas.setLayout(pnlEtapasLayout);
@@ -280,26 +277,26 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblGeneral)
-                    .addComponent(lblEspecial)
                     .addComponent(lbltxt)
                     .addGroup(pnlEtapasLayout.createSequentialGroup()
                         .addGroup(pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNumSemanasGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNumSemanasEspecial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblEspecial)
+                            .addComponent(txtPorcientoEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPorcientoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
                         .addGroup(pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPorciento1)
                             .addComponent(lblPorciento4))
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlEtapasLayout.createSequentialGroup()
-                                .addComponent(txtPorcientoEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNumSemanasGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPorciento2))
+                                .addComponent(lblPorciento))
                             .addGroup(pnlEtapasLayout.createSequentialGroup()
-                                .addComponent(txtPorcientoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNumSemanasEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPorciento)))))
+                                .addComponent(lblPorciento2)))))
                 .addGap(26, 26, 26))
         );
         pnlEtapasLayout.setVerticalGroup(
@@ -311,18 +308,18 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 .addComponent(lblGeneral)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumSemanasGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPorcientoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPorciento)
-                    .addComponent(lblPorciento1))
+                    .addComponent(lblPorciento1)
+                    .addComponent(txtNumSemanasGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(lblEspecial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumSemanasEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPorcientoEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPorciento2)
-                    .addComponent(lblPorciento4))
+                    .addComponent(lblPorciento4)
+                    .addComponent(txtNumSemanasEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -417,9 +414,9 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                     .addComponent(lblFechaInicioMacro))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 21, Short.MAX_VALUE)
+                        .addGap(0, 25, Short.MAX_VALUE)
                         .addComponent(pnlEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAtras)
                             .addComponent(btnConfigurarAcentos))
@@ -516,17 +513,17 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumSemanasMacroKeyPressed
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
-        txtPorcientoPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasPreparatorio.getText()))+"");
-        txtPorcientoCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasCompetitivo.getText()))+"");
+        txtNumSemanasPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
+        txtNumSemanasCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
 
-        txtPorcientoGeneral.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasPreparatorio.getText()), Integer.parseInt(txtNumSemanasGeneral.getText()))+"");
-        txtPorcientoEspecial.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasPreparatorio.getText()), Integer.parseInt(txtNumSemanasEspecial.getText()))+"");
+        txtPorcientoGeneral.setText(calcularPorcentaje(Integer.parseInt(txtPorcientoPreparatorio.getText()), Integer.parseInt(txtNumSemanasGeneral.getText()))+"");
+        txtPorcientoEspecial.setText(calcularPorcentaje(Integer.parseInt(txtPorcientoPreparatorio.getText()), Integer.parseInt(txtNumSemanasEspecial.getText()))+"");
 
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
-    private void txtPorcientoPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioActionPerformed
+    private void txtNumSemanasPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumSemanasPreparatorioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPorcientoPreparatorioActionPerformed
+    }//GEN-LAST:event_txtNumSemanasPreparatorioActionPerformed
 
     private void btnConfigurarAcentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigurarAcentosActionPerformed
         // TODO add your handling code here:

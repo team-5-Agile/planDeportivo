@@ -107,9 +107,9 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
                       <Component id="pnlEtapas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnAtras" min="-2" max="-2" attributes="0"/>
                           <Component id="btnConfigurarAcentos" min="-2" max="-2" attributes="0"/>
@@ -291,45 +291,40 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="53" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblPreparatorio" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="txtNumSemanasPreparatorio" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="txtPorcientoPreparatorio" min="-2" pref="55" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="lblCompetitivo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtNumSemanasCompetitivo" min="-2" pref="55" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="lblPorciento3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtPorcientoPreparatorio" min="-2" pref="49" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblPorciento5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txtPorcientoCompetitivo" min="-2" pref="55" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  <Component id="lblPorciento6" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblPorciento7" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txtNumSemanasPreparatorio" min="-2" pref="49" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblPorciento6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtNumSemanasCompetitivo" min="-2" pref="49" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblPorciento5" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPorciento3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="38" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel1" min="-2" pref="149" max="-2" attributes="0"/>
@@ -345,19 +340,19 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtPorcientoPreparatorio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNumSemanasPreparatorio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPorcientoPreparatorio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPreparatorio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtPorcientoCompetitivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNumSemanasCompetitivo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCompetitivo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNumSemanasCompetitivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPorcientoCompetitivo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
@@ -365,16 +360,16 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtPorcientoPreparatorio">
+        <Component class="javax.swing.JTextField" name="txtNumSemanasPreparatorio">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPorcientoPreparatorioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumSemanasPreparatorioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPorcientoCompetitivo">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNumSemanasPreparatorio">
-        </Component>
         <Component class="javax.swing.JTextField" name="txtNumSemanasCompetitivo">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPorcientoPreparatorio">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPorcientoCompetitivo">
         </Component>
         <Component class="javax.swing.JLabel" name="lblPreparatorio">
           <Properties>
@@ -407,7 +402,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="="/>
+            <Property name="text" type="java.lang.String" value="semanas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPorciento5">
@@ -415,7 +410,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="="/>
+            <Property name="text" type="java.lang.String" value="semanas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPorciento6">
@@ -452,29 +447,29 @@
                   <EmptySpace pref="48" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblGeneral" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblEspecial" min="-2" max="-2" attributes="0"/>
                       <Component id="lbltxt" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtNumSemanasGeneral" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
-                              <Component id="txtNumSemanasEspecial" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
+                              <Component id="lblEspecial" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPorcientoEspecial" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="txtPorcientoGeneral" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblPorciento1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblPorciento4" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txtPorcientoEspecial" min="-2" pref="55" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblPorciento2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtPorcientoGeneral" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="txtNumSemanasGeneral" min="-2" pref="71" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblPorciento" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="txtNumSemanasEspecial" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblPorciento2" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -492,19 +487,19 @@
                   <Component id="lblGeneral" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtNumSemanasGeneral" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPorcientoGeneral" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNumSemanasGeneral" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="lblEspecial" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtNumSemanasEspecial" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPorcientoEspecial" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPorciento4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNumSemanasEspecial" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -528,7 +523,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="% "/>
+            <Property name="text" type="java.lang.String" value="semanas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPorciento2">
@@ -536,7 +531,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="%"/>
+            <Property name="text" type="java.lang.String" value="semanas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbltxt">
@@ -568,7 +563,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="="/>
+            <Property name="text" type="java.lang.String" value="%"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPorciento4">
@@ -576,7 +571,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="="/>
+            <Property name="text" type="java.lang.String" value="%"/>
           </Properties>
         </Component>
       </SubComponents>
