@@ -122,6 +122,9 @@
       <Properties>
         <Property name="dragEnabled" type="boolean" value="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtUsuarioFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="checkVisiblePassword">
       <Properties>
@@ -205,6 +208,9 @@
       </Properties>
     </Component>
     <Component class="Herramientas.PasswordVisibleField" name="txtPassword">
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtPasswordFocusGained"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

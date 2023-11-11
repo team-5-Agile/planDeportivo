@@ -4,7 +4,12 @@
  */
 package GUI;
 
+import Exceptions.InputException;
 import Herramientas.PasswordVisibleField;
+import Negocio.EntrenadorNegocio;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -47,6 +52,11 @@ public class Login extends javax.swing.JFrame {
         setLocationByPlatform(true);
 
         txtUsuario.setDragEnabled(true);
+        txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsuarioFocusGained(evt);
+            }
+        });
 
         checkVisiblePassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -82,6 +92,12 @@ public class Login extends javax.swing.JFrame {
         lblSubtitulo.setText("Generador de Macrociclos");
 
         lblUserProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-profile.png"))); // NOI18N
+
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,22 +184,38 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
 
-        //Mover a otro modulo.!
-        String usuario = String.valueOf(txtUsuario.getText());
-        String password = String.valueOf(txtPassword.getPassword());
-        if (usuario.isBlank()) {
-            System.out.println("handle error");
-            return;
-        }
-        if (password.isBlank()) {
-            System.out.println("handle error");
-            return;
+        try {
+            EntrenadorNegocio en = new EntrenadorNegocio();
+            en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+        } catch (Exception e) {
+            
+            if (e instanceof InputException ) {
+                InputException ex  = (InputException) e;
+                if ( ex.getTextField().equals("usuario")) {
+                    txtUsuario.setBorder(new LineBorder(Color.RED));
+                }
+                if (ex.getTextField().equals("contrasena")) {
+                    txtPassword.setBorder(new LineBorder(Color.RED));
+                }
+            } 
+                JOptionPane.showMessageDialog(this, e.getMessage());
+                return;
+            
         }
 
-        //TODO: integración backend (DAOs!!!!!)
-        //transición a nueva página
-        System.out.println("Transicion....");
+      
+        this.dispose();
+        new ViewMacrociclo().setVisible(true);
+       
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void txtUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusGained
+          txtUsuario.setBorder(new LineBorder(Color.GRAY));
+    }//GEN-LAST:event_txtUsuarioFocusGained
+
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        txtPassword.setBorder(new LineBorder(Color.GRAY));
+    }//GEN-LAST:event_txtPasswordFocusGained
 
     /**
      * @param args the command line arguments
