@@ -5,11 +5,13 @@
 package Dominio;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -23,13 +25,24 @@ public class Administrador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "Contraseña", nullable = false, unique = false)
+    @Column(name = "Contrasena", nullable = false, unique = false)
     public String contrasena;
     
     @Column(name = "Usuario", nullable = false, unique = true)
     public String usuario;
+    
+    // Un administrador puede registrar muchos entrenadores
+    @OneToMany(mappedBy = "administrador")
+    private List<Entrenadores> entrenadores;
 
     public Administrador() {
+    }
+
+    public Administrador(Long id, String contrasena, String usuario, List<Entrenadores> entrenadores) {
+        this.id = id;
+        this.contrasena = contrasena;
+        this.usuario = usuario;
+        this.entrenadores = entrenadores;
     }
 
     public Administrador(Long id, String contrasena, String usuario) {
@@ -67,6 +80,14 @@ public class Administrador implements Serializable {
         this.usuario = usuario;
     }
 
+    public List<Entrenadores> getEntrenadores() {
+        return entrenadores;
+    }
+
+    public void setEntrenadores(List<Entrenadores> entrenadores) {
+        this.entrenadores = entrenadores;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -89,6 +110,6 @@ public class Administrador implements Serializable {
 
     @Override
     public String toString() {
-        return "Administrador{" + "id=" + id + ", contrasena=" + contrasena + ", usuario=" + usuario + '}';
+        return "Administrador{" + "id=" + id + ", contrasena=" + contrasena + ", usuario=" + usuario + ", entrenadores=" + entrenadores + '}';
     }
 }

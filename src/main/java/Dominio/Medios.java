@@ -13,6 +13,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -47,9 +49,27 @@ public class Medios implements Serializable {
     private Integer insitaciones = 0;
     
     @Column(name = "VolumenEtapa", nullable = false)
-    private Float voluemenEtapa = (float) 0;
+    private Float volumenEtapa = (float) 0;
+    
+    // Llave foránea
+    // Muchos medios pueden pertenecer a una etapa
+    @ManyToOne()
+    @JoinColumn(name = "idEtapa", referencedColumnName = "ID", nullable = true)
+    private Etapas etapa;
 
     public Medios() {
+    }
+    
+    public Medios(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa, Etapas etapa) {
+        this.id = id;
+        this.tipoMedio = tipoMedio;
+        this.tipo = tipo;
+        this.minimo = minimo;
+        this.maximo = maximo;
+        this.promedio = promedio;
+        this.insitaciones = insitaciones;
+        this.volumenEtapa = volumenEtapa;
+        this.etapa = etapa;
     }
 
     public Medios(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
@@ -60,7 +80,7 @@ public class Medios implements Serializable {
         this.maximo = maximo;
         this.promedio = promedio;
         this.insitaciones = insitaciones;
-        this.voluemenEtapa = volumenEtapa;
+        this.volumenEtapa = volumenEtapa;
     }
     
     public Medios(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
@@ -70,7 +90,7 @@ public class Medios implements Serializable {
         this.maximo = maximo;
         this.promedio = promedio;
         this.insitaciones = insitaciones;
-        this.voluemenEtapa = volumenEtapa;
+        this.volumenEtapa = volumenEtapa;
     }
     
     public Medios(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Integer insitaciones) {
@@ -137,12 +157,20 @@ public class Medios implements Serializable {
         this.insitaciones = insitaciones;
     }
 
-    public Float getVoluemenEtapa() {
-        return voluemenEtapa;
+    public Float getVolumenEtapa() {
+        return volumenEtapa;
     }
 
-    public void setVoluemenEtapa(Float voluemenEtapa) {
-        this.voluemenEtapa = voluemenEtapa;
+    public void setVolumenEtapa(Float volumenEtapa) {
+        this.volumenEtapa = volumenEtapa;
+    }
+
+    public Etapas getEtapa() {
+        return etapa;
+    }
+
+    public void setEtapa(Etapas etapa) {
+        this.etapa = etapa;
     }
 
     @Override
@@ -167,6 +195,6 @@ public class Medios implements Serializable {
 
     @Override
     public String toString() {
-        return "Medios{" + "id=" + id + ", tipoMedio=" + tipoMedio + ", tipo=" + tipo + ", minimo=" + minimo + ", maximo=" + maximo + ", promedio=" + promedio + ", insitaciones=" + insitaciones + ", voluemenEtapa=" + voluemenEtapa + '}';
+        return "Medios{" + "id=" + id + ", tipoMedio=" + tipoMedio + ", tipo=" + tipo + ", minimo=" + minimo + ", maximo=" + maximo + ", promedio=" + promedio + ", insitaciones=" + insitaciones + ", volumenEtapa=" + volumenEtapa + ", etapa=" + etapa.getId() + '}';
     }
 }

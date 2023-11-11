@@ -5,11 +5,15 @@
 package Dominio;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -32,13 +36,34 @@ public class Entrenadores implements Serializable {
     @Column(name = "ApellidoMaterno", nullable = true)
     public String apellidoMaterno;
     
-    @Column(name = "Contraseña", nullable = false, unique = false)
+    @Column(name = "Contrasena", nullable = false, unique = false)
     public String contrasena;
     
     @Column(name = "Usuario", nullable = false, unique = true)
     public String usuario;
+    
+    // Un entrenador puede crear muchos macrociclos
+    @OneToMany(mappedBy = "entrenadores")
+    private List<Macrociclos> macrociclos;
+    
+    // Llave foránea
+    // Muchos entrenadores pueden ser registrados por un administrador
+    @ManyToOne()
+    @JoinColumn(name = "idAdministrador", referencedColumnName = "ID", nullable = true)
+    private Administrador administrador;
 
     public Entrenadores() {
+    }
+
+    public Entrenadores(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario, List<Macrociclos> macrociclos, Administrador administrador) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.contrasena = contrasena;
+        this.usuario = usuario;
+        this.macrociclos = macrociclos;
+        this.administrador = administrador;
     }
 
     public Entrenadores(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
@@ -106,6 +131,22 @@ public class Entrenadores implements Serializable {
         this.usuario = usuario;
     }
 
+    public List<Macrociclos> getMacrociclos() {
+        return macrociclos;
+    }
+
+    public void setMacrociclos(List<Macrociclos> macrociclos) {
+        this.macrociclos = macrociclos;
+    }
+
+    public Administrador getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -128,7 +169,7 @@ public class Entrenadores implements Serializable {
 
     @Override
     public String toString() {
-        return "Dominio.Entrenadores[ id=" + id + " ]";
+        return "Entrenadores{" + "id=" + id + ", nombre=" + nombre + " apellidoPaterno=" + apellidoPaterno + " apellidoMaterno=" + apellidoMaterno + ", contrasena=" + contrasena + ", usuario=" + usuario + ", macrociclos=" + macrociclos + ", administrador=" + administrador.getId() + '}';
     }
     
 }

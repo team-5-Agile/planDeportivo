@@ -6,6 +6,7 @@ package Dominio;
 
 import Enumeradores.TipoEtapa;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +14,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -35,8 +39,27 @@ public class Etapas implements Serializable {
 
     @Column(name = "Proporcion", nullable = true)
     private Integer proporcion = 0;
+    
+    // Una etapa puede tener muchos medios
+    @OneToMany(mappedBy = "etapas")
+    private List<Medios> medios;
+    
+    // Llave foránea
+    // Muchas etapas pueden componer un macrociclo
+    @ManyToOne()
+    @JoinColumn(name = "idMacrociclo", referencedColumnName = "ID", nullable = true)
+    private Macrociclos macrociclo;
 
     public Etapas() {
+    }
+    
+    public Etapas(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion, List<Medios> medios, Macrociclos macrociclo) {
+        this.id = id;
+        this.tipo = tipo;
+        this.duracionSemanas = duracionSemanas;
+        this.proporcion = proporcion;
+        this.medios = medios;
+        this.macrociclo = macrociclo;
     }
 
     public Etapas(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
@@ -84,6 +107,22 @@ public class Etapas implements Serializable {
         this.proporcion = proporcion;
     }
 
+    public List<Medios> getMedios() {
+        return medios;
+    }
+
+    public void setMedios(List<Medios> medios) {
+        this.medios = medios;
+    }
+
+    public Macrociclos getMacrociclo() {
+        return macrociclo;
+    }
+
+    public void setMacrociclo(Macrociclos macrociclo) {
+        this.macrociclo = macrociclo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,6 +145,6 @@ public class Etapas implements Serializable {
 
     @Override
     public String toString() {
-        return "Etapas{" + "id=" + id + ", tipo=" + tipo + ", duracionSemanas=" + duracionSemanas + ", proporcion=" + proporcion + '}';
+        return "Etapas{" + "id=" + id + ", tipo=" + tipo + ", duracionSemanas=" + duracionSemanas + ", proporcion=" + proporcion + ", medios=" + medios + ", macrociclo=" + macrociclo.getId() + '}';
     }
 }
