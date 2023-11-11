@@ -4,8 +4,12 @@
  */
 package Dominio;
 
+import Enumeradores.TipoEtapa;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,10 +21,36 @@ import javax.persistence.Id;
 @Entity
 public class Etapas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "TipoEtapa", nullable = true)
+    @Enumerated(EnumType.STRING)
+    private TipoEtapa tipo;
+
+    @Column(name = "DuracionSemanas", nullable = true)
+    private Integer duracionSemanas = 1;
+
+    @Column(name = "Proporcion", nullable = true)
+    private Integer proporcion = 0;
+
+    public Etapas() {
+    }
+
+    public Etapas(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
+        this.id = id;
+        this.tipo = tipo;
+        this.duracionSemanas = duracionSemanas;
+        this.proporcion = proporcion;
+    }
+
+    public Etapas(TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
+        this.tipo = tipo;
+        this.duracionSemanas = duracionSemanas;
+        this.proporcion = proporcion;
+    }
 
     public Long getId() {
         return id;
@@ -28,6 +58,30 @@ public class Etapas implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TipoEtapa getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoEtapa tipo) {
+        this.tipo = tipo;
+    }
+
+    public Integer getDuracionSemanas() {
+        return duracionSemanas;
+    }
+
+    public void setDuracionSemanas(Integer duracionSemanas) {
+        this.duracionSemanas = duracionSemanas;
+    }
+
+    public Integer getProporcion() {
+        return proporcion;
+    }
+
+    public void setProporcion(Integer proporcion) {
+        this.proporcion = proporcion;
     }
 
     @Override
@@ -52,7 +106,6 @@ public class Etapas implements Serializable {
 
     @Override
     public String toString() {
-        return "Dominio.Etapas[ id=" + id + " ]";
+        return "Etapas{" + "id=" + id + ", tipo=" + tipo + ", duracionSemanas=" + duracionSemanas + ", proporcion=" + proporcion + '}';
     }
-    
 }

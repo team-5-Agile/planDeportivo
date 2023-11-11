@@ -5,6 +5,7 @@
 package Dominio;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,10 +18,45 @@ import javax.persistence.Id;
 @Entity
 public class Entrenadores implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "Nombre", nullable = true)
+    public String nombre;
+    
+    @Column(name = "ApellidoPaterno", nullable = true)
+    public String apellidoPaterno;
+    
+    @Column(name = "ApellidoMaterno", nullable = true)
+    public String apellidoMaterno;
+    
+    @Column(name = "Contraseña", nullable = false, unique = false)
+    public String contrasena;
+    
+    @Column(name = "Usuario", nullable = false, unique = true)
+    public String usuario;
+
+    public Entrenadores() {
+    }
+
+    public Entrenadores(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.contrasena = contrasena;
+        this.usuario = usuario;
+    }
+
+    public Entrenadores(String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.contrasena = contrasena;
+        this.usuario = usuario;
+    } 
 
     public Long getId() {
         return id;
@@ -28,6 +64,46 @@ public class Entrenadores implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     @Override

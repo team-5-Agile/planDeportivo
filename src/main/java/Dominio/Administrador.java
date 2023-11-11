@@ -5,6 +5,7 @@
 package Dominio;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +17,31 @@ import javax.persistence.Id;
  */
 @Entity
 public class Administrador implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "Contraseña", nullable = false, unique = false)
+    public String contrasena;
+    
+    @Column(name = "Usuario", nullable = false, unique = true)
+    public String usuario;
+
+    public Administrador() {
+    }
+
+    public Administrador(Long id, String contrasena, String usuario) {
+        this.id = id;
+        this.contrasena = contrasena;
+        this.usuario = usuario;
+    }
+
+    public Administrador(String contrasena, String usuario) {
+        this.contrasena = contrasena;
+        this.usuario = usuario;
+    }
 
     public Long getId() {
         return id;
@@ -28,6 +49,22 @@ public class Administrador implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -52,7 +89,6 @@ public class Administrador implements Serializable {
 
     @Override
     public String toString() {
-        return "Dominio.Admin[ id=" + id + " ]";
+        return "Administrador{" + "id=" + id + ", contrasena=" + contrasena + ", usuario=" + usuario + '}';
     }
-    
 }
