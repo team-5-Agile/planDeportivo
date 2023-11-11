@@ -8,25 +8,27 @@ import Enumeradores.Ramas;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 /**
  *
  * @author brawun
  */
 @Entity
-public class Macrociclos implements Serializable {
+@Table(name = "macrociclos")
+public class Macrociclo implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -59,18 +61,18 @@ public class Macrociclos implements Serializable {
     
     // Un macrociclo puede tener muchas etapas
     @OneToMany(mappedBy = "macrociclos")
-    private List<Etapas> etapas;
+    private List<Etapa> etapas;
     
     // Llave foránea
-    // Muchos macrociclos pueden ser creados por un entrenador
+    // Muchos macrociclos pueden ser creados por un entrenadores
     @ManyToOne()
     @JoinColumn(name = "idEntrenador", referencedColumnName = "ID", nullable = true)
-    private Entrenadores entrenador;
+    private Entrenador entrenadores;
 
-    public Macrociclos() {
+    public Macrociclo() {
     }
 
-    public Macrociclos(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin, List<Etapas> etapas, Entrenadores entrenador) {
+    public Macrociclo(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin, List<Etapa> etapas, Entrenador entrenador) {
         this.id = id;
         this.deporte = deporte;
         this.jefeRama = jefeRama;
@@ -80,10 +82,10 @@ public class Macrociclos implements Serializable {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.etapas = etapas;
-        this.entrenador = entrenador;
+        this.entrenadores = entrenador;
     }
 
-    public Macrociclos(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
+    public Macrociclo(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
         this.id = id;
         this.deporte = deporte;
         this.jefeRama = jefeRama;
@@ -94,7 +96,7 @@ public class Macrociclos implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public Macrociclos(String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
+    public Macrociclo(String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
         this.deporte = deporte;
         this.jefeRama = jefeRama;
         this.rama = rama;
@@ -168,20 +170,20 @@ public class Macrociclos implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public List<Etapas> getEtapas() {
+    public List<Etapa> getEtapas() {
         return etapas;
     }
 
-    public void setEtapas(List<Etapas> etapas) {
+    public void setEtapas(List<Etapa> etapas) {
         this.etapas = etapas;
     }
 
-    public Entrenadores getEntrenador() {
-        return entrenador;
+    public Entrenador getEntrenadores() {
+        return entrenadores;
     }
 
-    public void setEntrenador(Entrenadores entrenador) {
-        this.entrenador = entrenador;
+    public void setEntrenadores(Entrenador entrenadores) {
+        this.entrenadores = entrenadores;
     }
 
     @Override
@@ -194,10 +196,10 @@ public class Macrociclos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Macrociclos)) {
+        if (!(object instanceof Macrociclo)) {
             return false;
         }
-        Macrociclos other = (Macrociclos) object;
+        Macrociclo other = (Macrociclo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -206,6 +208,6 @@ public class Macrociclos implements Serializable {
 
     @Override
     public String toString() {
-        return "Macrociclos{" + "id=" + id + ", deporte=" + deporte + ", jefeRama=" + jefeRama + ", rama=" + rama + ", metodologo=" + metodologo + ", preparadorFisico=" + preparadorFisico + ", fechaInicio=" + fechaInicio.toString() + ", fechaFin=" + fechaFin.toString() + ", etapas=" + etapas + ", entrenador=" + entrenador.getId() + '}';
+        return "Macrociclos{" + "id=" + id + ", deporte=" + deporte + ", jefeRama=" + jefeRama + ", rama=" + rama + ", metodologo=" + metodologo + ", preparadorFisico=" + preparadorFisico + ", fechaInicio=" + fechaInicio.toString() + ", fechaFin=" + fechaFin.toString() + ", etapas=" + etapas + ", entrenador=" + entrenadores.getId() + '}';
     }
 }

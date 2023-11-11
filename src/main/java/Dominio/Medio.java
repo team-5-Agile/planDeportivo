@@ -6,22 +6,24 @@ package Dominio;
 
 import Enumeradores.Unidades;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author brawun
  */
 @Entity
-public class Medios implements Serializable {
+@Table(name = "medios")
+public class Medio implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -52,15 +54,15 @@ public class Medios implements Serializable {
     private Float volumenEtapa = (float) 0;
     
     // Llave foránea
-    // Muchos medios pueden pertenecer a una etapa
+    // Muchos medios pueden pertenecer a una etapas
     @ManyToOne()
     @JoinColumn(name = "idEtapa", referencedColumnName = "ID", nullable = true)
-    private Etapas etapa;
+    private Etapa etapas;
 
-    public Medios() {
+    public Medio() {
     }
     
-    public Medios(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa, Etapas etapa) {
+    public Medio(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa, Etapa etapa) {
         this.id = id;
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
@@ -69,10 +71,10 @@ public class Medios implements Serializable {
         this.promedio = promedio;
         this.insitaciones = insitaciones;
         this.volumenEtapa = volumenEtapa;
-        this.etapa = etapa;
+        this.etapas = etapa;
     }
 
-    public Medios(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
+    public Medio(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
         this.id = id;
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
@@ -83,7 +85,7 @@ public class Medios implements Serializable {
         this.volumenEtapa = volumenEtapa;
     }
     
-    public Medios(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
+    public Medio(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
         this.minimo = minimo;
@@ -93,7 +95,7 @@ public class Medios implements Serializable {
         this.volumenEtapa = volumenEtapa;
     }
     
-    public Medios(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Integer insitaciones) {
+    public Medio(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Integer insitaciones) {
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
         this.minimo = minimo;
@@ -165,12 +167,12 @@ public class Medios implements Serializable {
         this.volumenEtapa = volumenEtapa;
     }
 
-    public Etapas getEtapa() {
-        return etapa;
+    public Etapa getEtapas() {
+        return etapas;
     }
 
-    public void setEtapa(Etapas etapa) {
-        this.etapa = etapa;
+    public void setEtapas(Etapa etapas) {
+        this.etapas = etapas;
     }
 
     @Override
@@ -183,10 +185,10 @@ public class Medios implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Medios)) {
+        if (!(object instanceof Medio)) {
             return false;
         }
-        Medios other = (Medios) object;
+        Medio other = (Medio) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -195,6 +197,6 @@ public class Medios implements Serializable {
 
     @Override
     public String toString() {
-        return "Medios{" + "id=" + id + ", tipoMedio=" + tipoMedio + ", tipo=" + tipo + ", minimo=" + minimo + ", maximo=" + maximo + ", promedio=" + promedio + ", insitaciones=" + insitaciones + ", volumenEtapa=" + volumenEtapa + ", etapa=" + etapa.getId() + '}';
+        return "Medios{" + "id=" + id + ", tipoMedio=" + tipoMedio + ", tipo=" + tipo + ", minimo=" + minimo + ", maximo=" + maximo + ", promedio=" + promedio + ", insitaciones=" + insitaciones + ", volumenEtapa=" + volumenEtapa + ", etapa=" + etapas.getId() + '}';
     }
 }

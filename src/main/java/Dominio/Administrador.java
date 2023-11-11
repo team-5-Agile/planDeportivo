@@ -6,18 +6,20 @@ package Dominio;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author brawun
  */
 @Entity
+@Table(name = "administrador")
 public class Administrador implements Serializable {
     
     @Id
@@ -33,12 +35,12 @@ public class Administrador implements Serializable {
     
     // Un administrador puede registrar muchos entrenadores
     @OneToMany(mappedBy = "administrador")
-    private List<Entrenadores> entrenadores;
+    private List<Entrenador> entrenadores;
 
     public Administrador() {
     }
 
-    public Administrador(Long id, String contrasena, String usuario, List<Entrenadores> entrenadores) {
+    public Administrador(Long id, String contrasena, String usuario, List<Entrenador> entrenadores) {
         this.id = id;
         this.contrasena = contrasena;
         this.usuario = usuario;
@@ -80,11 +82,11 @@ public class Administrador implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Entrenadores> getEntrenadores() {
+    public List<Entrenador> getEntrenadores() {
         return entrenadores;
     }
 
-    public void setEntrenadores(List<Entrenadores> entrenadores) {
+    public void setEntrenadores(List<Entrenador> entrenadores) {
         this.entrenadores = entrenadores;
     }
 

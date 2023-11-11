@@ -5,33 +5,37 @@
 package DAOs;
 
 import Dominio.Administrador;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.Persistence;
 
 /**
  *
  * @author brawun
  */
-public class AdministradorDAO {
-    
+public class AdministradorDAO implements BaseDAO {
+
+    private String persitenceUnit;
+
+    public AdministradorDAO(String persitenceUnit) {
+        this.persitenceUnit = persitenceUnit;
+    }
+
     // Métodos de acceso
     public Administrador registrarAdministrador(Administrador administrador) {
-        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AppPlanU");
-        EntityManager entityManager = managerFactory.createEntityManager();
+        EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(administrador);
         entityManager.getTransaction().commit();
         entityManager.close();
         return administrador;
     }
-    
+
     // Metodo de eliminacion
     public void eliminarAdministrador(Long id) {
         if (verificarAdministrador(id)) {
-            EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AppPlanU");
-            EntityManager entityManager = managerFactory.createEntityManager();
+            EntityManager entityManager = this.getEntityManager();
             entityManager.getTransaction().begin();
             Administrador administrador = consultarAdministrador(id);
             entityManager.remove(administrador);
@@ -45,8 +49,7 @@ public class AdministradorDAO {
     // Metodo de consultac
     public Administrador consultarAdministrador(Long id) {
         if (verificarAdministrador(id)) {
-            EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AppPlanU");
-            EntityManager entityManager = managerFactory.createEntityManager();
+            EntityManager entityManager = this.getEntityManager();
             entityManager.getTransaction().begin();
             Administrador administrador = entityManager.find(Administrador.class, id);
             entityManager.getTransaction().commit();
@@ -56,15 +59,30 @@ public class AdministradorDAO {
             throw new EntityNotFoundException("No se puede encontrar el administrador con ID: " + id);
         }
     }
-    
+
     // Métodos de verificacion 
     public Boolean verificarAdministrador(Long id) {
-        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AppPlanU");
-        EntityManager entityManager = managerFactory.createEntityManager();
+        EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         Administrador administrador = entityManager.find(Administrador.class, id);
         entityManager.getTransaction().commit();
         entityManager.close();
         return administrador != null;
     }
+
+    @Override
+    public EntityManager getEntityManager() {
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory(this.persitenceUnit);
+        EntityManager entityManager = managerFactory.createEntityManager();
+        return entityManager;
+    }
+
+    public String getPersitenceUnit() {
+        return persitenceUnit;
+    }
+
+    public void setPersitenceUnit(String persitenceUnit) {
+        this.persitenceUnit = persitenceUnit;
+    }
+
 }
