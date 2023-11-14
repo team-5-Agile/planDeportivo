@@ -144,6 +144,11 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         });
 
         txtFechaFinMacro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtFechaFinMacro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaFinMacroActionPerformed(evt);
+            }
+        });
         txtFechaFinMacro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFechaFinMacroKeyPressed(evt);
@@ -159,6 +164,34 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         txtNumSemanasPreparatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumSemanasPreparatorioActionPerformed(evt);
+            }
+        });
+        txtNumSemanasPreparatorio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumSemanasPreparatorioKeyPressed(evt);
+            }
+        });
+
+        txtNumSemanasCompetitivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumSemanasCompetitivoKeyPressed(evt);
+            }
+        });
+
+        txtPorcientoPreparatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPorcientoPreparatorioActionPerformed(evt);
+            }
+        });
+        txtPorcientoPreparatorio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPorcientoPreparatorioKeyPressed(evt);
+            }
+        });
+
+        txtPorcientoCompetitivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPorcientoCompetitivoKeyPressed(evt);
             }
         });
 
@@ -242,9 +275,32 @@ public class ViewMacrociclo extends javax.swing.JFrame {
 
         pnlEtapas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtNumSemanasGeneral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumSemanasGeneralKeyPressed(evt);
+            }
+        });
+
+        txtNumSemanasEspecial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumSemanasEspecialKeyPressed(evt);
+            }
+        });
+
         txtPorcientoGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPorcientoGeneralActionPerformed(evt);
+            }
+        });
+        txtPorcientoGeneral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPorcientoGeneralKeyPressed(evt);
+            }
+        });
+
+        txtPorcientoEspecial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPorcientoEspecialKeyPressed(evt);
             }
         });
 
@@ -462,6 +518,8 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFechaFinMacroKeyPressed
 
+    
+    
     private void txtFechaInicioMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaInicioMacroKeyPressed
         String fechaInicio = this.txtFechaInicioMacro.getText();
         String numSemanas = this.txtNumSemanasMacro.getText();
@@ -486,9 +544,46 @@ public class ViewMacrociclo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
         }
     }//GEN-LAST:event_txtFechaInicioMacroKeyPressed
-    private double calcularPorcentaje(int total, int can){
-        double re= (can/total)*100;
+    private int calcularSemanas(int total, int can){
+        int re= (can*total)/100;
         return re;
+    }
+    private double calcularPorcentaje(int total, int can){
+        double re= (can*100)/total;
+        return re;
+    }
+    
+    private String rellenarPorcentaje(String valor){
+        
+        try {
+            Validaciones val = new Validaciones();
+            if (!valor.equals("")) {
+                if (val.isPorcentajeValido(Double.parseDouble(valor))) {
+                }
+                return ((100-Integer.parseInt(valor))+"");
+
+            }
+        
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+        
+        return ((100-Integer.parseInt(valor))+"");
+    }
+    private String rellenarSemanas(String valor, String total){
+        
+        try {
+            Validaciones val = new Validaciones();
+            if (!valor.equals("")) {
+                return ((Integer.parseInt(total)-Integer.parseInt(valor))+"");
+
+            }
+        
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+        
+        return ((100-Integer.parseInt(valor))+"");
     }
     private void txtNumSemanasMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasMacroKeyPressed
         String fechaInicio = this.txtFechaInicioMacro.getText();
@@ -513,11 +608,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumSemanasMacroKeyPressed
 
     private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
-        txtNumSemanasPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
-        txtNumSemanasCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
-
-        txtPorcientoGeneral.setText(calcularPorcentaje(Integer.parseInt(txtPorcientoPreparatorio.getText()), Integer.parseInt(txtNumSemanasGeneral.getText()))+"");
-        txtPorcientoEspecial.setText(calcularPorcentaje(Integer.parseInt(txtPorcientoPreparatorio.getText()), Integer.parseInt(txtNumSemanasEspecial.getText()))+"");
+   
 
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
@@ -536,6 +627,171 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void txtFechaFinMacroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaFinMacroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaFinMacroActionPerformed
+
+    private void txtPorcientoPreparatorioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioKeyPressed
+        String porPre = this.txtPorcientoPreparatorio.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtPorcientoCompetitivo.setText(rellenarPorcentaje(porPre));
+            if (!numSemanas.equals("")) {
+                txtNumSemanasCompetitivo.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
+                txtNumSemanasPreparatorio.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtPorcientoPreparatorioKeyPressed
+
+    private void txtPorcientoPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPorcientoPreparatorioActionPerformed
+
+    private void txtPorcientoCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoCompetitivoKeyPressed
+        String porPre = this.txtPorcientoCompetitivo.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        
+        try {
+            txtPorcientoPreparatorio.setText(rellenarPorcentaje(porPre));
+            if (!numSemanas.equals("")) {
+                txtNumSemanasCompetitivo.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
+                txtNumSemanasPreparatorio.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtPorcientoCompetitivoKeyPressed
+
+    private void txtPorcientoGeneralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoGeneralKeyPressed
+        String numSemanas = this.txtNumSemanasPreparatorio.getText();
+        String porPre = this.txtPorcientoGeneral.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        
+        try {
+            txtPorcientoEspecial.setText(rellenarPorcentaje(porPre));
+            System.out.println("entra");
+            if (!numSemanas.equals("")) {
+                System.out.println(numSemanas);
+                txtNumSemanasGeneral.setText(calcularSemanas(Integer.parseInt(numSemanas), Integer.parseInt(txtPorcientoGeneral.getText()))+"");
+                txtNumSemanasEspecial.setText(calcularSemanas(Integer.parseInt(numSemanas), Integer.parseInt(txtPorcientoEspecial.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtPorcientoGeneralKeyPressed
+
+    private void txtPorcientoEspecialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoEspecialKeyPressed
+        String numSemanas = this.txtNumSemanasPreparatorio.getText();
+        String porPre = this.txtPorcientoEspecial.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        
+        try {
+            txtPorcientoGeneral.setText(rellenarPorcentaje(porPre));
+            if (!numSemanas.equals("")) {
+                txtNumSemanasGeneral.setText(calcularSemanas(Integer.parseInt(numSemanas), Integer.parseInt(txtPorcientoGeneral.getText()))+"");
+                txtNumSemanasEspecial.setText(calcularSemanas(Integer.parseInt(numSemanas), Integer.parseInt(txtPorcientoEspecial.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtPorcientoEspecialKeyPressed
+
+    private void txtNumSemanasPreparatorioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasPreparatorioKeyPressed
+        String sem = this.txtNumSemanasPreparatorio.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtNumSemanasCompetitivo.setText(rellenarSemanas(sem,numSemanas));
+            if (!numSemanas.equals("")) {
+                txtPorcientoCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasCompetitivo.getText()))+"");
+                txtPorcientoPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasPreparatorio.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtNumSemanasPreparatorioKeyPressed
+
+    private void txtNumSemanasCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasCompetitivoKeyPressed
+         String sem = this.txtNumSemanasCompetitivo.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtNumSemanasPreparatorio.setText(rellenarSemanas(sem,numSemanas));
+            if (!numSemanas.equals("")) {
+                txtPorcientoCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasCompetitivo.getText()))+"");
+                txtPorcientoPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasPreparatorio.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtNumSemanasCompetitivoKeyPressed
+
+    private void txtNumSemanasGeneralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasGeneralKeyPressed
+        String sem = this.txtNumSemanasGeneral.getText();
+        String numSemanas = this.txtNumSemanasPreparatorio.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtNumSemanasEspecial.setText(rellenarSemanas(sem,numSemanas));
+            if (!numSemanas.equals("")) {
+                txtPorcientoGeneral.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasPreparatorio.getText()), Integer.parseInt(txtNumSemanasGeneral.getText()))+"");
+                txtPorcientoEspecial.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasPreparatorio.getText()), Integer.parseInt(txtNumSemanasEspecial.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtNumSemanasGeneralKeyPressed
+
+    private void txtNumSemanasEspecialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasEspecialKeyPressed
+        String sem = this.txtNumSemanasEspecial.getText();
+        String numSemanas = this.txtNumSemanasPreparatorio.getText();
+        
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtNumSemanasGeneral.setText(rellenarSemanas(sem,numSemanas));
+            if (!numSemanas.equals("")) {
+                txtPorcientoGeneral.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasPreparatorio.getText()), Integer.parseInt(txtNumSemanasGeneral.getText()))+"");
+                txtPorcientoEspecial.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasPreparatorio.getText()), Integer.parseInt(txtNumSemanasEspecial.getText()))+"");
+        }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtNumSemanasEspecialKeyPressed
 
     /**
      * @param args the command line arguments

@@ -266,6 +266,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFechaFinMacroActionPerformed"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFechaFinMacroKeyPressed"/>
       </Events>
     </Component>
@@ -363,13 +364,24 @@
         <Component class="javax.swing.JTextField" name="txtNumSemanasPreparatorio">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumSemanasPreparatorioActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumSemanasPreparatorioKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumSemanasCompetitivo">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumSemanasCompetitivoKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPorcientoPreparatorio">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPorcientoPreparatorioActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPorcientoPreparatorioKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPorcientoCompetitivo">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPorcientoCompetitivoKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPreparatorio">
           <Properties>
@@ -508,15 +520,25 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtNumSemanasGeneral">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumSemanasGeneralKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumSemanasEspecial">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumSemanasEspecialKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPorcientoGeneral">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPorcientoGeneralActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPorcientoGeneralKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPorcientoEspecial">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPorcientoEspecialKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPorciento">
           <Properties>

@@ -34,7 +34,6 @@ public class Validaciones {
     public boolean isFechaValida(String strFecha) throws Exception {
         Pattern pattern = Pattern.compile(FORMATO_FECHA, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(strFecha);
-
         if (!matcher.matches()) {
             throw new Exception("Error, La Fecha debe ser en formato dd/mm/yyyy");
         }
@@ -43,6 +42,15 @@ public class Validaciones {
         return true;
 
     }
+    public boolean isPorcentajeValido(double porcentaje) throws Exception {
+
+        if (porcentaje>100) {
+            throw new Exception("Error, El numero no debe superar el 100%");
+        }
+        return true;
+
+    }
+
 
     /**
      * isNumSemanaValido Método que valida el formato de la cadena str y el
@@ -68,6 +76,10 @@ public class Validaciones {
 
         return true;
 
+    }
+    public static boolean esNumero(String str) {
+        // Utiliza una expresión regular para verificar si la cadena contiene solo dígitos
+        return str.matches("\\d+");
     }
 
     /**
