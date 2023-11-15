@@ -12,6 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -98,11 +99,14 @@ public class AdministradorDAO implements BaseDAO {
             if (this.verificarContrasenaUsuario(usuario, contrasena)) {
                 // Se busca administrador a regresar
                 administrador = this.consultarAdministradoresUsuario(usuario);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             }
             entityManager.getTransaction().commit();
             entityManager.close();
             return administrador;
         } else {
+            JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             // El usuario NO se encontro en la base de datos
             throw new EntityNotFoundException("No se puede encontrar el administrador con usuario: " + usuario);
         }
@@ -113,12 +117,12 @@ public class AdministradorDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Administrador> query;
-        String jpql = "SELECT o FROM Administrador o WHERE o.usuario = :usuario";
+        String jpql = "SELECT a FROM Administrador a WHERE a.usuario = :usuario";
         query = entityManager.createQuery(jpql, Administrador.class);
         query.setParameter("usuario", usuario);
         entityManager.getTransaction().commit();
         try {
-            query.getSingleResult();
+            Administrador adminis = query.getSingleResult();
         } catch (NoResultException e) {
             entityManager.close();
             return false;
@@ -143,7 +147,7 @@ public class AdministradorDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Administrador> query;
-        String jpql = "SELECT o FROM Administrador o WHERE o.usuario = :usuario";
+        String jpql = "SELECT a FROM Administrador a WHERE a.usuario = :usuario";
         query = entityManager.createQuery(jpql, Administrador.class);
         query.setParameter("usuario", usuario);
         Administrador administrador = query.getSingleResult();

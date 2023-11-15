@@ -26,7 +26,7 @@ public class PasswordVisibleField extends JPasswordField {
 
     public void setCheckBox(JCheckBox checkbox) {
         this.checkbox = checkbox;
-        setEchoChar('*');
+        setEchoChar('●');
         configCheckBox();
 
     }
@@ -56,7 +56,7 @@ public class PasswordVisibleField extends JPasswordField {
     public void setText(String t) {
         // si el checkBox es seleccionado no se muestra el contenido 
         if (!checkbox.isSelected()) {
-            setEchoChar('*');
+            setEchoChar('●');
         } else {
             // en caso contrario se muestra
             setEchoChar('\u0000');

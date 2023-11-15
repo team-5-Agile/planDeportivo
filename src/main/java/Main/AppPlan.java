@@ -33,7 +33,7 @@ public class AppPlan {
         Login login = new Login();
         login.setVisible(true);
         
-        // Administradoradministrador
+        // Administrador
         // Usuario: admin
         // Contraseña: root
         

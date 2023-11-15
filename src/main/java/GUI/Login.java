@@ -6,6 +6,7 @@ package GUI;
 
 import Exceptions.InputException;
 import Herramientas.PasswordVisibleField;
+import Negocio.AdministradorNegocio;
 import Negocio.EntrenadorNegocio;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -179,38 +180,46 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(0);
+        int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (i == JOptionPane.YES_OPTION) {
+            this.dispose();
+        } else {
+            this.setVisible(true);
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-
         try {
-            EntrenadorNegocio en = new EntrenadorNegocio();
-            en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+            if (txtUsuario.getText() != "admin") {
+                EntrenadorNegocio en = new EntrenadorNegocio();
+                en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+                this.dispose();
+                new ViewMacrociclo().setVisible(true);
+            } else {
+                AdministradorNegocio an = new AdministradorNegocio();
+                an.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+                this.dispose();
+                new ViewMacrociclo().setVisible(true);
+            }
+
         } catch (Exception e) {
-            
-            if (e instanceof InputException ) {
-                InputException ex  = (InputException) e;
-                if ( ex.getTextField().equals("usuario")) {
+            if (e instanceof InputException) {
+                InputException ex = (InputException) e;
+                if (ex.getTextField().equals("usuario")) {
                     txtUsuario.setBorder(new LineBorder(Color.RED));
                 }
                 if (ex.getTextField().equals("contrasena")) {
                     txtPassword.setBorder(new LineBorder(Color.RED));
                 }
-            } 
-                JOptionPane.showMessageDialog(this, e.getMessage());
-                return;
-            
+            }
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return;
         }
 
-      
-        this.dispose();
-        new ViewMacrociclo().setVisible(true);
-       
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void txtUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusGained
-          txtUsuario.setBorder(new LineBorder(Color.GRAY));
+        txtUsuario.setBorder(new LineBorder(Color.GRAY));
     }//GEN-LAST:event_txtUsuarioFocusGained
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained

@@ -13,6 +13,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -91,11 +92,14 @@ public class EntrenadoresDAO implements BaseDAO {
             if (this.verificarContrasenaUsuario(usuario, contrasena)) {
                 // Se busca entrenador a regresar
                 entrenador = this.consultarEntrenadoresUsuario(usuario);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             }
             entityManager.getTransaction().commit();
             entityManager.close();
             return entrenador;
         } else {
+            JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             // El usuario NO se encontro en la base de datos
             throw new EntityNotFoundException("No se puede encontrar el entrenador con usuario: " + usuario);
         }
@@ -106,7 +110,7 @@ public class EntrenadoresDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Entrenadores> query;
-        String jpql = "SELECT o FROM Entrenador o WHERE o.usuario = :usuario";
+        String jpql = "SELECT e FROM Entrenadores e WHERE e.usuario = :usuario";
         query = entityManager.createQuery(jpql, Entrenadores.class);
         query.setParameter("usuario", usuario);
         entityManager.getTransaction().commit();
@@ -136,7 +140,7 @@ public class EntrenadoresDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Entrenadores> query;
-        String jpql = "SELECT o FROM Entrenador o WHERE o.usuario = :usuario";
+        String jpql = "SELECT e FROM Entrenadores e WHERE e.usuario = :usuario";
         query = entityManager.createQuery(jpql, Entrenadores.class);
         query.setParameter("usuario", usuario);
         Entrenadores entrenador = query.getSingleResult();
@@ -150,7 +154,7 @@ public class EntrenadoresDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Entrenadores> query;
-        String jpql = "SELECT e FROM Entrenador e";
+        String jpql = "SELECT e FROM Entrenadores e";
         query = entityManager.createQuery(jpql, Entrenadores.class);
         List<Entrenadores> entrenador = query.getResultList();
         entityManager.getTransaction().commit();
