@@ -4,6 +4,10 @@
 
 package Main;
 
+import DAOs.AdministradorDAO;
+import Dominio.Administrador;
+import GUI.Login;
+
 /**
  * La clase AppPlan es la clase principal del programa.
  * Sirve como punto de entrada para la aplicación Plan Deportivo.
@@ -17,7 +21,24 @@ public class AppPlan {
      * 
      * @param args Los argumentos de la línea de comandos
      */
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) throws Exception {
+        AdministradorDAO DAO = new AdministradorDAO("AppPlanU");
+        // Se crea el usuario de tipo administrador en caso que no exista
+        if (!DAO.verificarUsuarioAdministrador("admin")) {
+            Administrador admin = new Administrador("root", "admin");
+            DAO.registrarAdministrador(admin);
+        }
+        
+        // Se abre el formulario de inicio de sesión
+        Login login = new Login();
+        login.setVisible(true);
+        
+        // Administradoradministrador
+        // Usuario: admin
+        // Contraseña: root
+        
+        // Base de Datos
+        // Nombre: appplan
+        // Contraseña: u6$2{4/Cl
     }
 }

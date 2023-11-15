@@ -3,10 +3,10 @@
   <persistence-unit name="AppPlanU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Dominio.Administrador</class>
-    <class>Dominio.Entrenador</class>
-    <class>Dominio.Etapa</class>
-    <class>Dominio.Macrociclo</class>
-    <class>Dominio.Medio</class>
+    <class>Dominio.Entrenadores</class>
+    <class>Dominio.Etapas</class>
+    <class>Dominio.Macrociclos</class>
+    <class>Dominio.Medios</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appplan?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
@@ -19,10 +19,10 @@
   <persistence-unit name="AppPlanUTest" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Dominio.Administrador</class>
-    <class>Dominio.Entrenador</class>
-    <class>Dominio.Etapa</class>
-    <class>Dominio.Macrociclo</class>
-    <class>Dominio.Medio</class>
+    <class>Dominio.Entrenadores</class>
+    <class>Dominio.Etapas</class>
+    <class>Dominio.Macrociclos</class>
+    <class>Dominio.Medios</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appplanTest?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>

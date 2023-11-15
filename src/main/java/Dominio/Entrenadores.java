@@ -22,7 +22,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "entrenadores")
-public class Entrenador implements Serializable {
+public class Entrenadores implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -46,7 +46,7 @@ public class Entrenador implements Serializable {
     
     // Un entrenador puede crear muchos macrociclos
     @OneToMany(mappedBy = "entrenadores")
-    private List<Macrociclo> macrociclos;
+    private List<Macrociclos> macrociclos;
     
     // Llave foránea
     // Muchos entrenadores pueden ser registrados por un administrador
@@ -54,10 +54,10 @@ public class Entrenador implements Serializable {
     @JoinColumn(name = "idAdministrador", referencedColumnName = "ID", nullable = true)
     private Administrador administrador;
 
-    public Entrenador() {
+    public Entrenadores() {
     }
 
-    public Entrenador(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario, List<Macrociclo> macrociclos, Administrador administrador) {
+    public Entrenadores(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario, List<Macrociclos> macrociclos, Administrador administrador) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -68,7 +68,7 @@ public class Entrenador implements Serializable {
         this.administrador = administrador;
     }
 
-    public Entrenador(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
+    public Entrenadores(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -77,7 +77,7 @@ public class Entrenador implements Serializable {
         this.usuario = usuario;
     }
 
-    public Entrenador(String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
+    public Entrenadores(String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -133,11 +133,11 @@ public class Entrenador implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Macrociclo> getMacrociclos() {
+    public List<Macrociclos> getMacrociclos() {
         return macrociclos;
     }
 
-    public void setMacrociclos(List<Macrociclo> macrociclos) {
+    public void setMacrociclos(List<Macrociclos> macrociclos) {
         this.macrociclos = macrociclos;
     }
 
@@ -159,10 +159,10 @@ public class Entrenador implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Entrenador)) {
+        if (!(object instanceof Entrenadores)) {
             return false;
         }
-        Entrenador other = (Entrenador) object;
+        Entrenadores other = (Entrenadores) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

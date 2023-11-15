@@ -23,7 +23,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "medios")
-public class Medio implements Serializable {
+public class Medios implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -57,12 +57,12 @@ public class Medio implements Serializable {
     // Muchos medios pueden pertenecer a una etapas
     @ManyToOne()
     @JoinColumn(name = "idEtapa", referencedColumnName = "ID", nullable = true)
-    private Etapa etapas;
+    private Etapas etapas;
 
-    public Medio() {
+    public Medios() {
     }
     
-    public Medio(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa, Etapa etapa) {
+    public Medios(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa, Etapas etapa) {
         this.id = id;
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
@@ -74,7 +74,7 @@ public class Medio implements Serializable {
         this.etapas = etapa;
     }
 
-    public Medio(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
+    public Medios(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
         this.id = id;
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
@@ -85,7 +85,7 @@ public class Medio implements Serializable {
         this.volumenEtapa = volumenEtapa;
     }
     
-    public Medio(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
+    public Medios(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
         this.minimo = minimo;
@@ -95,7 +95,7 @@ public class Medio implements Serializable {
         this.volumenEtapa = volumenEtapa;
     }
     
-    public Medio(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Integer insitaciones) {
+    public Medios(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Integer insitaciones) {
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
         this.minimo = minimo;
@@ -167,11 +167,11 @@ public class Medio implements Serializable {
         this.volumenEtapa = volumenEtapa;
     }
 
-    public Etapa getEtapas() {
+    public Etapas getEtapas() {
         return etapas;
     }
 
-    public void setEtapas(Etapa etapas) {
+    public void setEtapas(Etapas etapas) {
         this.etapas = etapas;
     }
 
@@ -185,10 +185,10 @@ public class Medio implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Medio)) {
+        if (!(object instanceof Medios)) {
             return false;
         }
-        Medio other = (Medio) object;
+        Medios other = (Medios) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

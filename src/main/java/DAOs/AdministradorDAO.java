@@ -4,11 +4,14 @@
  */
 package DAOs;
 
+import Interfaces.BaseDAO;
 import Dominio.Administrador;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 
 /**
  *
@@ -20,6 +23,21 @@ public class AdministradorDAO implements BaseDAO {
 
     public AdministradorDAO(String persitenceUnit) {
         this.persitenceUnit = persitenceUnit;
+    }
+    
+    public String getPersitenceUnit() {
+        return persitenceUnit;
+    }
+
+    public void setPersitenceUnit(String persitenceUnit) {
+        this.persitenceUnit = persitenceUnit;
+    }
+    
+    @Override
+    public EntityManager getEntityManager() {
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory(this.persitenceUnit);
+        EntityManager entityManager = managerFactory.createEntityManager();
+        return entityManager;
     }
 
     // Métodos de acceso
@@ -69,20 +87,68 @@ public class AdministradorDAO implements BaseDAO {
         entityManager.close();
         return administrador != null;
     }
-
-    @Override
-    public EntityManager getEntityManager() {
-        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory(this.persitenceUnit);
-        EntityManager entityManager = managerFactory.createEntityManager();
-        return entityManager;
+    
+    // Métodos de inicio de sesión
+    public Administrador iniciarSesionAdministrador(String usuario, String contrasena) throws Exception {
+        if (verificarUsuarioAdministrador(usuario)) {
+            EntityManager entityManager = this.getEntityManager();
+            entityManager.getTransaction().begin();
+            // Administrador a regresar inicializado
+            Administrador administrador = null;
+            if (this.verificarContrasenaUsuario(usuario, contrasena)) {
+                // Se busca administrador a regresar
+                administrador = this.consultarAdministradoresUsuario(usuario);
+            }
+            entityManager.getTransaction().commit();
+            entityManager.close();
+            return administrador;
+        } else {
+            // El usuario NO se encontro en la base de datos
+            throw new EntityNotFoundException("No se puede encontrar el administrador con usuario: " + usuario);
+        }
     }
 
-    public String getPersitenceUnit() {
-        return persitenceUnit;
+    // Verificar que exista en la base de datos, regresa verdadero si el usuario ha sido encontrado en la base de datos
+    public boolean verificarUsuarioAdministrador(String usuario) throws Exception {
+        EntityManager entityManager = this.getEntityManager();
+        entityManager.getTransaction().begin();
+        TypedQuery<Administrador> query;
+        String jpql = "SELECT o FROM Administrador o WHERE o.usuario = :usuario";
+        query = entityManager.createQuery(jpql, Administrador.class);
+        query.setParameter("usuario", usuario);
+        entityManager.getTransaction().commit();
+        try {
+            query.getSingleResult();
+        } catch (NoResultException e) {
+            entityManager.close();
+            return false;
+        }
+        entityManager.close();
+        return true;
     }
 
-    public void setPersitenceUnit(String persitenceUnit) {
-        this.persitenceUnit = persitenceUnit;
+    // Verifica que el usuario dado y la contrasena dado correspondan entre si, regresa verdadero si el usuario y la contrasena corresponden
+    public boolean verificarContrasenaUsuario(String usuario, String contrasena) throws Exception {
+        EntityManager entityManager = this.getEntityManager();
+        entityManager.getTransaction().begin();
+        // Consulta el administrador con el usuario dado de la base de datos
+        Administrador administrador = this.consultarAdministradoresUsuario(usuario);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return administrador.getContrasena().equals(contrasena);
     }
 
+    // Consulta de la base de datos un objeto de tipo Administrador, solamente solicitando el usuario, regresa un objeto si se halla un administrador en la base de datos con el usuario dado
+    public Administrador consultarAdministradoresUsuario(String usuario) throws Exception {
+        EntityManager entityManager = this.getEntityManager();
+        entityManager.getTransaction().begin();
+        TypedQuery<Administrador> query;
+        String jpql = "SELECT o FROM Administrador o WHERE o.usuario = :usuario";
+        query = entityManager.createQuery(jpql, Administrador.class);
+        query.setParameter("usuario", usuario);
+        Administrador administrador = query.getSingleResult();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return administrador;
+    }
 }

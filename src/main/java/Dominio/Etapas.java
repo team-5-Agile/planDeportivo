@@ -25,7 +25,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "etapas")
-public class Etapa implements Serializable {
+public class Etapas implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -44,18 +44,18 @@ public class Etapa implements Serializable {
     
     // Una etapa puede tener muchos medios
     @OneToMany(mappedBy = "etapas")
-    private List<Medio> medios;
+    private List<Medios> medios;
     
     // Llave foránea
     // Muchas etapas pueden componer un macrociclo
     @ManyToOne()
     @JoinColumn(name = "idMacrociclo", referencedColumnName = "ID", nullable = true)
-    private Macrociclo macrociclos;
+    private Macrociclos macrociclos;
 
-    public Etapa() {
+    public Etapas() {
     }
     
-    public Etapa(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion, List<Medio> medios, Macrociclo macrociclo) {
+    public Etapas(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion, List<Medios> medios, Macrociclos macrociclo) {
         this.id = id;
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
@@ -64,14 +64,14 @@ public class Etapa implements Serializable {
         this.macrociclos = macrociclo;
     }
 
-    public Etapa(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
+    public Etapas(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
         this.id = id;
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
         this.proporcion = proporcion;
     }
 
-    public Etapa(TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
+    public Etapas(TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
         this.proporcion = proporcion;
@@ -109,19 +109,19 @@ public class Etapa implements Serializable {
         this.proporcion = proporcion;
     }
 
-    public List<Medio> getMedios() {
+    public List<Medios> getMedios() {
         return medios;
     }
 
-    public void setMedios(List<Medio> medios) {
+    public void setMedios(List<Medios> medios) {
         this.medios = medios;
     }
 
-    public Macrociclo getMacrociclo() {
+    public Macrociclos getMacrociclo() {
         return macrociclos;
     }
 
-    public void setMacrociclo(Macrociclo macrociclo) {
+    public void setMacrociclo(Macrociclos macrociclo) {
         this.macrociclos = macrociclo;
     }
 
@@ -135,10 +135,10 @@ public class Etapa implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Etapa)) {
+        if (!(object instanceof Etapas)) {
             return false;
         }
-        Etapa other = (Etapa) object;
+        Etapas other = (Etapas) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

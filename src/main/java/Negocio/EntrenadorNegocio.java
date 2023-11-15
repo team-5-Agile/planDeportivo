@@ -4,8 +4,8 @@
  */
 package Negocio;
 
-import DAOs.EntrenadorDAO;
-import Dominio.Entrenador;
+import DAOs.EntrenadoresDAO;
+import Dominio.Entrenadores;
 import Exceptions.InputException;
 import Herramientas.Validaciones;
 import java.util.logging.Level;
@@ -17,11 +17,11 @@ import java.util.logging.Logger;
  */
 public class EntrenadorNegocio {
 
-    private EntrenadorDAO dao;
+    private EntrenadoresDAO dao;
     private Validaciones val;
 
     public EntrenadorNegocio() {
-        dao = new EntrenadorDAO("AppPlanU");
+        dao = new EntrenadoresDAO("AppPlanU");
         val=new Validaciones();
     }
     /**
@@ -31,9 +31,9 @@ public class EntrenadorNegocio {
      * @return devuelve el usuario solo si es encontrado en la capa DAO
      * @throws Exception devuelve una excepción si ocurrió algún error
      */
-    public Entrenador iniciarSesion(String usuario, String contrasena) throws Exception  {
+    public Entrenadores iniciarSesion(String usuario, String contrasena) throws Exception  {
         try {
-            Entrenador entrenador;
+            Entrenadores entrenador;
             if (usuario == null ) {
                 throw new InputException("Debe llenar el campo usuario","usuario");
             }

@@ -4,7 +4,7 @@
  */
 package DAOs;
 
-import Dominio.Entrenador;
+import Dominio.Entrenadores;
 import jakarta.persistence.EntityManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,14 +21,14 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class EntrenadorDAOTest {
 
-    private static EntrenadorDAO instance;
+    private static EntrenadoresDAO instance;
 
     public EntrenadorDAOTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
-        instance = new EntrenadorDAO("AppPlanUTest");
+        instance = new EntrenadoresDAO("AppPlanU");
          EntityManager em= instance.getEntityManager();
          em.getTransaction().begin();
          em.createNativeQuery("SET foreign_key_checks = 0").executeUpdate();
@@ -61,18 +61,18 @@ public class EntrenadorDAOTest {
     }
 
     /**
-     * Test of registrarEntrenador method, of class EntrenadorDAO.
+     * Test of registrarEntrenador method, of class EntrenadoresDAO.
      */
     @Test
     public void testRegistrarEntrenador() {
         try{
             
         System.out.println("registrarEntrenador");
-        Entrenador entrenador = new Entrenador();
+        Entrenadores entrenador = new Entrenadores();
         entrenador.setUsuario("test");
         entrenador.setContrasena("contrasena");
-        Entrenador result = instance.registrarEntrenador(entrenador);
-        Entrenador a =new Entrenador();
+        Entrenadores result = instance.registrarEntrenador(entrenador);
+        Entrenadores a =new Entrenadores();
         a.setId(1L);
         assertEquals(a.getId(),result.getId());
         }catch(Exception e){
@@ -86,7 +86,7 @@ public class EntrenadorDAOTest {
         try {
             System.out.println("ConsultarEntrenador");
             
-            Entrenador result = instance.consultarEntrenadoresUsuario("test");
+            Entrenadores result = instance.consultarEntrenadoresUsuario("test");
             assertEquals("test",result.getUsuario());
         } catch (Exception ex) {
             fail("falló test -> consultarEntrenadoresUsuario(args)");
@@ -99,7 +99,7 @@ public class EntrenadorDAOTest {
         try {
             System.out.println("IniciarSesionEntrenador");
             
-            Entrenador result = instance.iniciarSesionEntrenador("test","contrasena");
+            Entrenadores result = instance.iniciarSesionEntrenador("test","contrasena");
             assertEquals("test",result.getUsuario());
         } catch (Exception ex) {
              fail("falló test -> iniciarSesionEntrenador(args,args)");

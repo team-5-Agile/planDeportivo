@@ -28,7 +28,7 @@ import jakarta.persistence.TemporalType;
  */
 @Entity
 @Table(name = "macrociclos")
-public class Macrociclo implements Serializable {
+public class Macrociclos implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -61,18 +61,18 @@ public class Macrociclo implements Serializable {
     
     // Un macrociclo puede tener muchas etapas
     @OneToMany(mappedBy = "macrociclos")
-    private List<Etapa> etapas;
+    private List<Etapas> etapas;
     
     // Llave foránea
     // Muchos macrociclos pueden ser creados por un entrenadores
     @ManyToOne()
     @JoinColumn(name = "idEntrenador", referencedColumnName = "ID", nullable = true)
-    private Entrenador entrenadores;
+    private Entrenadores entrenadores;
 
-    public Macrociclo() {
+    public Macrociclos() {
     }
 
-    public Macrociclo(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin, List<Etapa> etapas, Entrenador entrenador) {
+    public Macrociclos(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin, List<Etapas> etapas, Entrenadores entrenador) {
         this.id = id;
         this.deporte = deporte;
         this.jefeRama = jefeRama;
@@ -85,7 +85,7 @@ public class Macrociclo implements Serializable {
         this.entrenadores = entrenador;
     }
 
-    public Macrociclo(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
+    public Macrociclos(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
         this.id = id;
         this.deporte = deporte;
         this.jefeRama = jefeRama;
@@ -96,7 +96,7 @@ public class Macrociclo implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public Macrociclo(String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
+    public Macrociclos(String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
         this.deporte = deporte;
         this.jefeRama = jefeRama;
         this.rama = rama;
@@ -170,19 +170,19 @@ public class Macrociclo implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public List<Etapa> getEtapas() {
+    public List<Etapas> getEtapas() {
         return etapas;
     }
 
-    public void setEtapas(List<Etapa> etapas) {
+    public void setEtapas(List<Etapas> etapas) {
         this.etapas = etapas;
     }
 
-    public Entrenador getEntrenadores() {
+    public Entrenadores getEntrenadores() {
         return entrenadores;
     }
 
-    public void setEntrenadores(Entrenador entrenadores) {
+    public void setEntrenadores(Entrenadores entrenadores) {
         this.entrenadores = entrenadores;
     }
 
@@ -196,10 +196,10 @@ public class Macrociclo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Macrociclo)) {
+        if (!(object instanceof Macrociclos)) {
             return false;
         }
-        Macrociclo other = (Macrociclo) object;
+        Macrociclos other = (Macrociclos) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
