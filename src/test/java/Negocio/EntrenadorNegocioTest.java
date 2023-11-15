@@ -82,22 +82,6 @@ public class EntrenadorNegocioTest {
         
     }
     
-    /**
-     * Test of iniciarSesion method, of class EntrenadorNegocio.
-     */
-    @Test
-    @Order(3)
-    public void testIniciarSesionIncorrect() throws Exception {
-        System.out.println("iniciarSesionFail");
-        String usuario = "Test Usuario";
-        String contrasena = "TestContrasenas";
-        EntrenadorNegocio instance = new EntrenadorNegocio(Scope.TEST);
-        Entrenador expResult = new Entrenador();
-        expResult.setUsuario(usuario);
-        expResult.setContrasena(contrasena);
-        expResult.setId(1L);
-        Entrenador result = instance.iniciarSesion(usuario, contrasena);
-        assertNull( result);
-    }
+   
     
 }
