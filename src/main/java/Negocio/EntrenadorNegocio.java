@@ -6,11 +6,10 @@ package Negocio;
 
 import DAOs.EntrenadoresDAO;
 import Dominio.Entrenador;
+import Enumeradores.Scope;
 import Exceptions.InputException;
 import Herramientas.Validaciones;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -23,6 +22,22 @@ public class EntrenadorNegocio {
 
     public EntrenadorNegocio() {
         dao = new EntrenadoresDAO("AppPlanU");
+        val = new Validaciones();
+    }
+    /**
+     * Si 
+     * @param scope 
+     */
+    public EntrenadorNegocio(Scope scope) {
+         if (scope == null) {
+            return;
+        }
+        if (scope.equals(Scope.TEST)) {
+            this.dao = new EntrenadoresDAO("AppPlanUTest");
+        }
+        if (scope.equals(Scope.DEV)) {
+            this.dao = new EntrenadoresDAO("AppPlanU");
+        }
         val = new Validaciones();
     }
 

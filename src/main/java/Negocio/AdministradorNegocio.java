@@ -6,9 +6,9 @@ package Negocio;
 
 import DAOs.AdministradorDAO;
 import Dominio.Administrador;
+import Enumeradores.Scope;
 import Exceptions.InputException;
 import Herramientas.Validaciones;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +21,22 @@ public class AdministradorNegocio {
 
     public AdministradorNegocio() {
         dao = new AdministradorDAO("AppPlanU");
+        val = new Validaciones();
+    }
+    /**
+     * constructor que define el alcance de la instancia, utilizado para testing
+     * @param scope define el alcance de la instancia
+     */
+    public AdministradorNegocio(Scope scope) {
+        if (scope == null) {
+            return;
+        }
+        if (scope.equals(Scope.TEST)) {
+            this.dao = new AdministradorDAO("AppPlanUTest");
+        }
+        if (scope.equals(Scope.DEV)) {
+            this.dao = new AdministradorDAO("AppPlanU");
+        }
         val = new Validaciones();
     }
 

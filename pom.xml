@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>mx.edu.itson</groupId>
     <artifactId>AppPlan</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
         
     <dependencies>
@@ -80,6 +80,8 @@
                         <artifactId>AbsoluteLayout</artifactId>
                         <version>RELEASE190</version>
                 </dependency>
+                
+                <!-- Dependecias de testing no agregar dependencias por debajo de este commentario -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -102,6 +104,7 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.7.1</version>
+            <scope>Test</scope>
         </dependency>
     </dependencies>
     <build>
