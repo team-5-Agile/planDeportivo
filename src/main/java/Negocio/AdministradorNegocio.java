@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author brawun
  */
 public class AdministradorNegocio {
-    
+
     private AdministradorDAO dao;
     private Validaciones val;
 
@@ -23,14 +23,17 @@ public class AdministradorNegocio {
         dao = new AdministradorDAO("AppPlanU");
         val = new Validaciones();
     }
+
     /**
      * Método que hace llamada a la capa DAO para iniciar sesión en el sistema
+     *
      * @param usuario representa el usuario a ingresar al sistema
-     * @param contrasena representa la contraseña del usuario a ingresar al sistema
+     * @param contrasena representa la contraseña del usuario a ingresar al
+     * sistema
      * @return devuelve el usuario solo si es encontrado en la capa DAO
      * @throws Exception devuelve una excepción si ocurrió algún error
      */
-    public Administrador iniciarSesion(String usuario, String contrasena) throws Exception  {
+    public Administrador iniciarSesion(String usuario, String contrasena) throws Exception {
         try {
             Administrador administrador;
             if (usuario.isBlank()) {
@@ -43,7 +46,9 @@ public class AdministradorNegocio {
             return administrador;
         } catch (Exception ex) {
             // lanza InputExcepción si la excepción es de tipo InputExcepción 
-            if(ex instanceof InputException)throw ex;
+            if (ex instanceof InputException) {
+                throw ex;
+            }
             // en caso contrario solo Excepción
             throw new Exception(ex.getMessage());
         }

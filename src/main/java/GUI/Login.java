@@ -124,12 +124,6 @@ public class Login extends javax.swing.JFrame {
                         .addGap(310, 310, 310)
                         .addComponent(lblUserProfile))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSalir)
-                        .addGap(224, 224, 224)
-                        .addComponent(btnIniciar)
-                        .addGap(169, 169, 169)
-                        .addComponent(lblLogoIws))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(lblContrasenia)
                         .addGap(18, 18, 18)
@@ -146,7 +140,15 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(lblUsuario)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(21, 21, 21))
+                .addGap(120, 120, 120))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSalir)
+                .addGap(224, 224, 224)
+                .addComponent(btnIniciar)
+                .addGap(169, 169, 169)
+                .addComponent(lblLogoIws)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +180,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(lblContrasenia)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLogoIws)
                     .addGroup(layout.createSequentialGroup()
@@ -185,7 +188,7 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnIniciar)
                             .addComponent(btnSalir))))
-                .addContainerGap())
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,7 +205,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         try {
-            if (txtUsuario.getText() != "admin") {
+            if (!txtUsuario.getText().equals("admin")) {
                 EntrenadorNegocio en = new EntrenadorNegocio();
                 en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
                 this.dispose();
@@ -213,7 +216,6 @@ public class Login extends javax.swing.JFrame {
                 this.dispose();
                 new ViewMacrociclo().setVisible(true);
             }
-
         } catch (Exception e) {
             if (e instanceof InputException) {
                 InputException ex = (InputException) e;
