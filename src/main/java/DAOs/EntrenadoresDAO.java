@@ -5,7 +5,7 @@
 package DAOs;
 
 import Interfaces.BaseDAO;
-import Dominio.Entrenadores;
+import Dominio.Entrenador;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
@@ -35,7 +35,7 @@ public class EntrenadoresDAO implements BaseDAO {
     }
 
     // Métodos de acceso
-    public Entrenadores registrarEntrenador(Entrenadores entrenador) {
+    public Entrenador registrarEntrenador(Entrenador entrenador) {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(entrenador);
@@ -49,7 +49,7 @@ public class EntrenadoresDAO implements BaseDAO {
         if (verificarEntrenador(id)) {
             EntityManager entityManager = this.getEntityManager();
             entityManager.getTransaction().begin();
-            Entrenadores entrenador = consultarEntrenador(id);
+            Entrenador entrenador = consultarEntrenador(id);
             entityManager.remove(entrenador);
             entityManager.getTransaction().commit();
             entityManager.close();
@@ -59,11 +59,11 @@ public class EntrenadoresDAO implements BaseDAO {
     }
 
     // Metodo de consultac
-    public Entrenadores consultarEntrenador(Long id) {
+    public Entrenador consultarEntrenador(Long id) {
         if (verificarEntrenador(id)) {
             EntityManager entityManager = this.getEntityManager();
             entityManager.getTransaction().begin();
-            Entrenadores entrenador = entityManager.find(Entrenadores.class, id);
+            Entrenador entrenador = entityManager.find(Entrenador.class, id);
             entityManager.getTransaction().commit();
             entityManager.close();
             return entrenador;
@@ -76,19 +76,19 @@ public class EntrenadoresDAO implements BaseDAO {
     public Boolean verificarEntrenador(Long id) {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
-        Entrenadores entrenador = entityManager.find(Entrenadores.class, id);
+        Entrenador entrenador = entityManager.find(Entrenador.class, id);
         entityManager.getTransaction().commit();
         entityManager.close();
         return entrenador != null;
     }
 
     // Métodos de inicio de sesión
-    public Entrenadores iniciarSesionEntrenador(String usuario, String contrasena) throws Exception {
+    public Entrenador iniciarSesionEntrenador(String usuario, String contrasena) throws Exception {
         if (verificarUsuarioEntrenador(usuario)) {
             EntityManager entityManager = this.getEntityManager();
             entityManager.getTransaction().begin();
-            // Entrenadores a regresar inicializado
-            Entrenadores entrenador = null;
+            // Entrenador a regresar inicializado
+            Entrenador entrenador = null;
             if (this.verificarContrasenaUsuario(usuario, contrasena)) {
                 // Se busca entrenador a regresar
                 entrenador = this.consultarEntrenadoresUsuario(usuario);
@@ -109,9 +109,9 @@ public class EntrenadoresDAO implements BaseDAO {
     public boolean verificarUsuarioEntrenador(String usuario) throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
-        TypedQuery<Entrenadores> query;
+        TypedQuery<Entrenador> query;
         String jpql = "SELECT e FROM Entrenadores e WHERE e.usuario = :usuario";
-        query = entityManager.createQuery(jpql, Entrenadores.class);
+        query = entityManager.createQuery(jpql, Entrenador.class);
         query.setParameter("usuario", usuario);
         entityManager.getTransaction().commit();
         try {
@@ -129,34 +129,34 @@ public class EntrenadoresDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         // Consulta el entrenador con el usuario dado de la base de datos
-        Entrenadores entrenador = this.consultarEntrenadoresUsuario(usuario);
+        Entrenador entrenador = this.consultarEntrenadoresUsuario(usuario);
         entityManager.getTransaction().commit();
         entityManager.close();
         return entrenador.getContrasena().equals(contrasena);
     }
 
-    // Consulta de la base de datos un objeto de tipo Entrenadores, solamente solicitando el usuario, regresa un objeto si se halla un entrenador en la base de datos con el usuario dado
-    public Entrenadores consultarEntrenadoresUsuario(String usuario) throws Exception {
+    // Consulta de la base de datos un objeto de tipo Entrenador, solamente solicitando el usuario, regresa un objeto si se halla un entrenador en la base de datos con el usuario dado
+    public Entrenador consultarEntrenadoresUsuario(String usuario) throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
-        TypedQuery<Entrenadores> query;
+        TypedQuery<Entrenador> query;
         String jpql = "SELECT e FROM Entrenadores e WHERE e.usuario = :usuario";
-        query = entityManager.createQuery(jpql, Entrenadores.class);
+        query = entityManager.createQuery(jpql, Entrenador.class);
         query.setParameter("usuario", usuario);
-        Entrenadores entrenador = query.getSingleResult();
+        Entrenador entrenador = query.getSingleResult();
         entityManager.getTransaction().commit();
         entityManager.close();
         return entrenador;
     }
     
     // Metodo que regresa una lista con todos los entrenadores registrados en la base de datos
-    public List<Entrenadores> consultarTodosEntrenadores() throws Exception {
+    public List<Entrenador> consultarTodosEntrenadores() throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
-        TypedQuery<Entrenadores> query;
+        TypedQuery<Entrenador> query;
         String jpql = "SELECT e FROM Entrenadores e";
-        query = entityManager.createQuery(jpql, Entrenadores.class);
-        List<Entrenadores> entrenador = query.getResultList();
+        query = entityManager.createQuery(jpql, Entrenador.class);
+        List<Entrenador> entrenador = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
         return entrenador;

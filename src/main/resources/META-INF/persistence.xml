@@ -3,10 +3,10 @@
   <persistence-unit name="AppPlanU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Dominio.Administrador</class>
-    <class>Dominio.Entrenadores</class>
-    <class>Dominio.Etapas</class>
-    <class>Dominio.Macrociclos</class>
-    <class>Dominio.Medios</class>
+    <class>Dominio.Entrenador</class>
+    <class>Dominio.Medio</class>
+    <class>Dominio.Macrociclo</class>
+    <class>Dominio.Etapa</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appplan?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
@@ -19,17 +19,17 @@
   <persistence-unit name="AppPlanUTest" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Dominio.Administrador</class>
-    <class>Dominio.Entrenadores</class>
-    <class>Dominio.Etapas</class>
-    <class>Dominio.Macrociclos</class>
-    <class>Dominio.Medios</class>
+    <class>Dominio.Entrenador</class>
+    <class>Dominio.Medio</class>
+    <class>Dominio.Macrociclo</class>
+    <class>Dominio.Etapa</class>
     <properties>
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appplanTest?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
-      <property name="jakarta.persistence.jdbc.user" value="root"/>
-      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="jakarta.persistence.jdbc.password" value="u6$2{4/Cl"/>
-      <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:hsqldb:mem:myDb"/>
+      <property name="jakarta.persistence.jdbc.user" value="SA"/>
+      <property name="jakarta.persistence.jdbc.driver" value="org.hsqldb.jdbc.JDBCDriver"/>
+      <property name="jakarta.persistence.jdbc.password" value=""/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

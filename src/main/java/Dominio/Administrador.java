@@ -35,12 +35,12 @@ public class Administrador implements Serializable {
     
     // Un administrador puede registrar muchos entrenadores
     @OneToMany(mappedBy = "administrador")
-    private List<Entrenadores> entrenadores;
+    private List<Entrenador> entrenadores;
 
     public Administrador() {
     }
 
-    public Administrador(Long id, String contrasena, String usuario, List<Entrenadores> entrenadores) {
+    public Administrador(Long id, String contrasena, String usuario, List<Entrenador> entrenadores) {
         this.id = id;
         this.contrasena = contrasena;
         this.usuario = usuario;
@@ -82,11 +82,11 @@ public class Administrador implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Entrenadores> getEntrenadores() {
+    public List<Entrenador> getEntrenadores() {
         return entrenadores;
     }
 
-    public void setEntrenadores(List<Entrenadores> entrenadores) {
+    public void setEntrenadores(List<Entrenador> entrenadores) {
         this.entrenadores = entrenadores;
     }
 
