@@ -22,8 +22,8 @@ public class AppPlan {
      * @param args Los argumentos de la línea de comandos
      */
     public static void main(String[] args) throws Exception {
-        AdministradorDAO DAO = new AdministradorDAO("AppPlanU");
         // Se crea el usuario de tipo administrador en caso que no exista
+        AdministradorDAO DAO = new AdministradorDAO("AppPlanU");
         if (!DAO.verificarUsuarioAdministrador("admin")) {
             Administrador admin = new Administrador("root", "admin");
             DAO.registrarAdministrador(admin);

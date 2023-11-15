@@ -1,9 +1,9 @@
+package GUI;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
-
 import Exceptions.InputException;
 import Herramientas.PasswordVisibleField;
 import Negocio.AdministradorNegocio;
@@ -41,26 +41,34 @@ public class Login extends javax.swing.JFrame {
         btnIniciar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lblIconOjo = new javax.swing.JLabel();
-        lblLogoPotro = new javax.swing.JLabel();
         lblLogoItson = new javax.swing.JLabel();
         lblLogoIws = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         lblSubtitulo = new javax.swing.JLabel();
         lblUserProfile = new javax.swing.JLabel();
+        lblContrasenia = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         txtPassword = new Herramientas.PasswordVisibleField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
 
+        txtUsuario.setToolTipText("");
         txtUsuario.setDragEnabled(true);
         txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtUsuarioFocusGained(evt);
             }
         });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
 
         checkVisiblePassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        btnIniciar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnIniciar.setText("Iniciar Sesión");
         btnIniciar.setToolTipText("");
         btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -70,6 +78,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -80,100 +89,103 @@ public class Login extends javax.swing.JFrame {
 
         lblIconOjo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ojo.png"))); // NOI18N
 
-        lblLogoPotro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/potros.png"))); // NOI18N
-
         lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-itson.png"))); // NOI18N
 
-        lblLogoIws.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-isw.png"))); // NOI18N
+        lblLogoIws.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-isw.jpg"))); // NOI18N
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo.setText("Plan de Entrenamiento");
 
-        lblSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblSubtitulo.setText("Generador de Macrociclos");
 
-        lblUserProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-profile.png"))); // NOI18N
+        lblUserProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-profile.jpg"))); // NOI18N
 
-        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusGained(evt);
-            }
-        });
+        lblContrasenia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblContrasenia.setText("Contraseña:");
+
+        lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblUsuario.setText("Usuario:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLogoPotro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(253, 253, 253)
                 .addComponent(lblLogoItson)
-                .addGap(18, 18, 18)
-                .addComponent(lblLogoIws)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
+                .addGap(226, 226, 226))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnSalir)
-                        .addGap(206, 206, 206)
-                        .addComponent(btnIniciar))
+                        .addGap(207, 207, 207)
+                        .addComponent(lblSubtitulo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
+                        .addGap(310, 310, 310)
+                        .addComponent(lblUserProfile))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSalir)
+                        .addGap(224, 224, 224)
+                        .addComponent(btnIniciar)
+                        .addGap(169, 169, 169)
+                        .addComponent(lblLogoIws))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(lblContrasenia)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(checkVisiblePassword)
+                        .addGap(4, 4, 4)
+                        .addComponent(lblIconOjo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitulo)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSubtitulo)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(44, 44, 44)
-                                        .addComponent(lblUserProfile))))
-                            .addComponent(lblTitulo))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(lblIconOjo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkVisiblePassword)
-                .addGap(99, 99, 99))
+                                .addComponent(lblUsuario)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblLogoPotro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(lblLogoIws))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblLogoItson)))
+                .addGap(27, 27, 27)
+                .addComponent(lblLogoItson)
                 .addGap(18, 18, 18)
                 .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(lblSubtitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(lblUserProfile)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(checkVisiblePassword)
-                    .addComponent(lblIconOjo)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnIniciar))
-                .addGap(44, 44, 44))
+                        .addGap(9, 9, 9)
+                        .addComponent(lblUsuario))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(checkVisiblePassword))
+                            .addComponent(lblIconOjo))
+                        .addGap(8, 8, 8))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lblContrasenia)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLogoIws)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnIniciar)
+                            .addComponent(btnSalir))))
+                .addContainerGap())
         );
 
         pack();
@@ -226,18 +238,27 @@ public class Login extends javax.swing.JFrame {
         txtPassword.setBorder(new LineBorder(Color.GRAY));
     }//GEN-LAST:event_txtPasswordFocusGained
 
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // Verifica si la tecla presionada es un espacio
+        if (evt.getKeyChar() == ' ') {
+            // Si es un espacio, consume el evento para evitar que se escriba en el TextField
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox checkVisiblePassword;
+    private javax.swing.JLabel lblContrasenia;
     private javax.swing.JLabel lblIconOjo;
     private javax.swing.JLabel lblLogoItson;
     private javax.swing.JLabel lblLogoIws;
-    private javax.swing.JLabel lblLogoPotro;
     private javax.swing.JLabel lblSubtitulo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUserProfile;
+    private javax.swing.JLabel lblUsuario;
     private Herramientas.PasswordVisibleField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
