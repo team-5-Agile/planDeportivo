@@ -5,7 +5,6 @@ package GUI;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 import Exceptions.InputException;
-import Herramientas.PasswordVisibleField;
 import Negocio.AdministradorNegocio;
 import Negocio.EntrenadorNegocio;
 import java.awt.Color;
@@ -24,7 +23,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
-        txtPassword.setCheckBox(checkVisiblePassword);
     }
 
     /**
@@ -48,12 +46,13 @@ public class Login extends javax.swing.JFrame {
         lblUserProfile = new javax.swing.JLabel();
         lblContrasenia = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
-        txtPassword = new Herramientas.PasswordVisibleField();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
 
-        txtUsuario.setToolTipText("");
+        txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtUsuario.setToolTipText("Ingrese su usuario");
         txtUsuario.setDragEnabled(true);
         txtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -67,7 +66,13 @@ public class Login extends javax.swing.JFrame {
         });
 
         checkVisiblePassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        checkVisiblePassword.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                checkVisiblePasswordStateChanged(evt);
+            }
+        });
 
+        btnIniciar.setBackground(new java.awt.Color(117, 155, 255));
         btnIniciar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnIniciar.setText("Iniciar Sesión");
         btnIniciar.setToolTipText("");
@@ -78,6 +83,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setBackground(new java.awt.Color(255, 117, 117));
         btnSalir.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -92,6 +98,11 @@ public class Login extends javax.swing.JFrame {
         lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-itson.png"))); // NOI18N
 
         lblLogoIws.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-isw.jpg"))); // NOI18N
+        lblLogoIws.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoIwsMouseClicked(evt);
+            }
+        });
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblTitulo.setText("Plan de Entrenamiento");
@@ -107,48 +118,58 @@ public class Login extends javax.swing.JFrame {
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblUsuario.setText("Usuario:");
 
+        txtPassword.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        txtPassword.setToolTipText("Ingrese su contraseña");
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(253, 253, 253)
-                .addComponent(lblLogoItson)
-                .addGap(226, 226, 226))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(lblSubtitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(lblUserProfile))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(lblContrasenia)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(checkVisiblePassword)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblIconOjo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitulo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblUsuario)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(120, 120, 120))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 32, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addGap(224, 224, 224)
                 .addComponent(btnIniciar)
                 .addGap(169, 169, 169)
                 .addComponent(lblLogoIws)
-                .addGap(20, 20, 20))
+                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(lblLogoItson))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(lblTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(lblSubtitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(341, 341, 341)
+                        .addComponent(lblUserProfile))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(164, 164, 164)
+                                .addComponent(lblUsuario)
+                                .addGap(20, 20, 20))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblContrasenia)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(txtPassword))
+                        .addGap(12, 12, 12)
+                        .addComponent(checkVisiblePassword)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblIconOjo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,34 +182,34 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(lblSubtitulo)
                 .addGap(6, 6, 6)
                 .addComponent(lblUserProfile)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(27, 27, 27)
                         .addComponent(lblUsuario))
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblContrasenia))
+                        .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addComponent(checkVisiblePassword))
                             .addComponent(lblIconOjo))
-                        .addGap(8, 8, 8))
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(lblContrasenia)))
-                .addGap(18, 18, 18)
+                        .addGap(30, 30, 30)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogoIws)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnIniciar)
-                            .addComponent(btnSalir))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(lblLogoIws, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnSalir)
+                        .addComponent(btnIniciar)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,12 +228,12 @@ public class Login extends javax.swing.JFrame {
         try {
             if (!txtUsuario.getText().equals("admin")) {
                 EntrenadorNegocio en = new EntrenadorNegocio();
-                en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+                en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getText()));
                 this.dispose();
                 new ViewMacrociclo().setVisible(true);
             } else {
                 AdministradorNegocio an = new AdministradorNegocio();
-                an.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+                an.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getText()));
                 this.dispose();
                 new ViewMacrociclo().setVisible(true);
             }
@@ -236,10 +257,6 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.setBorder(new LineBorder(Color.GRAY));
     }//GEN-LAST:event_txtUsuarioFocusGained
 
-    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        txtPassword.setBorder(new LineBorder(Color.GRAY));
-    }//GEN-LAST:event_txtPasswordFocusGained
-
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // Verifica si la tecla presionada es un espacio
         if (evt.getKeyChar() == ' ') {
@@ -247,6 +264,29 @@ public class Login extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void lblLogoIwsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoIwsMouseClicked
+        JOptionPane.showMessageDialog(null, "Autores: \n"
+                + " - Brandon Figueroa Ugalde \n"
+                + " - Jesus Omar Hernandez Iturbe \n"
+                + " - Jose Alfredo Núñez Aguirre \n"
+                + "\nProf. Gilberto Borrego \n"
+                + "Metodologías Ágiles de Desarrollo "
+                + "ISW ITSON",
+                "Acerca de", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_lblLogoIwsMouseClicked
+
+    private void checkVisiblePasswordStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkVisiblePasswordStateChanged
+        if (this.checkVisiblePassword.isSelected()) {
+            this.txtPassword.setEchoChar((char) 0);
+        } else {
+            this.txtPassword.setEchoChar('•');
+        }
+    }//GEN-LAST:event_checkVisiblePasswordStateChanged
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -261,7 +301,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUserProfile;
     private javax.swing.JLabel lblUsuario;
-    private Herramientas.PasswordVisibleField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

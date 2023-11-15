@@ -26,23 +26,77 @@ public class PanelAdministrador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lblEncabezadoTitulo = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        lblFechaHoy = new javax.swing.JLabel();
+        lblEncabezadoMacro = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo1.setText("Panel de Administrador");
+
+        lblFechaHoy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFechaHoy.setText("Fecha Hoy");
+
+        javax.swing.GroupLayout lblEncabezadoTituloLayout = new javax.swing.GroupLayout(lblEncabezadoTitulo);
+        lblEncabezadoTitulo.setLayout(lblEncabezadoTituloLayout);
+        lblEncabezadoTituloLayout.setHorizontalGroup(
+            lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
+                .addComponent(lblFechaHoy)
+                .addGap(78, 78, 78))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        lblEncabezadoTituloLayout.setVerticalGroup(
+            lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo1)
+                    .addComponent(lblFechaHoy)))
         );
+
+        getContentPane().add(lblEncabezadoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 50));
+
+        lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo.setText("Entrenadores Registrados");
+
+        javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
+        lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);
+        lblEncabezadoMacroLayout.setHorizontalGroup(
+            lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo)
+                .addContainerGap(397, Short.MAX_VALUE))
+        );
+        lblEncabezadoMacroLayout.setVerticalGroup(
+            lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(lblTitulo))
+        );
+
+        getContentPane().add(lblEncabezadoMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 750, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel lblEncabezadoMacro;
+    private javax.swing.JPanel lblEncabezadoTitulo;
+    private javax.swing.JLabel lblFechaHoy;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
     // End of variables declaration//GEN-END:variables
 }

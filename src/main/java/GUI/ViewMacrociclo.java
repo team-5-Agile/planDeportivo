@@ -31,11 +31,18 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblEncabezadoTitulo = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
         lblEncabezadoMacro = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblDeporte = new javax.swing.JLabel();
         lblRama = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        lblNum = new javax.swing.JLabel();
+        lblGuion1 = new javax.swing.JLabel();
+        lblGuion2 = new javax.swing.JLabel();
         btnConfigurarAcentos = new javax.swing.JButton();
+        lblArrow = new javax.swing.JLabel();
         lblFechaFinMacro = new javax.swing.JLabel();
         lblSemanasMacro = new javax.swing.JLabel();
         lblMensajeMacro = new javax.swing.JLabel();
@@ -68,7 +75,6 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblGeneral = new javax.swing.JLabel();
         lblPorciento1 = new javax.swing.JLabel();
         lblPorciento4 = new javax.swing.JLabel();
-        lblArrow = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         btnCalcularPorcentajes = new javax.swing.JButton();
@@ -76,17 +82,53 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Macrociclo");
         setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblEncabezadoMacro.setBackground(new java.awt.Color(204, 204, 204));
+        lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo1.setText("Paso #2: Seleccion de Proporciones");
+
+        javax.swing.GroupLayout lblEncabezadoTituloLayout = new javax.swing.GroupLayout(lblEncabezadoTitulo);
+        lblEncabezadoTitulo.setLayout(lblEncabezadoTituloLayout);
+        lblEncabezadoTituloLayout.setHorizontalGroup(
+            lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1)
+                .addContainerGap(509, Short.MAX_VALUE))
+        );
+        lblEncabezadoTituloLayout.setVerticalGroup(
+            lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(lblTitulo1))
+        );
+
+        getContentPane().add(lblEncabezadoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 50));
+
+        lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setText("Nuevo Macrociclo");
 
-        lblDeporte.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblDeporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblDeporte.setText("Deporte");
 
-        lblRama.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblRama.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblRama.setText("Rama");
+
+        lblID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblID.setText("ID");
+
+        lblNum.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNum.setText("#");
+
+        lblGuion1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblGuion1.setText("-");
+
+        lblGuion2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblGuion2.setText("-");
 
         javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
         lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);
@@ -95,11 +137,19 @@ public class ViewMacrociclo extends javax.swing.JFrame {
             .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(144, 144, 144)
                 .addComponent(lblDeporte)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
+                .addComponent(lblGuion1)
+                .addGap(35, 35, 35)
                 .addComponent(lblRama)
-                .addGap(34, 34, 34))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(lblGuion2)
+                .addGap(35, 35, 35)
+                .addComponent(lblNum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblID)
+                .addGap(42, 42, 42))
         );
         lblEncabezadoMacroLayout.setVerticalGroup(
             lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,10 +158,17 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 .addGroup(lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDeporte)
                     .addComponent(lblTitulo)
-                    .addComponent(lblRama)))
+                    .addComponent(lblRama)
+                    .addComponent(lblID)
+                    .addComponent(lblNum)
+                    .addComponent(lblGuion1)
+                    .addComponent(lblGuion2)))
         );
 
+        getContentPane().add(lblEncabezadoMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 750, 50));
+
         btnConfigurarAcentos.setBackground(new java.awt.Color(204, 255, 204));
+        btnConfigurarAcentos.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         btnConfigurarAcentos.setText("Siguiente");
         btnConfigurarAcentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfigurarAcentos.setOpaque(true);
@@ -120,14 +177,21 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 btnConfigurarAcentosActionPerformed(evt);
             }
         });
+        getContentPane().add(btnConfigurarAcentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 480, -1, -1));
+
+        lblArrow.setText("<----");
+        getContentPane().add(lblArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 325, -1, -1));
 
         lblFechaFinMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFechaFinMacro.setText("Fecha Fin:");
+        getContentPane().add(lblFechaFinMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         lblSemanasMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSemanasMacro.setText("Semanas");
+        getContentPane().add(lblSemanasMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, -1));
 
         lblMensajeMacro.setText("Seleccione una fecha inicio ó una fecha fin");
+        getContentPane().add(lblMensajeMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         txtNumSemanasMacro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNumSemanasMacro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -135,6 +199,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 txtNumSemanasMacroKeyPressed(evt);
             }
         });
+        getContentPane().add(txtNumSemanasMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 76, -1));
 
         txtFechaInicioMacro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtFechaInicioMacro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -142,6 +207,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 txtFechaInicioMacroKeyPressed(evt);
             }
         });
+        getContentPane().add(txtFechaInicioMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 138, -1));
 
         txtFechaFinMacro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtFechaFinMacro.addActionListener(new java.awt.event.ActionListener() {
@@ -154,12 +220,15 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 txtFechaFinMacroKeyPressed(evt);
             }
         });
+        getContentPane().add(txtFechaFinMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 138, -1));
 
         lblDuracionMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblDuracionMacro.setText("Duracion:");
+        getContentPane().add(lblDuracionMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, -1, -1));
 
         lblFechaInicioMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFechaInicioMacro.setText("Fecha Incio:");
+        getContentPane().add(lblFechaInicioMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         txtNumSemanasPreparatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,6 +342,8 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        getContentPane().add(pnlPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 300, -1, -1));
+
         pnlEtapas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtNumSemanasGeneral.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -379,12 +450,16 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        lblArrow.setText("<----");
+        getContentPane().add(pnlEtapas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 258, -1, -1));
 
         btnAtras.setBackground(new java.awt.Color(255, 153, 153));
+        btnAtras.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         btnAtras.setText("Atrás");
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
 
+        btnSiguiente.setBackground(new java.awt.Color(237, 192, 123));
+        btnSiguiente.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         btnSiguiente.setText("Configurar Acentos");
         btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSiguiente.setOpaque(true);
@@ -393,6 +468,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, -1, -1));
 
         btnCalcularPorcentajes.setBackground(new java.awt.Color(51, 204, 255));
         btnCalcularPorcentajes.setText("Calcular");
@@ -403,112 +479,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 btnCalcularPorcentajesActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(lblFechaInicioMacro)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblFechaFinMacro)
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblDuracionMacro)
-                        .addGap(22, 22, 22)
-                        .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(lblSemanasMacro)
-                        .addGap(95, 95, 95))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pnlPeriodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(360, 360, 360)
-                                    .addComponent(lblArrow)))
-                            .addGap(1, 1, 1)
-                            .addComponent(pnlEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(200, 200, 200)
-                            .addComponent(btnCalcularPorcentajes)
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(lblMensajeMacro)
-                        .addGap(158, 158, 158)
-                        .addComponent(btnSiguiente)))
-                .addGap(0, 29, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAtras)
-                .addGap(444, 444, 444)
-                .addComponent(btnConfigurarAcentos)
-                .addGap(50, 50, 50))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(lblMensajeMacro))
-                            .addComponent(btnSiguiente))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblFechaInicioMacro))
-                            .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblDuracionMacro))
-                            .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblSemanasMacro)))
-                        .addGap(3, 3, 3)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFechaFinMacro))
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(lblArrow))))
-                    .addComponent(pnlEtapas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(btnCalcularPorcentajes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAtras)
-                    .addComponent(btnConfigurarAcentos))
-                .addGap(25, 25, 25))
-        );
+        getContentPane().add(btnCalcularPorcentajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -821,11 +792,16 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     private javax.swing.JLabel lblDeporte;
     private javax.swing.JLabel lblDuracionMacro;
     private javax.swing.JPanel lblEncabezadoMacro;
+    private javax.swing.JPanel lblEncabezadoTitulo;
     private javax.swing.JLabel lblEspecial;
     private javax.swing.JLabel lblFechaFinMacro;
     private javax.swing.JLabel lblFechaInicioMacro;
     private javax.swing.JLabel lblGeneral;
+    private javax.swing.JLabel lblGuion1;
+    private javax.swing.JLabel lblGuion2;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblMensajeMacro;
+    private javax.swing.JLabel lblNum;
     private javax.swing.JLabel lblPorciento;
     private javax.swing.JLabel lblPorciento1;
     private javax.swing.JLabel lblPorciento2;
@@ -838,6 +814,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     private javax.swing.JLabel lblRama;
     private javax.swing.JLabel lblSemanasMacro;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lbltxt;
     private javax.swing.JPanel pnlEtapas;
     private javax.swing.JPanel pnlPeriodos;
