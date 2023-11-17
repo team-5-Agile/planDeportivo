@@ -95,13 +95,12 @@ public class EntrenadoresDAO implements BaseDAO {
             } else {
                 /// NOTA: -> QuitarJOptionPane de DAO se pierde la arquitectura, el dao no envia directamente alas vistas, para eso es 
                 // la capa de negocio, devuelve null o el throw
-                JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+                return null;
             }
             entityManager.getTransaction().commit();
             entityManager.close();
             return entrenador;
         } else {
-            JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

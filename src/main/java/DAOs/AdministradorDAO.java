@@ -100,13 +100,12 @@ public class AdministradorDAO implements BaseDAO {
                 // Se busca administrador a regresar
                 administrador = this.consultarAdministradoresUsuario(usuario);
             } else {
-                JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+                return null;
             }
             entityManager.getTransaction().commit();
             entityManager.close();
             return administrador;
         } else {
-            JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
