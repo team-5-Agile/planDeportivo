@@ -10,7 +10,6 @@ import Enumeradores.Scope;
 import Exceptions.InputException;
 import Herramientas.Validaciones;
 
-
 /**
  *
  * @author el_fr
@@ -24,12 +23,14 @@ public class EntrenadorNegocio {
         dao = new EntrenadoresDAO("AppPlanU");
         val = new Validaciones();
     }
+
     /**
-     * Si 
-     * @param scope 
+     * Si
+     *
+     * @param scope
      */
     public EntrenadorNegocio(Scope scope) {
-         if (scope == null) {
+        if (scope == null) {
             return;
         }
         if (scope.equals(Scope.TEST)) {

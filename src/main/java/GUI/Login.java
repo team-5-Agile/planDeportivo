@@ -1,13 +1,12 @@
 package GUI;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import Dominio.Administrador;
+import Dominio.Entrenador;
 import Exceptions.InputException;
 import Negocio.AdministradorNegocio;
 import Negocio.EntrenadorNegocio;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
@@ -120,9 +119,14 @@ public class Login extends javax.swing.JFrame {
 
         txtPassword.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         txtPassword.setToolTipText("Ingrese su contraseña");
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusGained(evt);
+            }
+        });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyTyped(evt);
             }
         });
 
@@ -228,14 +232,28 @@ public class Login extends javax.swing.JFrame {
         try {
             if (!txtUsuario.getText().equals("admin")) {
                 EntrenadorNegocio en = new EntrenadorNegocio();
-                en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getText()));
-                this.dispose();
-                new ViewMacrociclo().setVisible(true);
+                Entrenador entrenador = en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+                if (entrenador != null) {
+                    this.dispose();
+                    new PanelEntrenador(entrenador).setVisible(true);
+                } else {
+                    this.txtPassword.setText("");
+                    this.txtUsuario.setText("");
+                    txtUsuario.setBorder(new LineBorder(Color.RED));
+                    txtPassword.setBorder(new LineBorder(Color.RED));
+                }
             } else {
                 AdministradorNegocio an = new AdministradorNegocio();
-                an.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getText()));
-                this.dispose();
-                new ViewMacrociclo().setVisible(true);
+                Administrador administrador = an.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+                if (administrador != null) {
+                    this.dispose();
+                    new PanelAdministrador(administrador).setVisible(true);
+                } else {
+                    this.txtPassword.setText("");
+                    this.txtUsuario.setText("");
+                    txtUsuario.setBorder(new LineBorder(Color.RED));
+                    txtPassword.setBorder(new LineBorder(Color.RED));
+                }
             }
         } catch (Exception e) {
             if (e instanceof InputException) {
@@ -257,6 +275,10 @@ public class Login extends javax.swing.JFrame {
         txtUsuario.setBorder(new LineBorder(Color.GRAY));
     }//GEN-LAST:event_txtUsuarioFocusGained
 
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        txtPassword.setBorder(new LineBorder(Color.GRAY));
+    }//GEN-LAST:event_txtPasswordFocusGained
+
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // Verifica si la tecla presionada es un espacio
         if (evt.getKeyChar() == ' ') {
@@ -264,6 +286,14 @@ public class Login extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+        // Verifica si la tecla presionada es un espacio
+        if (evt.getKeyChar() == ' ') {
+            // Si es un espacio, consume el evento para evitar que se escriba en el TextField
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPasswordKeyTyped
 
     private void lblLogoIwsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoIwsMouseClicked
         JOptionPane.showMessageDialog(null, "Autores: \n"
@@ -283,10 +313,6 @@ public class Login extends javax.swing.JFrame {
             this.txtPassword.setEchoChar('•');
         }
     }//GEN-LAST:event_checkVisiblePasswordStateChanged
-
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

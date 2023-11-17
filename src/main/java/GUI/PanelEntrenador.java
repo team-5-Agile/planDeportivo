@@ -4,17 +4,27 @@
  */
 package GUI;
 
+import DAOs.EntrenadoresDAO;
+import Dominio.Entrenador;
+
 /**
  *
  * @author brawun
  */
 public class PanelEntrenador extends javax.swing.JFrame {
-
+    
+    // Atributos
+    Entrenador entrenador;
+    EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
+    
     /**
      * Creates new form PanelEntrenador
      */
-    public PanelEntrenador() {
+    public PanelEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
         initComponents();
+//        this.lblInsertarID.setText(this.cliente.getId().toString());
+//        this.lblInsertarNombre.setText(this.cliente.getNombre());
     }
 
     /**

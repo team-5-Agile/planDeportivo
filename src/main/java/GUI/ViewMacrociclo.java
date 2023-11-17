@@ -41,8 +41,8 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblNum = new javax.swing.JLabel();
         lblGuion1 = new javax.swing.JLabel();
         lblGuion2 = new javax.swing.JLabel();
-        btnConfigurarAcentos = new javax.swing.JButton();
         lblArrow = new javax.swing.JLabel();
+        btnConfigurarAcentos = new javax.swing.JButton();
         lblFechaFinMacro = new javax.swing.JLabel();
         lblSemanasMacro = new javax.swing.JLabel();
         lblMensajeMacro = new javax.swing.JLabel();
@@ -63,6 +63,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblPorciento5 = new javax.swing.JLabel();
         lblPorciento6 = new javax.swing.JLabel();
         lblPorciento7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         pnlEtapas = new javax.swing.JPanel();
         txtNumSemanasGeneral = new javax.swing.JTextField();
         txtNumSemanasEspecial = new javax.swing.JTextField();
@@ -82,9 +83,10 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo Macrociclo");
         setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(750, 550));
 
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
+        lblEncabezadoTitulo.setPreferredSize(new java.awt.Dimension(750, 50));
 
         lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo1.setText("Paso #2: Seleccion de Proporciones");
@@ -96,18 +98,18 @@ public class ViewMacrociclo extends javax.swing.JFrame {
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo1)
-                .addContainerGap(509, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         lblEncabezadoTituloLayout.setVerticalGroup(
             lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(lblTitulo1))
+                .addComponent(lblTitulo1)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        getContentPane().add(lblEncabezadoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 50));
-
         lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
+        lblEncabezadoMacro.setPreferredSize(new java.awt.Dimension(750, 50));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setText("Nuevo Macrociclo");
@@ -137,35 +139,37 @@ public class ViewMacrociclo extends javax.swing.JFrame {
             .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addGap(144, 144, 144)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                 .addComponent(lblDeporte)
                 .addGap(32, 32, 32)
                 .addComponent(lblGuion1)
                 .addGap(35, 35, 35)
                 .addComponent(lblRama)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addComponent(lblGuion2)
                 .addGap(35, 35, 35)
                 .addComponent(lblNum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblID)
-                .addGap(42, 42, 42))
+                .addGap(39, 39, 39))
         );
         lblEncabezadoMacroLayout.setVerticalGroup(
             lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblEncabezadoMacroLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addGroup(lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDeporte)
                     .addComponent(lblTitulo)
-                    .addComponent(lblRama)
-                    .addComponent(lblID)
-                    .addComponent(lblNum)
-                    .addComponent(lblGuion1)
-                    .addComponent(lblGuion2)))
+                    .addGroup(lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDeporte)
+                        .addComponent(lblRama)
+                        .addComponent(lblID)
+                        .addComponent(lblNum)
+                        .addComponent(lblGuion1)
+                        .addComponent(lblGuion2)))
+                .addContainerGap())
         );
 
-        getContentPane().add(lblEncabezadoMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 750, 50));
+        lblArrow.setText("<----");
 
         btnConfigurarAcentos.setBackground(new java.awt.Color(204, 255, 204));
         btnConfigurarAcentos.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
@@ -177,21 +181,14 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 btnConfigurarAcentosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnConfigurarAcentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 480, -1, -1));
-
-        lblArrow.setText("<----");
-        getContentPane().add(lblArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 325, -1, -1));
 
         lblFechaFinMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFechaFinMacro.setText("Fecha Fin:");
-        getContentPane().add(lblFechaFinMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         lblSemanasMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSemanasMacro.setText("Semanas");
-        getContentPane().add(lblSemanasMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, -1));
 
         lblMensajeMacro.setText("Seleccione una fecha inicio ó una fecha fin");
-        getContentPane().add(lblMensajeMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         txtNumSemanasMacro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNumSemanasMacro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -199,7 +196,6 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 txtNumSemanasMacroKeyPressed(evt);
             }
         });
-        getContentPane().add(txtNumSemanasMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 76, -1));
 
         txtFechaInicioMacro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtFechaInicioMacro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -207,7 +203,6 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 txtFechaInicioMacroKeyPressed(evt);
             }
         });
-        getContentPane().add(txtFechaInicioMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 138, -1));
 
         txtFechaFinMacro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtFechaFinMacro.addActionListener(new java.awt.event.ActionListener() {
@@ -220,15 +215,12 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 txtFechaFinMacroKeyPressed(evt);
             }
         });
-        getContentPane().add(txtFechaFinMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 138, -1));
 
         lblDuracionMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblDuracionMacro.setText("Duracion:");
-        getContentPane().add(lblDuracionMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, -1, -1));
 
         lblFechaInicioMacro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFechaInicioMacro.setText("Fecha Incio:");
-        getContentPane().add(lblFechaInicioMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         txtNumSemanasPreparatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +263,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblCompetitivo.setText("Competitivo:");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Seleccione la proporción \nque se le asignará a cada periodo");
+        jLabel1.setText("Seleccione la proporción que se");
 
         lblPorciento3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPorciento3.setText("semanas");
@@ -285,18 +277,21 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         lblPorciento7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPorciento7.setText("% ");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("le asignará a cada periodo:");
+
         javax.swing.GroupLayout pnlPeriodosLayout = new javax.swing.GroupLayout(pnlPeriodos);
         pnlPeriodos.setLayout(pnlPeriodosLayout);
         pnlPeriodosLayout.setHorizontalGroup(
             pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(pnlPeriodosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
                         .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPeriodosLayout.createSequentialGroup()
                                 .addComponent(lblPreparatorio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(11, 11, 11)
                                 .addComponent(txtPorcientoPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
                                 .addComponent(lblCompetitivo)
@@ -306,7 +301,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                         .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPeriodosLayout.createSequentialGroup()
                                 .addComponent(lblPorciento7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(12, 12, 12)
                                 .addComponent(txtNumSemanasPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlPeriodosLayout.createSequentialGroup()
                                 .addComponent(lblPorciento6)
@@ -316,16 +311,21 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                         .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPorciento5)
                             .addComponent(lblPorciento3))
-                        .addContainerGap(38, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPeriodosLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76))))
+                        .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))))
         );
         pnlPeriodosLayout.setVerticalGroup(
             pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPeriodosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumSemanasPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPorcientoPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,10 +339,8 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                     .addComponent(lblPorciento5)
                     .addComponent(lblPorciento6)
                     .addComponent(txtPorcientoCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        getContentPane().add(pnlPeriodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 300, -1, -1));
 
         pnlEtapas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -401,7 +399,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         pnlEtapasLayout.setHorizontalGroup(
             pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEtapasLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblGeneral)
                     .addComponent(lbltxt)
@@ -429,7 +427,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         pnlEtapasLayout.setVerticalGroup(
             pnlEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEtapasLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbltxt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblGeneral)
@@ -450,13 +448,10 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pnlEtapas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 258, -1, -1));
-
         btnAtras.setBackground(new java.awt.Color(255, 153, 153));
         btnAtras.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         btnAtras.setText("Atrás");
         btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
 
         btnSiguiente.setBackground(new java.awt.Color(237, 192, 123));
         btnSiguiente.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
@@ -468,9 +463,9 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, -1, -1));
 
         btnCalcularPorcentajes.setBackground(new java.awt.Color(51, 204, 255));
+        btnCalcularPorcentajes.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
         btnCalcularPorcentajes.setText("Calcular");
         btnCalcularPorcentajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCalcularPorcentajes.setOpaque(true);
@@ -479,7 +474,95 @@ public class ViewMacrociclo extends javax.swing.JFrame {
                 btnCalcularPorcentajesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCalcularPorcentajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(31, 31, 31)
+                            .addComponent(btnAtras)
+                            .addGap(506, 506, 506)
+                            .addComponent(btnConfigurarAcentos))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblArrow)
+                            .addGap(16, 16, 16)
+                            .addComponent(pnlEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(148, 148, 148)
+                            .addComponent(btnCalcularPorcentajes)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblMensajeMacro)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblFechaInicioMacro)
+                            .addGap(16, 16, 16)
+                            .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(112, 112, 112)
+                            .addComponent(lblDuracionMacro)
+                            .addGap(12, 12, 12)
+                            .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(14, 14, 14)
+                            .addComponent(lblSemanasMacro))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(lblFechaFinMacro)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(520, 520, 520)
+                            .addComponent(btnSiguiente))))
+                .addGap(44, 44, 44))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSiguiente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMensajeMacro)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblFechaInicioMacro))
+                    .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDuracionMacro)
+                    .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSemanasMacro))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaFinMacro)
+                    .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(67, 67, 67)
+                            .addComponent(lblArrow))
+                        .addComponent(pnlEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCalcularPorcentajes)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfigurarAcentos)
+                    .addComponent(btnAtras))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -599,10 +682,6 @@ public class ViewMacrociclo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
 
-    private void txtNumSemanasPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumSemanasPreparatorioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumSemanasPreparatorioActionPerformed
-
     private void btnConfigurarAcentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigurarAcentosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConfigurarAcentosActionPerformed
@@ -618,49 +697,6 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     private void txtFechaFinMacroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaFinMacroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaFinMacroActionPerformed
-
-    private void txtPorcientoPreparatorioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioKeyPressed
-        String porPre = this.txtPorcientoPreparatorio.getText();
-        String numSemanas = this.txtNumSemanasMacro.getText();
-        
-        // validar si se a presionado enter
-        if (evt.getKeyCode() != 10) {
-            return;
-        }
-        try {
-            txtPorcientoCompetitivo.setText(rellenarPorcentaje(porPre));
-            if (!numSemanas.equals("")) {
-                txtNumSemanasCompetitivo.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
-                txtNumSemanasPreparatorio.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
-        }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
-        }
-    }//GEN-LAST:event_txtPorcientoPreparatorioKeyPressed
-
-    private void txtPorcientoPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPorcientoPreparatorioActionPerformed
-
-    private void txtPorcientoCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoCompetitivoKeyPressed
-        String porPre = this.txtPorcientoCompetitivo.getText();
-        String numSemanas = this.txtNumSemanasMacro.getText();
-        
-        // validar si se a presionado enter
-        if (evt.getKeyCode() != 10) {
-            return;
-        }
-        
-        try {
-            txtPorcientoPreparatorio.setText(rellenarPorcentaje(porPre));
-            if (!numSemanas.equals("")) {
-                txtNumSemanasCompetitivo.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
-                txtNumSemanasPreparatorio.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
-        }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
-        }
-    }//GEN-LAST:event_txtPorcientoCompetitivoKeyPressed
 
     private void txtPorcientoGeneralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoGeneralKeyPressed
         String numSemanas = this.txtNumSemanasPreparatorio.getText();
@@ -704,44 +740,6 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPorcientoEspecialKeyPressed
 
-    private void txtNumSemanasPreparatorioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasPreparatorioKeyPressed
-        String sem = this.txtNumSemanasPreparatorio.getText();
-        String numSemanas = this.txtNumSemanasMacro.getText();
-        
-        // validar si se a presionado enter
-        if (evt.getKeyCode() != 10) {
-            return;
-        }
-        try {
-            txtNumSemanasCompetitivo.setText(rellenarSemanas(sem,numSemanas));
-            if (!numSemanas.equals("")) {
-                txtPorcientoCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasCompetitivo.getText()))+"");
-                txtPorcientoPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasPreparatorio.getText()))+"");
-        }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
-        }
-    }//GEN-LAST:event_txtNumSemanasPreparatorioKeyPressed
-
-    private void txtNumSemanasCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasCompetitivoKeyPressed
-         String sem = this.txtNumSemanasCompetitivo.getText();
-        String numSemanas = this.txtNumSemanasMacro.getText();
-        
-        // validar si se a presionado enter
-        if (evt.getKeyCode() != 10) {
-            return;
-        }
-        try {
-            txtNumSemanasPreparatorio.setText(rellenarSemanas(sem,numSemanas));
-            if (!numSemanas.equals("")) {
-                txtPorcientoCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasCompetitivo.getText()))+"");
-                txtPorcientoPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasPreparatorio.getText()))+"");
-        }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
-        }
-    }//GEN-LAST:event_txtNumSemanasCompetitivoKeyPressed
-
     private void txtNumSemanasGeneralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasGeneralKeyPressed
         String sem = this.txtNumSemanasGeneral.getText();
         String numSemanas = this.txtNumSemanasPreparatorio.getText();
@@ -780,6 +778,91 @@ public class ViewMacrociclo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNumSemanasEspecialKeyPressed
 
+    private void txtPorcientoCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoCompetitivoKeyPressed
+        String porPre = this.txtPorcientoCompetitivo.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+
+        try {
+            txtPorcientoPreparatorio.setText(rellenarPorcentaje(porPre));
+            if (!numSemanas.equals("")) {
+                txtNumSemanasCompetitivo.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
+                txtNumSemanasPreparatorio.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtPorcientoCompetitivoKeyPressed
+
+    private void txtPorcientoPreparatorioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioKeyPressed
+        String porPre = this.txtPorcientoPreparatorio.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtPorcientoCompetitivo.setText(rellenarPorcentaje(porPre));
+            if (!numSemanas.equals("")) {
+                txtNumSemanasCompetitivo.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoCompetitivo.getText()))+"");
+                txtNumSemanasPreparatorio.setText(calcularSemanas(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtPorcientoPreparatorio.getText()))+"");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtPorcientoPreparatorioKeyPressed
+
+    private void txtPorcientoPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPorcientoPreparatorioActionPerformed
+
+    private void txtNumSemanasCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasCompetitivoKeyPressed
+        String sem = this.txtNumSemanasCompetitivo.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtNumSemanasPreparatorio.setText(rellenarSemanas(sem,numSemanas));
+            if (!numSemanas.equals("")) {
+                txtPorcientoCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasCompetitivo.getText()))+"");
+                txtPorcientoPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasPreparatorio.getText()))+"");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtNumSemanasCompetitivoKeyPressed
+
+    private void txtNumSemanasPreparatorioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasPreparatorioKeyPressed
+        String sem = this.txtNumSemanasPreparatorio.getText();
+        String numSemanas = this.txtNumSemanasMacro.getText();
+
+        // validar si se a presionado enter
+        if (evt.getKeyCode() != 10) {
+            return;
+        }
+        try {
+            txtNumSemanasCompetitivo.setText(rellenarSemanas(sem,numSemanas));
+            if (!numSemanas.equals("")) {
+                txtPorcientoCompetitivo.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasCompetitivo.getText()))+"");
+                txtPorcientoPreparatorio.setText(calcularPorcentaje(Integer.parseInt(txtNumSemanasMacro.getText()), Integer.parseInt(txtNumSemanasPreparatorio.getText()))+"");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+    }//GEN-LAST:event_txtNumSemanasPreparatorioKeyPressed
+
+    private void txtNumSemanasPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumSemanasPreparatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumSemanasPreparatorioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
@@ -787,6 +870,7 @@ public class ViewMacrociclo extends javax.swing.JFrame {
     private javax.swing.JButton btnConfigurarAcentos;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblArrow;
     private javax.swing.JLabel lblCompetitivo;
     private javax.swing.JLabel lblDeporte;

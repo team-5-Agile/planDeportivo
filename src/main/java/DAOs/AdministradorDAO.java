@@ -107,8 +107,7 @@ public class AdministradorDAO implements BaseDAO {
             return administrador;
         } else {
             JOptionPane.showMessageDialog(null, "Error: Usuario o contraseña incorrectos.", "¡Error!", JOptionPane.ERROR_MESSAGE);
-            // El usuario NO se encontro en la base de datos
-            throw new EntityNotFoundException("No se puede encontrar el administrador con usuario: " + usuario);
+            return null;
         }
     }
 

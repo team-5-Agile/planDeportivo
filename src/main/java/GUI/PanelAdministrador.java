@@ -4,16 +4,24 @@
  */
 package GUI;
 
+import DAOs.AdministradorDAO;
+import Dominio.Administrador;
+
 /**
  *
  * @author brawun
  */
 public class PanelAdministrador extends javax.swing.JFrame {
+    
+    //Atributos
+    Administrador administrador;
+    AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
 
     /**
      * Creates new form PanelAdministrador
      */
-    public PanelAdministrador() {
+    public PanelAdministrador(Administrador administrador) {
+        this.administrador = administrador;
         initComponents();
     }
 
