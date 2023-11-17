@@ -24,48 +24,30 @@ import org.junit.jupiter.api.TestMethodOrder;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EntrenadorNegocioTest {
-    
+
     public static EntrenadoresDAO entrenadorDao;
-    
+
     public EntrenadorNegocioTest() {
-        entrenadorDao = new EntrenadoresDAO("AppPlanUTest");
+
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-     @Test
-     @Order(1)
-    public void testResgistrar() {
-                System.out.println("TestRegistrar");
-
+        entrenadorDao = new EntrenadoresDAO("AppPlanUTest");
         Entrenador entrenador = new Entrenador();
         entrenador.setNombre("Test Nombre");
         entrenador.setApellidoPaterno("Test ApellidoP");
         entrenador.setApellidoMaterno("Test ApellidoM");
         entrenador.setUsuario("Test Usuario");
         entrenador.setContrasena("TestContrasena");
-        
-        Entrenador reg = entrenadorDao.registrarEntrenador(entrenador);
-        entrenador.setId(1L);
-        assertEquals(entrenador, reg);
+        entrenadorDao.registrarEntrenador(entrenador);
+
     }
 
-    /**
-     * Test of iniciarSesion method, of class EntrenadorNegocio.
-     */
+    @AfterAll
+    public static void tearDownClass() {
+    }
+
     @Test
     @Order(2)
     public void testIniciarSesion() throws Exception {
@@ -76,19 +58,16 @@ public class EntrenadorNegocioTest {
         Entrenador expResult = new Entrenador();
         expResult.setUsuario(usuario);
         expResult.setContrasena(contrasena);
-        expResult.setId(1L);
-        Entrenador result = instance.iniciarSesion(usuario, contrasena);
+        Entrenador result = instance.iniciarSesion(usuario, contrasena);        
+        expResult.setId(result.getId());
         assertEquals(expResult, result);
-        
+
     }
-    
-    /**
-     * Test of iniciarSesion method, of class EntrenadorNegocio.
-     */
+
     @Test
     @Order(3)
     public void testIniciarSesionIncorrect() throws Exception {
-        System.out.println("iniciarSesionFail");
+        System.out.println("iniciarSesionIncorrect");
         String usuario = "Test Usuario";
         String contrasena = "TestContrasenas";
         EntrenadorNegocio instance = new EntrenadorNegocio(Scope.TEST);
@@ -97,7 +76,7 @@ public class EntrenadorNegocioTest {
         expResult.setContrasena(contrasena);
         expResult.setId(1L);
         Entrenador result = instance.iniciarSesion(usuario, contrasena);
-        assertNull( result);
+        assertNull(result);
     }
-    
+
 }

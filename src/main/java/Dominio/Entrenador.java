@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.Objects;
 
 /**
  *
@@ -157,16 +158,24 @@ public class Entrenador implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Entrenador)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Entrenador other = (Entrenador) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Entrenador other = (Entrenador) obj;
+        // si el entrenador no tiene la misma contraseña, entonces no son igual
+        if (!Objects.equals(this.contrasena, other.contrasena)) {
+            return false;
+        }
+        // si el entrenador no tiene el mimso nombre usuario , entonces no son iguales
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        // devuelve verdadero si los id son iguales y falso en caso contrario
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
