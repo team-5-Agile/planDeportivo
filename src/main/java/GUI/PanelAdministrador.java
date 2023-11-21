@@ -433,7 +433,12 @@ public class PanelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
 
     private void btnEliminarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntrenadorActionPerformed
-        // TODO add your handling code here:
+        int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el entrenador?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (i == JOptionPane.YES_OPTION) {
+            
+        } else {
+
+        }
     }//GEN-LAST:event_btnEliminarEntrenadorActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
