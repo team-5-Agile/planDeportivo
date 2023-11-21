@@ -55,9 +55,9 @@
                           <Component id="txtSeleccion" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnVerEntrenador" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                               <Component id="btnEditarEntrenador" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnEliminarEntrenador" min="-2" pref="141" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -90,7 +90,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSeleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSeleccion" alignment="3" min="-2" pref="10" max="-2" attributes="0"/>
+                  <Component id="lblSeleccion" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="txtSeleccion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -101,7 +101,7 @@
                           <Component id="btnEditarEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnEliminarEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -245,7 +245,7 @@
     <Component class="javax.swing.JLabel" name="lblSeleccion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Selecci&#xf3;n:"/>
       </Properties>
@@ -257,7 +257,7 @@
           <Color blue="d9" green="d9" red="d9" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Liberation Sans" size="13" style="0"/>
+          <Font name="Liberation Sans" size="16" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Seleccione un entrenador de la tabla"/>
       </Properties>

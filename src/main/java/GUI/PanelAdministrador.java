@@ -11,8 +11,11 @@ import Dominio.Entrenador;
 import Herramientas.Fecha;
 import Herramientas.Validaciones;
 import com.sun.tools.javac.comp.Enter;
+import jakarta.persistence.EntityNotFoundException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +24,10 @@ import javax.swing.table.DefaultTableModel;
  * @author brawun
  */
 public class PanelAdministrador extends javax.swing.JFrame {
-    
+
     //Atributos
     Administrador administrador;
+    Entrenador seleccion = null;
     AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
     EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
     Validaciones Validaciones = new Validaciones();
@@ -36,10 +40,10 @@ public class PanelAdministrador extends javax.swing.JFrame {
         this.administrador = administrador;
         initComponents();
         this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
-        CargarTablaEntrenadores();
+        cargarTablaEntrenadores();
     }
-    
-    public void CargarTablaEntrenadores() throws Exception {
+
+    private void cargarTablaEntrenadores() throws Exception {
         List<Entrenador> listaEntrenadores = EntrenadoresDAO.consultarTodosEntrenadores();
         DefaultTableModel modeloTablaEntrenadores = (DefaultTableModel) this.tblEntrenadores.getModel();
         modeloTablaEntrenadores.setRowCount(0);
@@ -54,7 +58,17 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 Fecha.formatoFecha(entrenador.getFechaRegistro())};
             modeloTablaEntrenadores.addRow(filaNueva);
         }
-        Validaciones.centrarTabla(tblEntrenadores);   
+        Validaciones.centrarTabla(tblEntrenadores);
+    }
+
+    public int obtenerFila() {
+        try {
+            int fila = tblEntrenadores.getSelectedRow();
+            return fila;
+        } catch (Exception e) {
+            Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, e);
+            return -1;
+        }
     }
 
     /**
@@ -171,12 +185,12 @@ public class PanelAdministrador extends javax.swing.JFrame {
         tblEntrenadores.setToolTipText("Haga clic en entrenador a administrar");
         jScrollPanel.setViewportView(tblEntrenadores);
 
-        lblSeleccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblSeleccion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblSeleccion.setText("Selección:");
 
         txtSeleccion.setEditable(false);
         txtSeleccion.setBackground(new java.awt.Color(217, 217, 217));
-        txtSeleccion.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
+        txtSeleccion.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
         txtSeleccion.setText("Seleccione un entrenador de la tabla");
 
         btnSeleccionar.setBackground(new java.awt.Color(163, 163, 163));
@@ -332,9 +346,9 @@ public class PanelAdministrador extends javax.swing.JFrame {
                             .addComponent(txtSeleccion)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnVerEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(79, 79, 79)
                                 .addComponent(btnEditarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(95, 95, 95)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnEliminarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))))
             .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -359,7 +373,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSeleccionar)
-                    .addComponent(lblSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -368,7 +382,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
                             .addComponent(btnVerEntrenador)
                             .addComponent(btnEditarEntrenador)
                             .addComponent(btnEliminarEntrenador))
-                        .addContainerGap(25, Short.MAX_VALUE))
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCerrarSesion)
@@ -379,6 +393,64 @@ public class PanelAdministrador extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        try {
+            int fila = obtenerFila();
+            if (fila != -1) {
+                Entrenador entrenador = EntrenadoresDAO.consultarEntrenador((Long) tblEntrenadores.getValueAt(fila, 0));
+                this.txtSeleccion.setText(entrenador.getNombre() + " " + entrenador.getApellidoPaterno() + " " + entrenador.getApellidoMaterno() + " - ID: " + entrenador.getId() + ".");
+                this.seleccion = entrenador;
+                tblEntrenadores.clearSelection();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (EntityNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer seleccionar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnNuevoEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEntrenadorActionPerformed
+        this.dispose();
+        new RegistrarEntrenador(this.administrador).setVisible(true);
+    }//GEN-LAST:event_btnNuevoEntrenadorActionPerformed
+
+    private void btnVerEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEntrenadorActionPerformed
+        if (seleccion != null) {
+            try {
+                this.dispose();
+                new VerEntrenador(this.administrador, this.seleccion).setVisible(true);
+            } catch (ParseException ex) {
+                Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a ver. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnVerEntrenadorActionPerformed
+
+    private void btnEliminarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntrenadorActionPerformed
+        if (seleccion != null) {
+            int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el entrenador? (Se eliminaran todos los macrociclos y relacionados registrados por este entrenador)", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (i == JOptionPane.YES_OPTION) {
+                try {
+                    EntrenadoresDAO.eliminarEntrenador(this.seleccion.getId());
+                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente la cuenta del entrenador: " + this.seleccion.getNombre() + " " + this.seleccion.getApellidoPaterno() + " " + this.seleccion.getApellidoMaterno() + " - ID: " + seleccion.getId() + ".", "Eliminacion de entrenador exitosa.", JOptionPane.INFORMATION_MESSAGE);
+                    cargarTablaEntrenadores();
+                } catch (EntityNotFoundException e) {
+                    JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer eliminar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception ex) {
+                    Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a eliminar. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarEntrenadorActionPerformed
+
+    private void btnAdminMacrociclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminMacrociclosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdminMacrociclosActionPerformed
+
     private void btnConfigAcentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigAcentosActionPerformed
         JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
                 + "\n La funcion seleccionada esta por ser \n"
@@ -386,10 +458,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 + "\n Agradecemos su comprension \n",
                 "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfigAcentosActionPerformed
-
-    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnConfigPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigPersonalActionPerformed
         JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
@@ -415,32 +483,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfigDeportesActionPerformed
 
-    private void btnNuevoEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEntrenadorActionPerformed
-        this.dispose();
-        new RegistrarEntrenador(this.administrador).setVisible(true);
-    }//GEN-LAST:event_btnNuevoEntrenadorActionPerformed
-
-    private void btnAdminMacrociclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminMacrociclosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdminMacrociclosActionPerformed
-
-    private void btnVerEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEntrenadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerEntrenadorActionPerformed
-
-    private void btnEditarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEntrenadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
-
-    private void btnEliminarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntrenadorActionPerformed
-        int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el entrenador?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (i == JOptionPane.YES_OPTION) {
-            
-        } else {
-
-        }
-    }//GEN-LAST:event_btnEliminarEntrenadorActionPerformed
-
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cerrar sesion?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (i == JOptionPane.YES_OPTION) {
@@ -450,6 +492,10 @@ public class PanelAdministrador extends javax.swing.JFrame {
             this.setVisible(true);
         }
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnEditarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEntrenadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

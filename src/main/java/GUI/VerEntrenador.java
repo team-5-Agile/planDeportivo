@@ -33,6 +33,7 @@ public class VerEntrenador extends javax.swing.JFrame {
     public VerEntrenador(Administrador administrador, Entrenador entrenador) throws ParseException {
         this.administrador = administrador;
         this.entrenador = entrenador;
+        initComponents();
         // Insercion de datos a mostrar
         this.txtID.setText(this.entrenador.getId().toString());
         this.txtFechaRegistro.setText(Fecha.formatoFecha(this.entrenador.getFechaRegistro()));
@@ -41,7 +42,6 @@ public class VerEntrenador extends javax.swing.JFrame {
         this.txtApellidoMaterno.setText(this.entrenador.getApellidoMaterno());
         this.txtUsuario.setText(this.entrenador.getUsuario());
         this.txtContrasena.setText(this.entrenador.getContrasena());
-        initComponents();
     }
 
     /**

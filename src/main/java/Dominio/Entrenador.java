@@ -3,6 +3,7 @@
  */
 package Dominio;
 
+import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import java.util.List;
 import jakarta.persistence.Column;
@@ -53,7 +54,7 @@ public class Entrenador implements Serializable {
     private Calendar fechaRegistro;
     
     // Un entrenador puede crear muchos macrociclos
-    @OneToMany(mappedBy = "entrenadores")
+    @OneToMany(mappedBy = "entrenadores", cascade = CascadeType.REMOVE)
     private List<Macrociclo> macrociclos;
     
     // Llave foránea

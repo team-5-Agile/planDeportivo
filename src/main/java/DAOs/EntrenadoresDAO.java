@@ -48,7 +48,8 @@ public class EntrenadoresDAO implements BaseDAO {
             EntityManager entityManager = this.getEntityManager();
             entityManager.getTransaction().begin();
             Entrenador entrenador = consultarEntrenador(id);
-            entityManager.remove(entrenador);
+            Entrenador actual = entityManager.merge(entrenador);
+            entityManager.remove(actual);
             entityManager.getTransaction().commit();
             entityManager.close();
         } else {
