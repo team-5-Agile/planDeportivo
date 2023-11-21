@@ -5,11 +5,16 @@
 package GUI;
 
 import DAOs.AdministradorDAO;
+import DAOs.EntrenadoresDAO;
 import Dominio.Administrador;
+import Dominio.Entrenador;
 import Herramientas.Fecha;
 import Herramientas.Validaciones;
+import com.sun.tools.javac.comp.Enter;
 import java.text.ParseException;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,15 +25,36 @@ public class PanelAdministrador extends javax.swing.JFrame {
     //Atributos
     Administrador administrador;
     AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
+    EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
+    Validaciones Validaciones = new Validaciones();
     Fecha Fecha = new Fecha();
 
     /**
      * Creates new form PanelAdministrador
      */
-    public PanelAdministrador(Administrador administrador) throws ParseException {
+    public PanelAdministrador(Administrador administrador) throws ParseException, Exception {
         this.administrador = administrador;
         initComponents();
         this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
+        CargarTablaEntrenadores();
+    }
+    
+    public void CargarTablaEntrenadores() throws Exception {
+        List<Entrenador> listaEntrenadores = EntrenadoresDAO.consultarTodosEntrenadores();
+        DefaultTableModel modeloTablaEntrenadores = (DefaultTableModel) this.tblEntrenadores.getModel();
+        modeloTablaEntrenadores.setRowCount(0);
+        for (Entrenador entrenador : listaEntrenadores) {
+            Object[] filaNueva = {
+                entrenador.getId(),
+                entrenador.getNombre(),
+                entrenador.getApellidoPaterno(),
+                entrenador.getApellidoMaterno(),
+                entrenador.getUsuario(),
+                entrenador.getContrasena(),
+                Fecha.formatoFecha(entrenador.getFechaRegistro())};
+            modeloTablaEntrenadores.addRow(filaNueva);
+        }
+        Validaciones.centrarTabla(tblEntrenadores);   
     }
 
     /**
@@ -45,8 +71,8 @@ public class PanelAdministrador extends javax.swing.JFrame {
         lblFechaHoy = new javax.swing.JLabel();
         lblEncabezadoMacro = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPanel = new javax.swing.JScrollPane();
+        tblEntrenadores = new javax.swing.JTable();
         lblSeleccion = new javax.swing.JLabel();
         txtSeleccion = new javax.swing.JTextField();
         btnSeleccionar = new javax.swing.JButton();
@@ -115,11 +141,11 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entrenadores Registrados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 14))); // NOI18N
+        jScrollPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entrenadores Registrados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 14))); // NOI18N
 
-        jTable1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jTable1.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEntrenadores.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        tblEntrenadores.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        tblEntrenadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -142,8 +168,8 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("Haga clic en entrenador a administrar");
-        jScrollPane1.setViewportView(jTable1);
+        tblEntrenadores.setToolTipText("Haga clic en entrenador a administrar");
+        jScrollPanel.setViewportView(tblEntrenadores);
 
         lblSeleccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSeleccion.setText("Selección:");
@@ -294,7 +320,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
                         .addComponent(btnAdminMacrociclos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(460, 460, 460)
                         .addComponent(btnNuevoEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnSeleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -329,7 +355,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
                     .addComponent(btnAdminMacrociclos)
                     .addComponent(btnNuevoEntrenador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSeleccionar)
@@ -433,14 +459,14 @@ public class PanelAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoEntrenador;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton btnVerEntrenador;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPanel;
     private javax.swing.JPanel lblEncabezadoMacro;
     private javax.swing.JPanel lblEncabezadoTitulo;
     private javax.swing.JLabel lblFechaHoy;
     private javax.swing.JLabel lblSeleccion;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JTable tblEntrenadores;
     private javax.swing.JTextField txtSeleccion;
     // End of variables declaration//GEN-END:variables
 }

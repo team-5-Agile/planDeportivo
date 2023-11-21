@@ -85,6 +85,14 @@ public class Entrenador implements Serializable {
         this.contrasena = contrasena;
         this.usuario = usuario;
     }
+    
+    public Entrenador(String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.contrasena = contrasena;
+        this.usuario = usuario;
+    }
 
     public Entrenador(String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario, Calendar fechaRegistro, Administrador administrador) {
         this.nombre = nombre;
