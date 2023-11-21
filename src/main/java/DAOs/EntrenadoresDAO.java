@@ -56,6 +56,16 @@ public class EntrenadoresDAO implements BaseDAO {
             throw new EntityNotFoundException("No se puede encontrar el entrenador con ID: " + id);
         }
     }
+    
+    // Métodos de edicion
+    public Entrenador editarEntrenador(Entrenador entrenador) {
+        EntityManager entityManager = this.getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.merge(entrenador);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return entrenador;
+    }
 
     // Metodo de consultac
     public Entrenador consultarEntrenador(Long id) {

@@ -425,7 +425,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a ver. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnVerEntrenadorActionPerformed
 
     private void btnEliminarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntrenadorActionPerformed
@@ -494,7 +493,16 @@ public class PanelAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnEditarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEntrenadorActionPerformed
-        // TODO add your handling code here:
+        if (seleccion != null) {
+            try {
+                this.dispose();
+                new EditarEntrenador(this.administrador, this.seleccion).setVisible(true);
+            } catch (ParseException ex) {
+                Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a ver. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
 
 
