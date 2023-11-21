@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * .java
  */
 package Dominio;
 
@@ -15,6 +14,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.util.Calendar;
 import java.util.Objects;
 
 /**
@@ -45,6 +47,11 @@ public class Entrenador implements Serializable {
     @Column(name = "Usuario", nullable = false, unique = true)
     public String usuario;
     
+    // Auotgenerada
+    @Column(name = "FechaRegistro", nullable = true)
+    @Temporal(TemporalType.DATE)
+    private Calendar fechaRegistro;
+    
     // Un entrenador puede crear muchos macrociclos
     @OneToMany(mappedBy = "entrenadores")
     private List<Macrociclo> macrociclos;
@@ -58,17 +65,18 @@ public class Entrenador implements Serializable {
     public Entrenador() {
     }
 
-    public Entrenador(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario, List<Macrociclo> macrociclos, Administrador administrador) {
+    public Entrenador(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario, Calendar fechaRegistro, List<Macrociclo> macrociclos, Administrador administrador) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.contrasena = contrasena;
         this.usuario = usuario;
+        this.fechaRegistro = fechaRegistro;
         this.macrociclos = macrociclos;
         this.administrador = administrador;
     }
-
+    
     public Entrenador(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
         this.id = id;
         this.nombre = nombre;
@@ -78,12 +86,14 @@ public class Entrenador implements Serializable {
         this.usuario = usuario;
     }
 
-    public Entrenador(String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario) {
+    public Entrenador(String nombre, String apellidoPaterno, String apellidoMaterno, String contrasena, String usuario, Calendar fechaRegistro, Administrador administrador) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.contrasena = contrasena;
         this.usuario = usuario;
+        this.fechaRegistro = fechaRegistro;
+        this.administrador = administrador;
     } 
 
     public Long getId() {
@@ -132,6 +142,14 @@ public class Entrenador implements Serializable {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public Calendar getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Calendar fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     public List<Macrociclo> getMacrociclos() {

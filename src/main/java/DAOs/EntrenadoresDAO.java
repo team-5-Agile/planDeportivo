@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * .java
  */
 package DAOs;
 
@@ -13,7 +12,6 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +24,7 @@ public class EntrenadoresDAO implements BaseDAO {
     public EntrenadoresDAO(String persitenceUnit) {
         this.persitenceUnit = persitenceUnit;
     }
-    
+
     @Override
     public EntityManager getEntityManager() {
         EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory(this.persitenceUnit);
@@ -93,8 +91,6 @@ public class EntrenadoresDAO implements BaseDAO {
                 // Se busca entrenador a regresar
                 entrenador = this.consultarEntrenadoresUsuario(usuario);
             } else {
-                /// NOTA: -> QuitarJOptionPane de DAO se pierde la arquitectura, el dao no envia directamente alas vistas, para eso es 
-                // la capa de negocio, devuelve null o el throw
                 return null;
             }
             entityManager.getTransaction().commit();
@@ -148,7 +144,7 @@ public class EntrenadoresDAO implements BaseDAO {
         entityManager.close();
         return entrenador;
     }
-    
+
     // Metodo que regresa una lista con todos los entrenadores registrados en la base de datos
     public List<Entrenador> consultarTodosEntrenadores() throws Exception {
         EntityManager entityManager = this.getEntityManager();

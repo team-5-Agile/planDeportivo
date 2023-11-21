@@ -3,6 +3,8 @@ package GUI;
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Exceptions.InputException;
+import GUI.PanelAdministrador;
+import GUI.PanelEntrenador;
 import Negocio.AdministradorNegocio;
 import Negocio.EntrenadorNegocio;
 import java.awt.Color;
@@ -64,6 +66,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        checkVisiblePassword.setToolTipText("Ver contraseña");
         checkVisiblePassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         checkVisiblePassword.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -74,7 +77,7 @@ public class Login extends javax.swing.JFrame {
         btnIniciar.setBackground(new java.awt.Color(117, 155, 255));
         btnIniciar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnIniciar.setText("Iniciar Sesión");
-        btnIniciar.setToolTipText("");
+        btnIniciar.setToolTipText("Iniciar Sesión");
         btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +88,7 @@ public class Login extends javax.swing.JFrame {
         btnSalir.setBackground(new java.awt.Color(255, 117, 117));
         btnSalir.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.setToolTipText("Salir");
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +101,7 @@ public class Login extends javax.swing.JFrame {
         lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-itson.png"))); // NOI18N
 
         lblLogoIws.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-isw.jpg"))); // NOI18N
+        lblLogoIws.setToolTipText("Acerca de");
         lblLogoIws.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblLogoIwsMouseClicked(evt);
@@ -217,6 +222,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -237,8 +243,7 @@ public class Login extends javax.swing.JFrame {
                     this.dispose();
                     new PanelEntrenador(entrenador).setVisible(true);
                 } else {
-                    this.txtPassword.setText("");
-                    this.txtUsuario.setText("");
+                    JOptionPane.showMessageDialog(null, "Usuario y/o contraseña de incorrectas (Intente de nuevo).", "¡Error!", JOptionPane.ERROR_MESSAGE);
                     txtUsuario.setBorder(new LineBorder(Color.RED));
                     txtPassword.setBorder(new LineBorder(Color.RED));
                 }
@@ -249,8 +254,7 @@ public class Login extends javax.swing.JFrame {
                     this.dispose();
                     new PanelAdministrador(administrador).setVisible(true);
                 } else {
-                    this.txtPassword.setText("");
-                    this.txtUsuario.setText("");
+                    JOptionPane.showMessageDialog(null, "Usuario y/o contraseña de incorrectas (Intente de nuevo).", "¡Error!", JOptionPane.ERROR_MESSAGE);
                     txtUsuario.setBorder(new LineBorder(Color.RED));
                     txtPassword.setBorder(new LineBorder(Color.RED));
                 }

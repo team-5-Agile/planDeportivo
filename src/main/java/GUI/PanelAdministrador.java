@@ -6,6 +6,10 @@ package GUI;
 
 import DAOs.AdministradorDAO;
 import Dominio.Administrador;
+import Herramientas.Fecha;
+import Herramientas.Validaciones;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,13 +20,15 @@ public class PanelAdministrador extends javax.swing.JFrame {
     //Atributos
     Administrador administrador;
     AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
+    Fecha Fecha = new Fecha();
 
     /**
      * Creates new form PanelAdministrador
      */
-    public PanelAdministrador(Administrador administrador) {
+    public PanelAdministrador(Administrador administrador) throws ParseException {
         this.administrador = administrador;
         initComponents();
+        this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
     }
 
     /**
@@ -39,16 +45,31 @@ public class PanelAdministrador extends javax.swing.JFrame {
         lblFechaHoy = new javax.swing.JLabel();
         lblEncabezadoMacro = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        lblSeleccion = new javax.swing.JLabel();
+        txtSeleccion = new javax.swing.JTextField();
+        btnSeleccionar = new javax.swing.JButton();
+        btnConfigPersonal = new javax.swing.JButton();
+        btnConfigMedios = new javax.swing.JButton();
+        btnConfigDeportes = new javax.swing.JButton();
+        btnConfigAcentos = new javax.swing.JButton();
+        btnNuevoEntrenador = new javax.swing.JButton();
+        btnAdminMacrociclos = new javax.swing.JButton();
+        btnVerEntrenador = new javax.swing.JButton();
+        btnEditarEntrenador = new javax.swing.JButton();
+        btnEliminarEntrenador = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Panel Principal Adminsitrador");
 
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
 
         lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo1.setText("Panel de Administrador");
 
-        lblFechaHoy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFechaHoy.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         lblFechaHoy.setText("Fecha Hoy");
 
         javax.swing.GroupLayout lblEncabezadoTituloLayout = new javax.swing.GroupLayout(lblEncabezadoTitulo);
@@ -58,25 +79,24 @@ public class PanelAdministrador extends javax.swing.JFrame {
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
                 .addComponent(lblFechaHoy)
-                .addGap(78, 78, 78))
+                .addGap(59, 59, 59))
         );
         lblEncabezadoTituloLayout.setVerticalGroup(
             lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addContainerGap()
                 .addGroup(lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitulo1)
-                    .addComponent(lblFechaHoy)))
+                    .addComponent(lblFechaHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitulo1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        getContentPane().add(lblEncabezadoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 50));
 
         lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitulo.setText("Entrenadores Registrados");
+        lblTitulo.setText("Configuracion del sistema");
 
         javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
         lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);
@@ -85,26 +105,342 @@ public class PanelAdministrador extends javax.swing.JFrame {
             .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         lblEncabezadoMacroLayout.setVerticalGroup(
             lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(lblTitulo))
+                .addContainerGap()
+                .addComponent(lblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(lblEncabezadoMacro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 750, 50));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entrenadores Registrados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 14))); // NOI18N
+
+        jTable1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jTable1.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "#", "Nombre", "Apellido Paterno", "Apellido Materno", "Usuario", "Contraseña", "Fecha de Registro"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setToolTipText("Haga clic en entrenador a administrar");
+        jScrollPane1.setViewportView(jTable1);
+
+        lblSeleccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblSeleccion.setText("Selección:");
+
+        txtSeleccion.setEditable(false);
+        txtSeleccion.setBackground(new java.awt.Color(217, 217, 217));
+        txtSeleccion.setFont(new java.awt.Font("Liberation Sans", 0, 13)); // NOI18N
+        txtSeleccion.setText("Seleccione un entrenador de la tabla");
+
+        btnSeleccionar.setBackground(new java.awt.Color(163, 163, 163));
+        btnSeleccionar.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSeleccionar.setOpaque(true);
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
+        btnConfigPersonal.setBackground(new java.awt.Color(237, 192, 123));
+        btnConfigPersonal.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnConfigPersonal.setText("Configurar Personal");
+        btnConfigPersonal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfigPersonal.setOpaque(true);
+        btnConfigPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigPersonalActionPerformed(evt);
+            }
+        });
+
+        btnConfigMedios.setBackground(new java.awt.Color(237, 192, 123));
+        btnConfigMedios.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnConfigMedios.setText("Configurar Medios");
+        btnConfigMedios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfigMedios.setOpaque(true);
+        btnConfigMedios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigMediosActionPerformed(evt);
+            }
+        });
+
+        btnConfigDeportes.setBackground(new java.awt.Color(237, 192, 123));
+        btnConfigDeportes.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnConfigDeportes.setText("Configurar Deportes");
+        btnConfigDeportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfigDeportes.setOpaque(true);
+        btnConfigDeportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigDeportesActionPerformed(evt);
+            }
+        });
+
+        btnConfigAcentos.setBackground(new java.awt.Color(237, 192, 123));
+        btnConfigAcentos.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnConfigAcentos.setText("Configurar Acentos");
+        btnConfigAcentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfigAcentos.setOpaque(true);
+        btnConfigAcentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigAcentosActionPerformed(evt);
+            }
+        });
+
+        btnNuevoEntrenador.setBackground(new java.awt.Color(204, 255, 204));
+        btnNuevoEntrenador.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnNuevoEntrenador.setText("Registrar Nuevo Entrenador");
+        btnNuevoEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevoEntrenador.setOpaque(true);
+        btnNuevoEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoEntrenadorActionPerformed(evt);
+            }
+        });
+
+        btnAdminMacrociclos.setBackground(new java.awt.Color(153, 123, 237));
+        btnAdminMacrociclos.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnAdminMacrociclos.setText("Administrar Macrociclos");
+        btnAdminMacrociclos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdminMacrociclos.setOpaque(true);
+        btnAdminMacrociclos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminMacrociclosActionPerformed(evt);
+            }
+        });
+
+        btnVerEntrenador.setBackground(new java.awt.Color(238, 239, 170));
+        btnVerEntrenador.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnVerEntrenador.setText("Ver");
+        btnVerEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerEntrenador.setOpaque(true);
+        btnVerEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerEntrenadorActionPerformed(evt);
+            }
+        });
+
+        btnEditarEntrenador.setBackground(new java.awt.Color(170, 194, 239));
+        btnEditarEntrenador.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnEditarEntrenador.setText("Editar");
+        btnEditarEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarEntrenador.setOpaque(true);
+        btnEditarEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarEntrenadorActionPerformed(evt);
+            }
+        });
+
+        btnEliminarEntrenador.setBackground(new java.awt.Color(239, 170, 170));
+        btnEliminarEntrenador.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnEliminarEntrenador.setText("Eliminar");
+        btnEliminarEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarEntrenador.setOpaque(true);
+        btnEliminarEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarEntrenadorActionPerformed(evt);
+            }
+        });
+
+        btnCerrarSesion.setBackground(new java.awt.Color(237, 123, 123));
+        btnCerrarSesion.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setOpaque(true);
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnConfigDeportes, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnConfigPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnConfigAcentos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnConfigMedios, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAdminMacrociclos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(460, 460, 460)
+                        .addComponent(btnNuevoEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnSeleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(72, 72, 72)
+                        .addComponent(lblSeleccion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSeleccion)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnVerEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEditarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)
+                                .addComponent(btnEliminarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+            .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConfigDeportes)
+                    .addComponent(btnConfigPersonal)
+                    .addComponent(btnConfigAcentos)
+                    .addComponent(btnConfigMedios))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdminMacrociclos)
+                    .addComponent(btnNuevoEntrenador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeleccionar)
+                    .addComponent(lblSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnVerEntrenador)
+                            .addComponent(btnEditarEntrenador)
+                            .addComponent(btnEliminarEntrenador))
+                        .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCerrarSesion)
+                        .addContainerGap())))
+        );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConfigAcentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigAcentosActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
+                + "\n La funcion seleccionada esta por ser \n"
+                + "agregada en futuras versiones del sistema. \n"
+                + "\n Agradecemos su comprension \n",
+                "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnConfigAcentosActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnConfigPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigPersonalActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
+                + "\n La funcion seleccionada esta por ser \n"
+                + "agregada en futuras versiones del sistema. \n"
+                + "\n Agradecemos su comprension \n",
+                "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnConfigPersonalActionPerformed
+
+    private void btnConfigMediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigMediosActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
+                + "\n La funcion seleccionada esta por ser \n"
+                + "agregada en futuras versiones del sistema. \n"
+                + "\n Agradecemos su comprension \n",
+                "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnConfigMediosActionPerformed
+
+    private void btnConfigDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigDeportesActionPerformed
+        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
+                + "\n La funcion seleccionada esta por ser \n"
+                + "agregada en futuras versiones del sistema. \n"
+                + "\n Agradecemos su comprension \n",
+                "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnConfigDeportesActionPerformed
+
+    private void btnNuevoEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEntrenadorActionPerformed
+        this.dispose();
+        new RegistrarEntrenador(this.administrador).setVisible(true);
+    }//GEN-LAST:event_btnNuevoEntrenadorActionPerformed
+
+    private void btnAdminMacrociclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminMacrociclosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdminMacrociclosActionPerformed
+
+    private void btnVerEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEntrenadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerEntrenadorActionPerformed
+
+    private void btnEditarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEntrenadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
+
+    private void btnEliminarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntrenadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarEntrenadorActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cerrar sesion?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (i == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new Login().setVisible(true);
+        } else {
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdminMacrociclos;
+    private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnConfigAcentos;
+    private javax.swing.JButton btnConfigDeportes;
+    private javax.swing.JButton btnConfigMedios;
+    private javax.swing.JButton btnConfigPersonal;
+    private javax.swing.JButton btnEditarEntrenador;
+    private javax.swing.JButton btnEliminarEntrenador;
+    private javax.swing.JButton btnNuevoEntrenador;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JButton btnVerEntrenador;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel lblEncabezadoMacro;
     private javax.swing.JPanel lblEncabezadoTitulo;
     private javax.swing.JLabel lblFechaHoy;
+    private javax.swing.JLabel lblSeleccion;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JTextField txtSeleccion;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,3 +1,6 @@
+/*
+ * .java
+ */
 package Herramientas;
 
 import java.time.DayOfWeek;
@@ -42,15 +45,15 @@ public class Validaciones {
         return true;
 
     }
+
     public boolean isPorcentajeValido(double porcentaje) throws Exception {
 
-        if (porcentaje>100) {
+        if (porcentaje > 100) {
             throw new Exception("Error, El numero no debe superar el 100%");
         }
         return true;
 
     }
-
 
     /**
      * isNumSemanaValido Método que valida el formato de la cadena str y el
@@ -77,6 +80,7 @@ public class Validaciones {
         return true;
 
     }
+
     public static boolean esNumero(String str) {
         // Utiliza una expresión regular para verificar si la cadena contiene solo dígitos
         return str.matches("\\d+");
