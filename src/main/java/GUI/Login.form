@@ -30,7 +30,7 @@
               <EmptySpace min="224" pref="224" max="-2" attributes="0"/>
               <Component id="btnIniciar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="169" pref="169" max="-2" attributes="0"/>
-              <Component id="lblLogoIws" min="-2" max="-2" attributes="0"/>
+              <Component id="lblLogoISW" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -121,7 +121,7 @@
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblLogoIws" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLogoISW" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                       <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
                       <Component id="btnIniciar" min="-2" max="-2" attributes="0"/>
@@ -207,7 +207,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblLogoIws">
+    <Component class="javax.swing.JLabel" name="lblLogoISW">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icons/logo-isw.jpg"/>
@@ -215,7 +215,7 @@
         <Property name="toolTipText" type="java.lang.String" value="Acerca de"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblLogoIwsMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblLogoISWMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitulo">

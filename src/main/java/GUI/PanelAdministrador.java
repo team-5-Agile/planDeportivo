@@ -100,6 +100,8 @@ public class PanelAdministrador extends javax.swing.JFrame {
         btnEditarEntrenador = new javax.swing.JButton();
         btnEliminarEntrenador = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
+        btnRefrescarTabla = new javax.swing.JButton();
+        btnAyuda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Panel Principal Adminsitrador");
@@ -107,7 +109,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
 
         lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitulo1.setText("Panel de Administrador");
+        lblTitulo1.setText("Administrador");
 
         lblFechaHoy.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         lblFechaHoy.setText("Fecha Hoy");
@@ -119,7 +121,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 519, Short.MAX_VALUE)
                 .addComponent(lblFechaHoy)
                 .addGap(59, 59, 59))
         );
@@ -155,7 +157,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entrenadores Registrados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 14))); // NOI18N
+        jScrollPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entrenadores Registrados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 14))); // NOI18N
 
         tblEntrenadores.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         tblEntrenadores.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
@@ -314,6 +316,28 @@ public class PanelAdministrador extends javax.swing.JFrame {
             }
         });
 
+        btnRefrescarTabla.setBackground(new java.awt.Color(204, 255, 255));
+        btnRefrescarTabla.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnRefrescarTabla.setText("Refrescar Tabla");
+        btnRefrescarTabla.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefrescarTabla.setOpaque(true);
+        btnRefrescarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarTablaActionPerformed(evt);
+            }
+        });
+
+        btnAyuda.setBackground(new java.awt.Color(153, 181, 186));
+        btnAyuda.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnAyuda.setText("Ayuda");
+        btnAyuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAyuda.setOpaque(true);
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -322,18 +346,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnConfigDeportes, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnConfigPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnConfigAcentos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnConfigMedios, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdminMacrociclos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(460, 460, 460)
-                        .addComponent(btnNuevoEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -349,7 +361,23 @@ public class PanelAdministrador extends javax.swing.JFrame {
                                 .addGap(79, 79, 79)
                                 .addComponent(btnEditarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEliminarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(btnEliminarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConfigDeportes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdminMacrociclos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnRefrescarTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnConfigPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnConfigAcentos, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConfigMedios, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevoEntrenador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))))
             .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -366,7 +394,10 @@ public class PanelAdministrador extends javax.swing.JFrame {
                     .addComponent(btnConfigMedios))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdminMacrociclos)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAdminMacrociclos)
+                        .addComponent(btnRefrescarTabla)
+                        .addComponent(btnAyuda))
                     .addComponent(btnNuevoEntrenador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -505,9 +536,34 @@ public class PanelAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
 
+    private void btnRefrescarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarTablaActionPerformed
+        try {
+            JOptionPane.showMessageDialog(null, "Tabla refrescada con exito.", "Tabla refrescada", JOptionPane.INFORMATION_MESSAGE);
+            this.cargarTablaEntrenadores();
+        } catch (Exception ex) {
+            Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRefrescarTablaActionPerformed
+
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
+        JOptionPane.showMessageDialog(null, "Botones y funciones: \n"
+                + " - Configurar Deportes: Registrar y eliminar nuevos deportes. \n"
+                + " - Configurar Personal: Registrar y eliminar personal p.e. metodólogos, jefes de rama, etc.\n"
+                + " - Configurar Acentos: Editar la distribucion de acentos para todos los entrenadores. \n"
+                + " - Configurar Medios: Registrar y eliminar nuevos medios de trabajo en el sistema. \n"
+                + " - Administrar Macrociclos: Consultar, eliminar y editar todos los macrociclos en el sistema. \n"
+                + " - Refrescar Tabla: Refrescar la tabla de Entrenadores Registrados. \n"
+                + " - Registrar Nuevo Entrenador: Registrar un nuevo entrenador en el sistema. \n"
+                + " - Ver: Consultar los datos del entrenador seleccionado. \n"
+                + " - Editar: Editar los datos del entrenador seleccionado. \n"
+                + " - Eliminar: Eliminar los datos del entrenador seleccionado. \n",
+                "Ayuda", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnAyudaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminMacrociclos;
+    private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnConfigAcentos;
     private javax.swing.JButton btnConfigDeportes;
@@ -516,6 +572,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarEntrenador;
     private javax.swing.JButton btnEliminarEntrenador;
     private javax.swing.JButton btnNuevoEntrenador;
+    private javax.swing.JButton btnRefrescarTabla;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton btnVerEntrenador;
     private javax.swing.JScrollPane jScrollPanel;

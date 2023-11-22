@@ -41,7 +41,7 @@ public class Login extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         lblIconOjo = new javax.swing.JLabel();
         lblLogoItson = new javax.swing.JLabel();
-        lblLogoIws = new javax.swing.JLabel();
+        lblLogoISW = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         lblSubtitulo = new javax.swing.JLabel();
         lblUserProfile = new javax.swing.JLabel();
@@ -100,11 +100,11 @@ public class Login extends javax.swing.JFrame {
 
         lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-itson.png"))); // NOI18N
 
-        lblLogoIws.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-isw.jpg"))); // NOI18N
-        lblLogoIws.setToolTipText("Acerca de");
-        lblLogoIws.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblLogoISW.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo-isw.jpg"))); // NOI18N
+        lblLogoISW.setToolTipText("Acerca de");
+        lblLogoISW.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblLogoIwsMouseClicked(evt);
+                lblLogoISWMouseClicked(evt);
             }
         });
 
@@ -145,7 +145,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(224, 224, 224)
                 .addComponent(btnIniciar)
                 .addGap(169, 169, 169)
-                .addComponent(lblLogoIws)
+                .addComponent(lblLogoISW)
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +214,7 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(lblIconOjo))
                         .addGap(30, 30, 30)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogoIws, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblLogoISW, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnSalir)
                         .addComponent(btnIniciar)))
@@ -299,7 +299,7 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordKeyTyped
 
-    private void lblLogoIwsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoIwsMouseClicked
+    private void lblLogoISWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoISWMouseClicked
         JOptionPane.showMessageDialog(null, "Autores: \n"
                 + " - Brandon Figueroa Ugalde \n"
                 + " - Jesus Omar Hernandez Iturbe \n"
@@ -308,7 +308,7 @@ public class Login extends javax.swing.JFrame {
                 + "Metodologías Ágiles de Desarrollo "
                 + "ISW ITSON",
                 "Acerca de", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_lblLogoIwsMouseClicked
+    }//GEN-LAST:event_lblLogoISWMouseClicked
 
     private void checkVisiblePasswordStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkVisiblePasswordStateChanged
         if (this.checkVisiblePassword.isSelected()) {
@@ -325,8 +325,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkVisiblePassword;
     private javax.swing.JLabel lblContrasenia;
     private javax.swing.JLabel lblIconOjo;
+    private javax.swing.JLabel lblLogoISW;
     private javax.swing.JLabel lblLogoItson;
-    private javax.swing.JLabel lblLogoIws;
     private javax.swing.JLabel lblSubtitulo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUserProfile;
