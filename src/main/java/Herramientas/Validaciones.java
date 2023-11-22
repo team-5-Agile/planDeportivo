@@ -54,6 +54,22 @@ public class Validaciones {
         return true;
 
     }
+    public boolean isNegativo(double n) throws Exception {
+
+        if (0>n) {
+            throw new Exception("Error, El numero no debe ser menor a 0%");
+        }
+        return true;
+
+    }
+    public boolean isMenor(int semanas, int n) throws Exception {
+
+        if (n>semanas) {
+            throw new Exception("Error, El numero no debe ser menor a las semanas");
+        }
+        return true;
+
+    }
 
     /**
      * isNumSemanaValido Método que valida el formato de la cadena str y el

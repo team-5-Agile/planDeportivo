@@ -638,6 +638,8 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             if (!valor.equals("")) {
                 if (val.isPorcentajeValido(Double.parseDouble(valor))) {
                 }
+                if (val.isNegativo(Double.parseDouble(valor))) {
+                }
                 return ((100-Integer.parseInt(valor))+"");
 
             }
@@ -654,6 +656,10 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             Validaciones val = new Validaciones();
             if (!valor.equals("")) {
                 return ((Integer.parseInt(total)-Integer.parseInt(valor))+"");
+                if (val.isNegativo(Double.parseDouble(valor))) {
+                }
+                if (val.isMenor(Integer.parseInt(total), Integer.parseInt(valor))) {
+                }
 
             }
         
