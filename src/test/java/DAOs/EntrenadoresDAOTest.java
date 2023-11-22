@@ -33,7 +33,8 @@ public class EntrenadoresDAOTest {
 
     @BeforeAll
     public static void setUpClass() {
-        entrenadorDao = new EntrenadoresDAO("AppPlanUTest");
+               entrenadorDao = new EntrenadoresDAO("AppPlanUTest");
+
     }
 
     /**
