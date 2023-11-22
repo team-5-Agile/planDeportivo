@@ -4,7 +4,7 @@ on:
     branches: 
       - test
 jobs:
-  build:
+  testing:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -17,23 +17,25 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Compilar con Maven
+    - name: Testing Maven
       run: mvn test --file pom.xml
-      if: success()
-    - name: Approve Pull Request
-      uses: juliangruber/approve-pull-request-action@v2.0.0
-      with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: 1
-    - id: automerge
-      name: automerge
-      uses: "pascalgn/automerge-action@v0.15.6"
-      env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"     
+    - name: Close Pull Request on Failure
       if: failure()
-    - uses: superbrothers/close-pull-request@v3
+      uses: superbrothers/close-pull-request@v3
       with:
-        comment: "This pull request has been closed automatically because the branch was merged into main."   
+        comment:  This PR has failed the tests. (Fallaron los tests)
+    - name: Approve Pull Request
+      uses: juliangruber/approve-pull-request-action@v1.1.1
+      with:
+        github-token: ${{ github.token }}
+        number: ${{ github.event.number }}
+    - name: Merge Pull Request
+      uses: juliangruber/merge-pull-request-action@v1
+      with:
+        github-token: ${{ github.token}}
+        number: ${{ github.event.number }}
+        method: squash
+          
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
