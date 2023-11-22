@@ -32,7 +32,6 @@ public class VerMacrociclo extends javax.swing.JFrame {
      * Creates new form RegistrarEntrenador
      */
     public VerMacrociclo(Entrenador entrenador, Macrociclo macrociclo) throws ParseException {
-        this.administrador = administrador;
         this.entrenador = entrenador;
         initComponents();
         // Insercion de datos a mostrar
@@ -292,7 +291,6 @@ public class VerMacrociclo extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
         try {
-            new PanelAdministrador(this.administrador).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(VerMacrociclo.class.getName()).log(Level.SEVERE, null, ex);
         }

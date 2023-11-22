@@ -433,10 +433,7 @@ public class PanelEntrenador extends javax.swing.JFrame {
         try {
             int fila = obtenerFila();
             if (fila != -1) {
-                Macrociclo macrociclo = MacrociclosDAO.consultarMacrociclo((Long) tblMacrociclos.getValueAt(fila, 0));
-                this.txtSeleccion.setText(macrociclo.getDeporte()+ " - Rama: " + macrociclo.getRama().name() + " - Preparador Fisico: " + macrociclo.getPreparadorFisico() + " - ID: " + entrenador.getId() + ".");
-                this.seleccion = macrociclo;
-                tblMacrociclos.clearSelection();
+               
             } else {
                 JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
             }
@@ -447,7 +444,6 @@ public class PanelEntrenador extends javax.swing.JFrame {
 
     private void btnNuevoMacrocicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoMacrocicloActionPerformed
         this.dispose();
-        new Paso1Registro(this.entrenador).setVisible(true);
     }//GEN-LAST:event_btnNuevoMacrocicloActionPerformed
 
     private void btnVerEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEntrenadorActionPerformed
@@ -469,7 +465,6 @@ public class PanelEntrenador extends javax.swing.JFrame {
             if (i == JOptionPane.YES_OPTION) {
                 try {
                     EntrenadoresDAO.eliminarEntrenador(this.seleccion.getId());
-                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente la cuenta del entrenador: " + this.seleccion.getNombre() + " " + this.seleccion.getApellidoPaterno() + " " + this.seleccion.getApellidoMaterno() + " - ID: " + seleccion.getId() + ".", "Eliminacion de entrenador exitosa.", JOptionPane.INFORMATION_MESSAGE);
                     cargarTablaMacros();
                 } catch (EntityNotFoundException e) {
                     JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer eliminar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);

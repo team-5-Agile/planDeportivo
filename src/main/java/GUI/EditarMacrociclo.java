@@ -305,7 +305,6 @@ public class EditarMacrociclo extends javax.swing.JFrame {
         if (i == JOptionPane.YES_OPTION) {
             this.dispose();
             try {
-                new PanelAdministrador(this.administrador).setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(RegistrarEntrenador.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -335,7 +334,6 @@ public class EditarMacrociclo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se editó exitosamente la cuenta del entrenador: " + this.txtNombre.getText() + " " + this.txtApellidoPaterno.getText() + " " + this.txtApellidoMaterno.getText() + " - ID: " + this.entrenador.getId() + ". ☺", "Registro de entrenador exitoso", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             try {
-                new PanelAdministrador(this.administrador).setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(RegistrarEntrenador.class.getName()).log(Level.SEVERE, null, ex);
             }

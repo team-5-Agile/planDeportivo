@@ -62,10 +62,7 @@
                           <Component id="chkPasados" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnAyuda" min="-2" pref="164" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnAyuda" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="btnRefrescarTabla" min="-2" pref="164" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
