@@ -25,6 +25,7 @@ jobs:
       with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           number: 1
+      if: success()
     - id: automerge
       name: automerge
       uses: "pascalgn/automerge-action@v0.15.6"
