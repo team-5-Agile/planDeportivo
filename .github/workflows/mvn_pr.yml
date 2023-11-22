@@ -25,12 +25,16 @@ jobs:
       with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           number: 1
-
+      if: success()  
     - id: automerge
       name: automerge
       uses: "pascalgn/automerge-action@v0.15.6"
       env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"     
+      if: success() || failure()
+    - uses: superbrothers/close-pull-request@v3
+      with:
+        comment: "This pull request has been closed automatically because the branch was merged into main."   
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
