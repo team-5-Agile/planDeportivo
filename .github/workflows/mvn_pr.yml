@@ -19,8 +19,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Install Maven dependencies    
+        run: mvn clean install
       - name: Testing Maven    
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn test
         id: test
       - name: Close Pull
         uses: peter-evans/close-pull@v3
