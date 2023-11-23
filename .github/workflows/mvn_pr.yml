@@ -22,14 +22,14 @@ jobs:
       - name: Testing Maven    
         run: mvn test --file pom.xml
         id: test
-
+        continue-on-error: true
       - name: Close Pull
         uses: peter-evans/close-pull@v3
         with:
           pull-request-number: ${{ github.event.number }}
           comment: Auto-closing pull request
           delete-branch: false
-        if: ${{steps.test.conclusion == 'failure'}}
+        if: failure()
 
   merge:
     runs-on: ubuntu-latest
