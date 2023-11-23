@@ -3,6 +3,10 @@ name: Java continuous integration
 permissions:
         contents: write
 on:
+  workflow_run:
+    workflows: ["Test and Merge PR to main"]
+    types:
+      - completed
   push:
     branches:
       - main
