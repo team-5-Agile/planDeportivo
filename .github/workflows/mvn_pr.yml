@@ -23,6 +23,14 @@ jobs:
         run: mvn test --file pom.xml
         id: test
 
+      - name: Close Pull
+        uses: peter-evans/close-pull@v3
+        with:
+          pull-request-number: ${{ github.event.number }}
+          comment: Auto-closing pull request
+          delete-branch: false
+        if: ${{steps.test.conclusion == 'failure'}}
+
   merge:
     runs-on: ubuntu-latest
     needs: testing
@@ -30,13 +38,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Close Pull
-        uses: peter-evans/close-pull@v3
-        with:
-          pull-request-number: ${{ github.event.number }}
-          comment: Auto-closing pull request
-          delete-branch: false
-        if: ${{needs.testing.result == 'failure'}}
 
       - name: Approve Pull Request
         uses: juliangruber/approve-pull-request-action@v1.1.1
