@@ -19,11 +19,13 @@ jobs:
 
     - name: Testing Maven
       run: mvn test --file pom.xml
-    - name: Close Pull Request on Failure
       if: failure()
-      uses: superbrothers/close-pull-request@v3
+    - name: Close Pull
+      uses: peter-evans/close-pull@v3
       with:
-        comment:  This PR has failed the tests. (Fallaron los tests)
+        pull-request-number: ${{ github.event.number }}
+        comment: Auto-closing pull request
+        delete-branch: true
     - name: Approve Pull Request
       uses: juliangruber/approve-pull-request-action@v1.1.1
       with:
