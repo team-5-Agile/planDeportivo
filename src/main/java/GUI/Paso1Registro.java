@@ -6,9 +6,11 @@ package GUI;
 
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
+import DAOs.MacrociclosDAO;
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Herramientas.Fecha;
+import Herramientas.Validaciones;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,16 +23,17 @@ import javax.swing.JOptionPane;
 public class Paso1Registro extends javax.swing.JFrame {
 
     //Atributos
-    Administrador administrador;
-    AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
+    Entrenador entrenador;
     EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
+    MacrociclosDAO MacrociclosDAO = new MacrociclosDAO("AppPlanU");
+    Validaciones Validaciones = new Validaciones();
     Fecha Fecha = new Fecha();
 
     /**
      * Creates new form RegistrarEntrenador
      */
-    public Paso1Registro(Administrador administrador) {
-        this.administrador = administrador;
+    public Paso1Registro(Entrenador entrenador) {
+        this.entrenador = entrenador;
         initComponents();
     }
 

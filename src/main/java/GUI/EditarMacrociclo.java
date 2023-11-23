@@ -6,10 +6,12 @@ package GUI;
 
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
+import DAOs.MacrociclosDAO;
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Dominio.Macrociclo;
 import Herramientas.Fecha;
+import Herramientas.Validaciones;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,10 +24,11 @@ import javax.swing.JOptionPane;
 public class EditarMacrociclo extends javax.swing.JFrame {
 
     //Atributos
-    Macrociclo macrociclo;
     Entrenador entrenador;
-    AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
+    Macrociclo macrociclo;
     EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
+    MacrociclosDAO MacrociclosDAO = new MacrociclosDAO("AppPlanU");
+    Validaciones Validaciones = new Validaciones();
     Fecha Fecha = new Fecha();
 
     /**
@@ -36,13 +39,6 @@ public class EditarMacrociclo extends javax.swing.JFrame {
         this.entrenador = entrenador;
         initComponents();
         // Insercion de datos a mostrar
-        this.txtID.setText(this.entrenador.getId().toString());
-        this.txtFechaRegistro.setText(Fecha.formatoFecha(this.entrenador.getFechaRegistro()));
-        this.txtNombre.setText(this.entrenador.getNombre());
-        this.txtApellidoPaterno.setText(this.entrenador.getApellidoPaterno());
-        this.txtApellidoMaterno.setText(this.entrenador.getApellidoMaterno());
-        this.txtUsuario.setText(this.entrenador.getUsuario());
-        this.txtContrasena.setText(this.entrenador.getContrasena());
     }
 
     /**

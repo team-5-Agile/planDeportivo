@@ -6,6 +6,7 @@ package GUI;
 
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
+import DAOs.MacrociclosDAO;
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Dominio.Macrociclo;
@@ -31,6 +32,7 @@ public class PanelEntrenador extends javax.swing.JFrame {
     Entrenador entrenador;
     Macrociclo seleccion = null;
     EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
+    MacrociclosDAO MacrociclosDAO = new MacrociclosDAO("AppPlanU");
     Validaciones Validaciones = new Validaciones();
     Fecha Fecha = new Fecha();
 
