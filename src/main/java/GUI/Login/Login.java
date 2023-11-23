@@ -1,10 +1,10 @@
-package GUI;
+package GUI.Login;
 
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Exceptions.InputException;
-import GUI.PanelAdministrador;
-import GUI.PanelEntrenador;
+import GUI.Administrador.PanelAdministrador;
+import GUI.Entrenador.PanelEntrenador;
 import Negocio.AdministradorNegocio;
 import Negocio.EntrenadorNegocio;
 import java.awt.Color;

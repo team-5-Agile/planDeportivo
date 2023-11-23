@@ -46,6 +46,24 @@ public class MacrociclosDAO implements BaseDAO {
         return macrociclo;
     }
 
+    public Macrociclo insertarFechasMacrociclo(Macrociclo macrociclo, Calendar fechaInicio, Calendar fechaFin) {
+        EntityManager entityManager = this.getEntityManager(); 
+        // Obtener el Macrociclo actualizado desde la base de datos
+        Macrociclo macrocicloActualizado = entityManager.find(Macrociclo.class, macrociclo.getId());
+        if (macrocicloActualizado != null) {
+            entityManager.getTransaction().begin();
+            // Actualizar las fechas
+            macrocicloActualizado.setFechaInicio(fechaInicio);
+            macrocicloActualizado.setFechaFin(fechaFin);
+            // Realizar la actualización en la base de datos
+            entityManager.merge(macrocicloActualizado);
+            entityManager.getTransaction().commit();
+        }
+        entityManager.close();
+        // Devolver el Macrociclo actualizado
+        return macrocicloActualizado;
+    }
+
     // Metodo de eliminacion
     public void eliminarMacrociclo(Long id) {
         if (verificarMacrociclo(id)) {
@@ -94,20 +112,19 @@ public class MacrociclosDAO implements BaseDAO {
         entityManager.close();
         return macrociclo != null;
     }
-    
-    // CONSULTAS TOMANDO EN CUENTA EL ENTRENADOR
 
+    // CONSULTAS TOMANDO EN CUENTA EL ENTRENADOR
     // Metodo que regresa una lista con todos los macrociclos registrados en el sistema por un entrenador en particular
     public List<Macrociclo> consultarMacrociclosVigentes(Entrenador entrenador) throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Macrociclo> query;
-        Long idEntrenador = entrenador.getId();
+//        Long IDEntrenador = entrenador.getId();
         // Modificar la JPQL para incluir condiciones de fecha
-        String jpql = "SELECT m FROM Macrociclo m WHERE m.idEntrenador = :idEntrenador AND "
+        String jpql = "SELECT m FROM Macrociclo m WHERE m.entrenadores = :entrenador AND "
                 + ":fechaActual BETWEEN m.fechaInicio AND m.fechaFin";
         query = entityManager.createQuery(jpql, Macrociclo.class);
-        query.setParameter("idEntrenador", idEntrenador);
+        query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
         query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
@@ -121,12 +138,12 @@ public class MacrociclosDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Macrociclo> query;
-        Long idEntrenador = entrenador.getId();
+//        Long IDEntrenador = entrenador.getId();
         // Modificar la JPQL para incluir condiciones de fecha
-        String jpql = "SELECT m FROM Macrociclo m WHERE m.idEntrenador = :idEntrenador AND "
+        String jpql = "SELECT m FROM Macrociclo m WHERE m.entrenadores = :entrenador AND "
                 + ":fechaActual NOT BETWEEN m.fechaInicio AND m.fechaFin";
         query = entityManager.createQuery(jpql, Macrociclo.class);
-        query.setParameter("idEntrenador", idEntrenador);
+        query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
         query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
@@ -140,12 +157,12 @@ public class MacrociclosDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Macrociclo> query;
-        Long idEntrenador = entrenador.getId();
+//        Long IDEntrenador = entrenador.getId();
         // Modificar la JPQL para incluir condiciones de fecha
-        String jpql = "SELECT m FROM Macrociclo m WHERE m.idEntrenador = :idEntrenador AND "
+        String jpql = "SELECT m FROM Macrociclo m WHERE m.entrenadores = :entrenador AND "
                 + "m.fechaInicio > :fechaActual";
         query = entityManager.createQuery(jpql, Macrociclo.class);
-        query.setParameter("idEntrenador", idEntrenador);
+        query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
         query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
@@ -153,18 +170,18 @@ public class MacrociclosDAO implements BaseDAO {
         entityManager.close();
         return macrociclos;
     }
-    
+
     // Metodo que regresa una lista con todos los macrociclos registrados en el sistema por un entrenador en particular
     public List<Macrociclo> consultarMacrociclosPasados(Entrenador entrenador) throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Macrociclo> query;
-        Long idEntrenador = entrenador.getId();
+//        Long IDEntrenador = entrenador.getId();
         // Modificar la JPQL para incluir condiciones de fecha
-        String jpql = "SELECT m FROM Macrociclo m WHERE m.idEntrenador = :idEntrenador AND "
+        String jpql = "SELECT m FROM Macrociclo m WHERE m.entrenadores = :entrenador AND "
                 + "m.fechaFin < :fechaActual";
         query = entityManager.createQuery(jpql, Macrociclo.class);
-        query.setParameter("idEntrenador", idEntrenador);
+        query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
         query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
@@ -178,31 +195,30 @@ public class MacrociclosDAO implements BaseDAO {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Macrociclo> query;
-        Long idEntrenador = entrenador.getId();
-        String jpql = "SELECT m FROM Macrociclos m WHERE m.idEntrenador = :idEntrenador";
+//        Long IDEntrenador = entrenador.getId();
+        String jpql = "SELECT m FROM Macrociclo m WHERE m.entrenadores = :entrenador";
         query = entityManager.createQuery(jpql, Macrociclo.class);
-        query.setParameter("idEntrenador", idEntrenador);
+        query.setParameter("entrenador", entrenador);
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
         return macrociclos;
     }
-    
-    // CONSULTAS SIN TOMAR EN CUENTA EL ENTRENADOR
 
+    // CONSULTAS SIN TOMAR EN CUENTA EL ENTRENADOR
     // Metodo que regresa una lista con todos los macrociclos registrados en el sistema
     public List<Macrociclo> consultarTodosMacrociclos() throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Macrociclo> query;
-        String jpql = "SELECT m FROM Macrociclos m";
+        String jpql = "SELECT m FROM Macrociclo m";
         query = entityManager.createQuery(jpql, Macrociclo.class);
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
         return macrociclos;
     }
-    
+
     // Metodo que regresa una lista con todos los macrociclos registrados en el sistema por un entrenador en particular
     public List<Macrociclo> consultarTodosMacrociclosVigentes() throws Exception {
         EntityManager entityManager = this.getEntityManager();
@@ -250,7 +266,7 @@ public class MacrociclosDAO implements BaseDAO {
         entityManager.close();
         return macrociclos;
     }
-    
+
     // Metodo que regresa una lista con todos los macrociclos registrados en el sistema por un entrenador en particular
     public List<Macrociclo> consultarTodosMacrociclosPasados() throws Exception {
         EntityManager entityManager = this.getEntityManager();

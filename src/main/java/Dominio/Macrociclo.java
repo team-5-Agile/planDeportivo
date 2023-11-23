@@ -71,7 +71,7 @@ public class Macrociclo implements Serializable {
     public Macrociclo() {
     }
 
-    public Macrociclo(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin, List<Etapa> etapas, Entrenador entrenador) {
+    public Macrociclo(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin, List<Etapa> etapas, Entrenador entrenadores) {
         this.id = id;
         this.deporte = deporte;
         this.jefeRama = jefeRama;
@@ -81,7 +81,7 @@ public class Macrociclo implements Serializable {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.etapas = etapas;
-        this.entrenadores = entrenador;
+        this.entrenadores = entrenadores;
     }
 
     public Macrociclo(Long id, String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Calendar fechaInicio, Calendar fechaFin) {
@@ -103,6 +103,15 @@ public class Macrociclo implements Serializable {
         this.preparadorFisico = preparadorFisico;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+    }
+    
+    public Macrociclo(String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Entrenador entrenadores) {
+        this.deporte = deporte;
+        this.jefeRama = jefeRama;
+        this.rama = rama;
+        this.metodologo = metodologo;
+        this.preparadorFisico = preparadorFisico;
+        this.entrenadores = entrenadores;
     }
 
     public Long getId() {
@@ -177,11 +186,11 @@ public class Macrociclo implements Serializable {
         this.etapas = etapas;
     }
 
-    public Entrenador getEntrenadores() {
+    public Entrenador getEntrenador() {
         return entrenadores;
     }
 
-    public void setEntrenadores(Entrenador entrenadores) {
+    public void setEntrenador(Entrenador entrenadores) {
         this.entrenadores = entrenadores;
     }
 
@@ -207,6 +216,6 @@ public class Macrociclo implements Serializable {
 
     @Override
     public String toString() {
-        return "Macrociclos{" + "id=" + id + ", deporte=" + deporte + ", jefeRama=" + jefeRama + ", rama=" + rama + ", metodologo=" + metodologo + ", preparadorFisico=" + preparadorFisico + ", fechaInicio=" + fechaInicio.toString() + ", fechaFin=" + fechaFin.toString() + ", etapas=" + etapas + ", entrenador=" + entrenadores.getId() + '}';
+        return "Macrociclos{" + "id=" + id + ", deporte=" + deporte + ", jefeRama=" + jefeRama + ", rama=" + rama + ", metodologo=" + metodologo + ", preparadorFisico=" + preparadorFisico + ", fechaInicio=" + fechaInicio.toString() + ", fechaFin=" + fechaFin.toString() + ", etapas=" + etapas + ", entrenadores=" + entrenadores.getId() + '}';
     }
 }

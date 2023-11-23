@@ -8,5 +8,5 @@ package Enumeradores;
  * @author brawun
  */
 public enum Ramas {
-    VARONIL, FEMENIL, MIXTO
+    VARONIL, FEMENIL, MIXTO;
 }

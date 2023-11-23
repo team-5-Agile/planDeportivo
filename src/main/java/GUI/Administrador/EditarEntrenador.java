@@ -2,16 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
+package GUI.Administrador;
 
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
-import DAOs.MacrociclosDAO;
 import Dominio.Administrador;
 import Dominio.Entrenador;
-import Dominio.Macrociclo;
 import Herramientas.Fecha;
-import Herramientas.Validaciones;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,25 +18,36 @@ import javax.swing.JOptionPane;
  *
  * @author brawun
  */
-public class EditarMacrociclo extends javax.swing.JFrame {
+public class EditarEntrenador extends javax.swing.JFrame {
 
     //Atributos
+    Administrador administrador;
     Entrenador entrenador;
-    Macrociclo macrociclo;
+    AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
     EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
-    MacrociclosDAO MacrociclosDAO = new MacrociclosDAO("AppPlanU");
-    Validaciones Validaciones = new Validaciones();
     Fecha Fecha = new Fecha();
 
     /**
      * Creates new form RegistrarEntrenador
      */
-    public EditarMacrociclo(Entrenador entrenador, Macrociclo macrociclo) throws ParseException {
-        this.macrociclo = macrociclo;
+    public EditarEntrenador(Administrador administrador, Entrenador entrenador) throws ParseException {
+        this.administrador = administrador;
         this.entrenador = entrenador;
         initComponents();
-        // Insercion de datos a mostrar
+        llenarTextos();
     }
+    
+    public void llenarTextos() throws ParseException {
+        // Insercion de datos a mostrar
+        this.txtID.setText(this.entrenador.getId().toString());
+        this.txtFechaRegistro.setText(Fecha.formatoFecha(this.entrenador.getFechaRegistro()));
+        this.txtNombre.setText(this.entrenador.getNombre());
+        this.txtApellidoPaterno.setText(this.entrenador.getApellidoPaterno());
+        this.txtApellidoMaterno.setText(this.entrenador.getApellidoMaterno());
+        this.txtUsuario.setText(this.entrenador.getUsuario());
+        this.txtContrasena.setText(this.entrenador.getContrasena());
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,7 +83,7 @@ public class EditarMacrociclo extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Registrar Nuevo Entrenador");
+        setTitle("Editar Entrenador");
 
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
 
@@ -102,7 +110,7 @@ public class EditarMacrociclo extends javax.swing.JFrame {
         lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitulo.setText("Nuevo Entrenador");
+        lblTitulo.setText("Editar Entrenador");
 
         javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
         lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);

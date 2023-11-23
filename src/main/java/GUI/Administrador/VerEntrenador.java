@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
+package GUI.Administrador;
 
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
@@ -34,6 +34,10 @@ public class VerEntrenador extends javax.swing.JFrame {
         this.administrador = administrador;
         this.entrenador = entrenador;
         initComponents();
+        llenarTextos();
+    }
+    
+    public void llenarTextos() throws ParseException {
         // Insercion de datos a mostrar
         this.txtID.setText(this.entrenador.getId().toString());
         this.txtFechaRegistro.setText(Fecha.formatoFecha(this.entrenador.getFechaRegistro()));
@@ -77,7 +81,7 @@ public class VerEntrenador extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Registrar Nuevo Entrenador");
+        setTitle("Ver Entrenador");
 
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
 
@@ -104,7 +108,7 @@ public class VerEntrenador extends javax.swing.JFrame {
         lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitulo.setText("Nuevo Entrenador");
+        lblTitulo.setText("Ver Entrenador");
 
         javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
         lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);
