@@ -54,13 +54,14 @@ public class EntrenadoresDAOTest {
                 "randomizer");
         expResult.setId(1L);
         Entrenador result = entrenadorDao.registrarEntrenador(entrenador);
+        System.out.println("result registro:" + result.getNombre());
         assertEquals(expResult, result);
 
     }
 
     @Test
     public void testRegistrarEntrenadorFail() {
-        System.out.println("registrarEntrenador");
+        System.out.println("registrarEntrenadorFail");
         Entrenador entrenador = new Entrenador("Random",
                 "Real",
                 "Ficticio",

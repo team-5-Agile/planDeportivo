@@ -39,7 +39,8 @@ public class EntrenadorNegocioTest {
         entrenador.setApellidoMaterno("Test ApellidoM");
         entrenador.setUsuario("Test Usuario");
         entrenador.setContrasena("TestContrasena");
-        entrenadorDao.registrarEntrenador(entrenador);
+       Entrenador e= entrenadorDao.registrarEntrenador(entrenador);
+        System.out.println(e.getNombre());
 
     }
 
