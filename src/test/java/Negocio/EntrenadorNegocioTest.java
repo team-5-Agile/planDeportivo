@@ -25,7 +25,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EntrenadorNegocioTest {
 
-    public static EntrenadoresDAO entrenadorDao;
+    public static final EntrenadoresDAO entrenadorDao =new EntrenadoresDAO("AppPlanUTest");;
 
     public EntrenadorNegocioTest() {
 
@@ -33,7 +33,6 @@ public class EntrenadorNegocioTest {
 
     @BeforeAll
     public static void setUpClass() {
-        entrenadorDao = new EntrenadoresDAO("AppPlanUTest");
         Entrenador entrenador = new Entrenador();
         entrenador.setNombre("Test Nombre");
         entrenador.setApellidoPaterno("Test ApellidoP");

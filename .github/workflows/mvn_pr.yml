@@ -20,7 +20,7 @@ jobs:
           cache: maven
 
       - name: Testing Maven    
-        run: mvn test --file pom.xml
+        run: mvn verify --file pom.xml
         id: test
       - name: Close Pull
         uses: peter-evans/close-pull@v3
