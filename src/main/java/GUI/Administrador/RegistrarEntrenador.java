@@ -2,15 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
+package GUI.Administrador;
 
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
-import DAOs.MacrociclosDAO;
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Herramientas.Fecha;
-import Herramientas.Validaciones;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,20 +18,19 @@ import javax.swing.JOptionPane;
  *
  * @author brawun
  */
-public class Paso1Registro extends javax.swing.JFrame {
+public class RegistrarEntrenador extends javax.swing.JFrame {
 
     //Atributos
-    Entrenador entrenador;
+    Administrador administrador;
+    AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
     EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
-    MacrociclosDAO MacrociclosDAO = new MacrociclosDAO("AppPlanU");
-    Validaciones Validaciones = new Validaciones();
     Fecha Fecha = new Fecha();
 
     /**
      * Creates new form RegistrarEntrenador
      */
-    public Paso1Registro(Entrenador entrenador) {
-        this.entrenador = entrenador;
+    public RegistrarEntrenador(Administrador administrador) {
+        this.administrador = administrador;
         initComponents();
     }
 
@@ -278,7 +275,7 @@ public class Paso1Registro extends javax.swing.JFrame {
             try {
                 new PanelAdministrador(this.administrador).setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(Paso1Registro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistrarEntrenador.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             this.setVisible(true);
@@ -306,7 +303,7 @@ public class Paso1Registro extends javax.swing.JFrame {
                 try {
                     new PanelAdministrador(this.administrador).setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(Paso1Registro.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RegistrarEntrenador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer registrar la cuenta de entrenador.", "¡Error interno!", JOptionPane.ERROR_MESSAGE);

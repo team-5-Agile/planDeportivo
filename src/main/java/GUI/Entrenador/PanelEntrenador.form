@@ -35,15 +35,14 @@
                       <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       <Component id="lblSeleccion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btnVerEntrenador" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                              <Component id="btnEditarEntrenador" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                              <Component id="btnEliminarEntrenador" min="-2" pref="141" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                              <Component id="btnVerMacrociclo" min="-2" pref="191" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnEliminarMacrociclo" min="-2" pref="190" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtSeleccion" max="32767" attributes="0"/>
+                          <Component id="txtSeleccion" min="-2" pref="577" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -62,10 +61,7 @@
                           <Component id="chkPasados" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnAyuda" min="-2" pref="164" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnAyuda" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="btnRefrescarTabla" min="-2" pref="164" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -113,11 +109,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace pref="9" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnVerEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEditarEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEliminarEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVerMacrociclo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEliminarMacrociclo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -243,14 +238,15 @@
               <Font name="Liberation Sans" size="13" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="0">
+              <Table columnCount="8" rowCount="0">
                 <Column editable="false" title="#" type="java.lang.Long"/>
-                <Column editable="false" title="Nombre" type="java.lang.String"/>
-                <Column editable="false" title="Apellido Paterno" type="java.lang.String"/>
-                <Column editable="false" title="Apellido Materno" type="java.lang.String"/>
-                <Column editable="false" title="Usuario" type="java.lang.String"/>
-                <Column editable="false" title="Contrase&#xf1;a" type="java.lang.String"/>
-                <Column editable="false" title="Fecha de Registro" type="java.lang.Object"/>
+                <Column editable="false" title="Deporte" type="java.lang.String"/>
+                <Column editable="false" title="Rama" type="java.lang.String"/>
+                <Column editable="false" title="Jefe de Rama" type="java.lang.String"/>
+                <Column editable="false" title="Prep. F&#xed;sico" type="java.lang.String"/>
+                <Column editable="false" title="Metod&#xf3;logo" type="java.lang.String"/>
+                <Column editable="false" title="Fecha Inicio" type="java.lang.Object"/>
+                <Column editable="false" title="Fecha Fin" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Haga clic en entrenador a administrar"/>
@@ -358,7 +354,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoMacrocicloActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnVerEntrenador">
+    <Component class="javax.swing.JButton" name="btnVerMacrociclo">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="aa" green="ef" red="ee" type="rgb"/>
@@ -373,28 +369,10 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerEntrenadorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerMacrocicloActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnEditarEntrenador">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ef" green="c2" red="aa" type="rgb"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Liberation Sans" size="13" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Editar"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
-        </Property>
-        <Property name="opaque" type="boolean" value="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarEntrenadorActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnEliminarEntrenador">
+    <Component class="javax.swing.JButton" name="btnEliminarMacrociclo">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="aa" green="aa" red="ef" type="rgb"/>
@@ -409,7 +387,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarEntrenadorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarMacrocicloActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCerrarSesion">

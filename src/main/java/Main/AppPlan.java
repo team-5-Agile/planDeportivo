@@ -5,7 +5,7 @@ package Main;
 
 import DAOs.AdministradorDAO;
 import Dominio.Administrador;
-import GUI.Login;
+import GUI.Login.Login;
 
 /**
  * La clase AppPlan es la clase principal del programa.

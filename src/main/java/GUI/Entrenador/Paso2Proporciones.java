@@ -2,9 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
+package GUI.Entrenador;
 
+import Dominio.Entrenador;
+import Dominio.Macrociclo;
+import Herramientas.Fecha;
 import Herramientas.Validaciones;
+import java.text.ParseException;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
@@ -13,13 +17,27 @@ import javax.swing.JOptionPane;
  * @author el_fr
  */
 public class Paso2Proporciones extends javax.swing.JFrame {
+    
+    Entrenador entrenador;
+    Macrociclo macrociclo;
+    Fecha Fecha = new Fecha();
 
     /**
      * Creates new form ViewMacrociclo
      */
-    public Paso2Proporciones() {
+    public Paso2Proporciones(Entrenador entrenador, Macrociclo macrociclo) throws ParseException {
+        this.entrenador = entrenador;
+        this.macrociclo = macrociclo;
         initComponents();
+        llenarTextos();
         setLocationRelativeTo(null);
+    }
+    
+    public void llenarTextos() throws ParseException {
+        this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
+        this.lblDeporte.setText(this.macrociclo.getDeporte());
+        this.lblRama.setText(this.macrociclo.getRama().name());
+        this.lblID.setText(this.macrociclo.getId().toString());
     }
 
     /**
@@ -33,6 +51,7 @@ public class Paso2Proporciones extends javax.swing.JFrame {
 
         lblEncabezadoTitulo = new javax.swing.JPanel();
         lblTitulo1 = new javax.swing.JLabel();
+        lblFechaHoy = new javax.swing.JLabel();
         lblEncabezadoMacro = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblDeporte = new javax.swing.JLabel();
@@ -81,8 +100,8 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         btnCalcularPorcentajes = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Nuevo Macrociclo");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Seleccionador de Proporciones");
         setBackground(new java.awt.Color(255, 255, 255));
 
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
@@ -91,6 +110,9 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo1.setText("Paso #2: Seleccion de Proporciones");
 
+        lblFechaHoy.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        lblFechaHoy.setText("Fecha Hoy");
+
         javax.swing.GroupLayout lblEncabezadoTituloLayout = new javax.swing.GroupLayout(lblEncabezadoTitulo);
         lblEncabezadoTitulo.setLayout(lblEncabezadoTituloLayout);
         lblEncabezadoTituloLayout.setHorizontalGroup(
@@ -98,14 +120,18 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFechaHoy)
+                .addGap(27, 27, 27))
         );
         lblEncabezadoTituloLayout.setVerticalGroup(
             lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(lblTitulo1)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addGroup(lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo1)
+                    .addComponent(lblFechaHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
@@ -656,10 +682,11 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             Validaciones val = new Validaciones();
             if (!valor.equals("")) {
                 return ((Integer.parseInt(total)-Integer.parseInt(valor))+"");
-                if (val.isNegativo(Double.parseDouble(valor))) {
-                }
-                if (val.isMenor(Integer.parseInt(total), Integer.parseInt(valor))) {
-                }
+                //  AQUI DABA ERROR
+//                if (val.isNegativo(Double.parseDouble(valor))) {
+////                }
+//                if (val.isMenor(Integer.parseInt(total), Integer.parseInt(valor))) {
+//                }
 
             }
         
@@ -894,6 +921,7 @@ public class Paso2Proporciones extends javax.swing.JFrame {
     private javax.swing.JPanel lblEncabezadoTitulo;
     private javax.swing.JLabel lblEspecial;
     private javax.swing.JLabel lblFechaFinMacro;
+    private javax.swing.JLabel lblFechaHoy;
     private javax.swing.JLabel lblFechaInicioMacro;
     private javax.swing.JLabel lblGeneral;
     private javax.swing.JLabel lblGuion1;
