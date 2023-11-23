@@ -26,6 +26,8 @@ jobs:
         pull-request-number: ${{ github.event.number }}
         comment: Auto-closing pull request
         delete-branch: true
+      if: always()
+   # si falla el test, no se hace el merge
     - name: Approve Pull Request
       uses: juliangruber/approve-pull-request-action@v1.1.1
       with:
