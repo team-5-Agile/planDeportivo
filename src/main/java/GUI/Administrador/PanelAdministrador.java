@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
+package GUI.Administrador;
 
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
 import Dominio.Administrador;
 import Dominio.Entrenador;
+import GUI.Login.Login;
 import Herramientas.Fecha;
 import Herramientas.Validaciones;
 import com.sun.tools.javac.comp.Enter;
@@ -39,26 +40,35 @@ public class PanelAdministrador extends javax.swing.JFrame {
     public PanelAdministrador(Administrador administrador) throws ParseException, Exception {
         this.administrador = administrador;
         initComponents();
-        this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
+        llenarTextos();
         cargarTablaEntrenadores();
     }
 
     private void cargarTablaEntrenadores() throws Exception {
-        List<Entrenador> listaEntrenadores = EntrenadoresDAO.consultarTodosEntrenadores();
-        DefaultTableModel modeloTablaEntrenadores = (DefaultTableModel) this.tblEntrenadores.getModel();
-        modeloTablaEntrenadores.setRowCount(0);
-        for (Entrenador entrenador : listaEntrenadores) {
-            Object[] filaNueva = {
-                entrenador.getId(),
-                entrenador.getNombre(),
-                entrenador.getApellidoPaterno(),
-                entrenador.getApellidoMaterno(),
-                entrenador.getUsuario(),
-                entrenador.getContrasena(),
-                Fecha.formatoFecha(entrenador.getFechaRegistro())};
-            modeloTablaEntrenadores.addRow(filaNueva);
+        llenarTabla(EntrenadoresDAO.consultarTodosEntrenadores());
+    }
+
+    public void llenarTextos() throws ParseException {
+        this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
+    }
+
+    public void llenarTabla(List<Entrenador> listaEntrenadores) throws ParseException {
+        if (!listaEntrenadores.isEmpty()) {
+            DefaultTableModel modeloTablaEntrenadores = (DefaultTableModel) this.tblEntrenadores.getModel();
+            modeloTablaEntrenadores.setRowCount(0);
+            for (Entrenador entrenador : listaEntrenadores) {
+                Object[] filaNueva = {
+                    entrenador.getId(),
+                    entrenador.getNombre(),
+                    entrenador.getApellidoPaterno(),
+                    entrenador.getApellidoMaterno(),
+                    entrenador.getUsuario(),
+                    entrenador.getContrasena(),
+                    Fecha.formatoFecha(entrenador.getFechaRegistro())};
+                modeloTablaEntrenadores.addRow(filaNueva);
+            }
+            Validaciones.centrarTabla(tblEntrenadores);
         }
-        Validaciones.centrarTabla(tblEntrenadores);
     }
 
     public int obtenerFila() {
@@ -532,7 +542,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a ver. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a editar. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
 

@@ -2,17 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
+package GUI.Entrenador;
 
-import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
 import DAOs.MacrociclosDAO;
-import Dominio.Administrador;
 import Dominio.Entrenador;
 import Dominio.Macrociclo;
+import GUI.Login.Login;
 import Herramientas.Fecha;
 import Herramientas.Validaciones;
-import com.sun.tools.javac.comp.Enter;
 import jakarta.persistence.EntityNotFoundException;
 import java.awt.event.ItemEvent;
 import java.text.ParseException;
@@ -37,50 +35,77 @@ public class PanelEntrenador extends javax.swing.JFrame {
     Fecha Fecha = new Fecha();
 
     /**
-     * Creates new form PanelAdministrador
+     * Creates new form PanelEntrenador
      */
     public PanelEntrenador(Entrenador entrenador) throws ParseException, Exception {
         this.entrenador = entrenador;
         initComponents();
-        this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
-        this.lblNombreEntrenador.setText(this.entrenador.getNombre() + " " + this.entrenador.getApellidoPaterno() + " " + this.entrenador.getApellidoMaterno() + " - ID: " + entrenador.getId());
+        llenarTextos();
         cargarTablaMacros();
     }
 
-    private void cargarTablaMacros() throws Exception {
-        List<Entrenador> listaEntrenadores = EntrenadoresDAO.consultarTodosEntrenadores();
-        DefaultTableModel modeloTablaEntrenadores = (DefaultTableModel) this.tblMacrociclos.getModel();
-        modeloTablaEntrenadores.setRowCount(0);
-        for (Entrenador entrenador : listaEntrenadores) {
-            Object[] filaNueva = {
-                entrenador.getId(),
-                entrenador.getNombre(),
-                entrenador.getApellidoPaterno(),
-                entrenador.getApellidoMaterno(),
-                entrenador.getUsuario(),
-                entrenador.getContrasena(),
-                Fecha.formatoFecha(entrenador.getFechaRegistro())};
-            modeloTablaEntrenadores.addRow(filaNueva);
-        }
-        Validaciones.centrarTabla(tblMacrociclos);
+    public void llenarTextos() throws ParseException {
+        this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
+        this.lblNombreEntrenador.setText(this.entrenador.getNombre() + " " + this.entrenador.getApellidoPaterno() + " " + this.entrenador.getApellidoMaterno() + " - ID: " + entrenador.getId());
     }
-    
-    private void refrescarBusqueda() {
+
+    private void refrescarBusqueda() throws Exception {
         if (this.chkVigentes.isSelected()) {
             // Se buscara por los macrociclos vigentes
-            
+            cargarTablaVigentes();
         } else if (this.chkNoVigentes.isSelected()) {
             // Se buscara por los macrociclos NO vigentes
-            
+            cargarTablaNoVigentes();
         } else if (this.chkFuturos.isSelected()) {
             // Se buscara por los macrociclos futuros
-            
+            cargarTablaFuturos();
         } else if (this.chkPasados.isSelected()) {
             // Se buscara por los macrociclos pasados
-            
+            cargarTablaFuturos();
         } else {
             // Se buscara por TODOS los macrociclos 
-            
+            cargarTablaMacros();
+        }
+    }
+
+    private void cargarTablaMacros() throws Exception {
+        uncheckBoxes();
+        llenarTabla(MacrociclosDAO.consultarTodosMacrociclosEntrenador(this.entrenador));
+    }
+
+    public void cargarTablaVigentes() throws Exception {
+        llenarTabla(MacrociclosDAO.consultarMacrociclosVigentes(this.entrenador));
+    }
+
+    public void cargarTablaNoVigentes() throws Exception {
+        llenarTabla(MacrociclosDAO.consultarMacrociclosNoVigentes(this.entrenador));
+    }
+
+    public void cargarTablaFuturos() throws Exception {
+        llenarTabla(MacrociclosDAO.consultarMacrociclosFuturos(this.entrenador));
+    }
+
+    public void cargarTablaPasados() throws Exception {
+        llenarTabla(MacrociclosDAO.consultarMacrociclosPasados(this.entrenador));
+    }
+
+    public void llenarTabla(List<Macrociclo> listaMacrociclos) throws ParseException {
+        if (!listaMacrociclos.isEmpty()) {
+            DefaultTableModel modeloTablaEntrenadores = (DefaultTableModel) this.tblMacrociclos.getModel();
+            modeloTablaEntrenadores.setRowCount(0);
+            for (Macrociclo macrociclo : listaMacrociclos) {
+                Object[] filaNueva = {
+                    macrociclo.getId(),
+                    macrociclo.getDeporte(),
+                    macrociclo.getRama(),
+                    macrociclo.getJefeRama(),
+                    macrociclo.getPreparadorFisico(),
+                    macrociclo.getMetodologo(),
+                    Fecha.formatoFecha(macrociclo.getFechaInicio()),
+                    Fecha.formatoFecha(macrociclo.getFechaFin())};
+                modeloTablaEntrenadores.addRow(filaNueva);
+            }
+            Validaciones.centrarTabla(tblMacrociclos);
         }
     }
 
@@ -92,6 +117,13 @@ public class PanelEntrenador extends javax.swing.JFrame {
             Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, e);
             return -1;
         }
+    }
+
+    public void uncheckBoxes() {
+        this.chkVigentes.setSelected(false);
+        this.chkNoVigentes.setSelected(false);
+        this.chkFuturos.setSelected(false);
+        this.chkPasados.setSelected(false);
     }
 
     /**
@@ -117,9 +149,8 @@ public class PanelEntrenador extends javax.swing.JFrame {
         txtSeleccion = new javax.swing.JTextField();
         btnSeleccionar = new javax.swing.JButton();
         btnNuevoMacrociclo = new javax.swing.JButton();
-        btnVerEntrenador = new javax.swing.JButton();
-        btnEditarEntrenador = new javax.swing.JButton();
-        btnEliminarEntrenador = new javax.swing.JButton();
+        btnVerMacrociclo = new javax.swing.JButton();
+        btnEliminarMacrociclo = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
         chkVigentes = new javax.swing.JCheckBox();
         chkFuturos = new javax.swing.JCheckBox();
@@ -189,14 +220,14 @@ public class PanelEntrenador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "#", "Nombre", "Apellido Paterno", "Apellido Materno", "Usuario", "Contraseña", "Fecha de Registro"
+                "#", "Deporte", "Rama", "Jefe de Rama", "Prep. Físico", "Metodólogo", "Fecha Inicio", "Fecha Fin"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -265,36 +296,25 @@ public class PanelEntrenador extends javax.swing.JFrame {
             }
         });
 
-        btnVerEntrenador.setBackground(new java.awt.Color(238, 239, 170));
-        btnVerEntrenador.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        btnVerEntrenador.setText("Ver");
-        btnVerEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVerEntrenador.setOpaque(true);
-        btnVerEntrenador.addActionListener(new java.awt.event.ActionListener() {
+        btnVerMacrociclo.setBackground(new java.awt.Color(238, 239, 170));
+        btnVerMacrociclo.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnVerMacrociclo.setText("Ver");
+        btnVerMacrociclo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerMacrociclo.setOpaque(true);
+        btnVerMacrociclo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerEntrenadorActionPerformed(evt);
+                btnVerMacrocicloActionPerformed(evt);
             }
         });
 
-        btnEditarEntrenador.setBackground(new java.awt.Color(170, 194, 239));
-        btnEditarEntrenador.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        btnEditarEntrenador.setText("Editar");
-        btnEditarEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditarEntrenador.setOpaque(true);
-        btnEditarEntrenador.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarMacrociclo.setBackground(new java.awt.Color(239, 170, 170));
+        btnEliminarMacrociclo.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnEliminarMacrociclo.setText("Eliminar");
+        btnEliminarMacrociclo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarMacrociclo.setOpaque(true);
+        btnEliminarMacrociclo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarEntrenadorActionPerformed(evt);
-            }
-        });
-
-        btnEliminarEntrenador.setBackground(new java.awt.Color(239, 170, 170));
-        btnEliminarEntrenador.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        btnEliminarEntrenador.setText("Eliminar");
-        btnEliminarEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarEntrenador.setOpaque(true);
-        btnEliminarEntrenador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarEntrenadorActionPerformed(evt);
+                btnEliminarMacrocicloActionPerformed(evt);
             }
         });
 
@@ -355,14 +375,13 @@ public class PanelEntrenador extends javax.swing.JFrame {
                         .addGap(72, 72, 72)
                         .addComponent(lblSeleccion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnVerEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79)
-                                .addComponent(btnEditarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(77, 77, 77)
-                                .addComponent(btnEliminarEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSeleccion)))
+                                .addGap(178, 178, 178)
+                                .addComponent(btnVerMacrociclo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminarMacrociclo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,9 +396,7 @@ public class PanelEntrenador extends javax.swing.JFrame {
                             .addComponent(chkPasados)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnAyuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(btnRefrescarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
@@ -417,10 +434,9 @@ public class PanelEntrenador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnVerEntrenador)
-                            .addComponent(btnEditarEntrenador)
-                            .addComponent(btnEliminarEntrenador))
-                        .addContainerGap(21, Short.MAX_VALUE))
+                            .addComponent(btnVerMacrociclo)
+                            .addComponent(btnEliminarMacrociclo))
+                        .addContainerGap(18, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCerrarSesion)
@@ -449,10 +465,14 @@ public class PanelEntrenador extends javax.swing.JFrame {
 
     private void btnNuevoMacrocicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoMacrocicloActionPerformed
         this.dispose();
-        new Paso1Registro(this.entrenador).setVisible(true);
+        try {
+            new Paso1Registro(this.entrenador).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnNuevoMacrocicloActionPerformed
 
-    private void btnVerEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEntrenadorActionPerformed
+    private void btnVerMacrocicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMacrocicloActionPerformed
         if (seleccion != null) {
             try {
                 this.dispose();
@@ -461,28 +481,28 @@ public class PanelEntrenador extends javax.swing.JFrame {
                 Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a ver. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: Seleccione un macrociclo a ver. (De la tabla 'Macrociclos Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnVerEntrenadorActionPerformed
+    }//GEN-LAST:event_btnVerMacrocicloActionPerformed
 
-    private void btnEliminarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntrenadorActionPerformed
+    private void btnEliminarMacrocicloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMacrocicloActionPerformed
         if (seleccion != null) {
-            int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el entrenador? (Se eliminaran todos los macrociclos y relacionados registrados por este entrenador)", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el macrociclo? (Se eliminaran todas los etapas, medios y relacionados registrados a este macrociclo)", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (i == JOptionPane.YES_OPTION) {
                 try {
-                    EntrenadoresDAO.eliminarEntrenador(this.seleccion.getId());
-                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente el macrociclo: " + seleccion.getDeporte()+ " - Rama: " + seleccion.getRama().name() + " - Preparador Fisico: " + seleccion.getPreparadorFisico() + " - ID: " + seleccion.getId() + ".", "Eliminacion de macrociclo exitosa.", JOptionPane.INFORMATION_MESSAGE);
+                    MacrociclosDAO.eliminarMacrociclo(this.seleccion.getId());
+                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente el macrociclo: " + seleccion.getDeporte() + " - Rama: " + seleccion.getRama().name() + " - Preparador Fisico: " + seleccion.getPreparadorFisico() + " - ID: " + seleccion.getId() + ".", "Eliminacion de macrociclo exitosa.", JOptionPane.INFORMATION_MESSAGE);
                     cargarTablaMacros();
                 } catch (EntityNotFoundException e) {
-                    JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer eliminar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer eliminar al macrociclo. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
                     Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador a eliminar. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: Seleccione un macrociclo a eliminar. (De la tabla 'Macrociclos Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnEliminarEntrenadorActionPerformed
+    }//GEN-LAST:event_btnEliminarMacrocicloActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cerrar sesion?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -493,19 +513,6 @@ public class PanelEntrenador extends javax.swing.JFrame {
             this.setVisible(true);
         }
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
-
-    private void btnEditarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEntrenadorActionPerformed
-        if (seleccion != null) {
-            try {
-                this.dispose();
-                new EditarMacrociclo(this.entrenador, this.seleccion).setVisible(true);
-            } catch (ParseException ex) {
-                Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error: Seleccione un macrociclo a ver. (De la tabla 'Macrociclos Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
 
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         JOptionPane.showMessageDialog(null, "Filtros de Busqueda: \n"
@@ -528,68 +535,83 @@ public class PanelEntrenador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tabla refrescada con exito.", "Tabla refrescada", JOptionPane.INFORMATION_MESSAGE);
             this.cargarTablaMacros();
         } catch (Exception ex) {
-            Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRefrescarTablaActionPerformed
 
     private void chkVigentesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkVigentesItemStateChanged
-        // Desmarcar los otros checkboxes si es seleccionado
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            chkNoVigentes.setSelected(false);
-            chkFuturos.setSelected(false);
-            chkPasados.setSelected(false);
-        } else {
-            chkVigentes.setSelected(false);
+        try {
+            // Desmarcar los otros checkboxes si es seleccionado
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                chkNoVigentes.setSelected(false);
+                chkFuturos.setSelected(false);
+                chkPasados.setSelected(false);
+            } else {
+                chkVigentes.setSelected(false);
+            }
+            refrescarBusqueda();
+        } catch (Exception ex) {
+            Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refrescarBusqueda();
     }//GEN-LAST:event_chkVigentesItemStateChanged
 
     private void chkNoVigentesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkNoVigentesItemStateChanged
-        // Desmarcar los otros checkboxes si es seleccionado
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            chkVigentes.setSelected(false);
-            chkFuturos.setSelected(false);
-            chkPasados.setSelected(false);
-        } else {
-            chkNoVigentes.setSelected(false);
+        try {
+            // Desmarcar los otros checkboxes si es seleccionado
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                chkVigentes.setSelected(false);
+                chkFuturos.setSelected(false);
+                chkPasados.setSelected(false);
+            } else {
+                chkNoVigentes.setSelected(false);
+            }
+            refrescarBusqueda();
+        } catch (Exception ex) {
+            Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refrescarBusqueda();
     }//GEN-LAST:event_chkNoVigentesItemStateChanged
 
     private void chkFuturosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkFuturosItemStateChanged
-        // Desmarcar los otros checkboxes si es seleccionado
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            chkVigentes.setSelected(false);
-            chkNoVigentes.setSelected(false);
-            chkPasados.setSelected(false);
-        } else {
-            chkFuturos.setSelected(false);
+        try {
+            // Desmarcar los otros checkboxes si es seleccionado
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                chkVigentes.setSelected(false);
+                chkNoVigentes.setSelected(false);
+                chkPasados.setSelected(false);
+            } else {
+                chkFuturos.setSelected(false);
+            }
+            refrescarBusqueda();
+        } catch (Exception ex) {
+            Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refrescarBusqueda();
     }//GEN-LAST:event_chkFuturosItemStateChanged
 
     private void chkPasadosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkPasadosItemStateChanged
-        // Desmarcar los otros checkboxes si es seleccionado
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            chkVigentes.setSelected(false);
-            chkNoVigentes.setSelected(false);
-            chkFuturos.setSelected(false);
-        } else {
-            chkPasados.setSelected(false);
+        try {
+            // Desmarcar los otros checkboxes si es seleccionado
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                chkVigentes.setSelected(false);
+                chkNoVigentes.setSelected(false);
+                chkFuturos.setSelected(false);
+            } else {
+                chkPasados.setSelected(false);
+            }
+            refrescarBusqueda();
+        } catch (Exception ex) {
+            Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refrescarBusqueda();
     }//GEN-LAST:event_chkPasadosItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JButton btnEditarEntrenador;
-    private javax.swing.JButton btnEliminarEntrenador;
+    private javax.swing.JButton btnEliminarMacrociclo;
     private javax.swing.JButton btnNuevoMacrociclo;
     private javax.swing.JButton btnRefrescarTabla;
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JButton btnVerEntrenador;
+    private javax.swing.JButton btnVerMacrociclo;
     private javax.swing.JCheckBox chkFuturos;
     private javax.swing.JCheckBox chkNoVigentes;
     private javax.swing.JCheckBox chkPasados;
