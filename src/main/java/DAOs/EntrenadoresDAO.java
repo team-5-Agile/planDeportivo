@@ -163,9 +163,9 @@ public class EntrenadoresDAO implements BaseDAO {
         TypedQuery<Entrenador> query;
         String jpql = "SELECT e FROM Entrenador e";
         query = entityManager.createQuery(jpql, Entrenador.class);
-        List<Entrenador> entrenador = query.getResultList();
+        List<Entrenador> entrenadores = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
-        return entrenador;
+        return entrenadores;
     }
 }

@@ -434,7 +434,7 @@ public class PanelEntrenador extends javax.swing.JFrame {
             int fila = obtenerFila();
             if (fila != -1) {
                 Macrociclo macrociclo = MacrociclosDAO.consultarMacrociclo((Long) tblMacrociclos.getValueAt(fila, 0));
-                this.txtSeleccion.setText(macrociclo.getDeporte()+ " - Rama: " + macrociclo.getRama().name() + " - Preparador Fisico: " + macrociclo.getPreparadorFisico() + " - ID: " + entrenador.getId() + ".");
+                this.txtSeleccion.setText(macrociclo.getDeporte() + " - Rama: " + macrociclo.getRama().name() + " - Preparador Fisico: " + macrociclo.getPreparadorFisico() + " - ID: " + entrenador.getId() + ".");
                 this.seleccion = macrociclo;
                 tblMacrociclos.clearSelection();
             } else {
@@ -469,7 +469,7 @@ public class PanelEntrenador extends javax.swing.JFrame {
             if (i == JOptionPane.YES_OPTION) {
                 try {
                     EntrenadoresDAO.eliminarEntrenador(this.seleccion.getId());
-                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente la cuenta del entrenador: " + this.seleccion.getNombre() + " " + this.seleccion.getApellidoPaterno() + " " + this.seleccion.getApellidoMaterno() + " - ID: " + seleccion.getId() + ".", "Eliminacion de entrenador exitosa.", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente el macrociclo: " + seleccion.getDeporte()+ " - Rama: " + seleccion.getRama().name() + " - Preparador Fisico: " + seleccion.getPreparadorFisico() + " - ID: " + seleccion.getId() + ".", "Eliminacion de macrociclo exitosa.", JOptionPane.INFORMATION_MESSAGE);
                     cargarTablaMacros();
                 } catch (EntityNotFoundException e) {
                     JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer eliminar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
