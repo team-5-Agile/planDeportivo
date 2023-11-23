@@ -26,7 +26,7 @@ jobs:
         uses: peter-evans/close-pull@v3
         with:
           pull-request-number: ${{ github.event.number }}
-          comment: Auto-closing pull request
+          comment: Auto-closing pull request - all checks not passed (No pasaron los tests)
           delete-branch: false
         if: failure()
 
