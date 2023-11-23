@@ -48,7 +48,7 @@ public class EntrenadorNegocioTest {
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void testIniciarSesion() throws Exception {
         System.out.println("iniciarSesion");
         String usuario = "Test Usuario";
@@ -64,7 +64,7 @@ public class EntrenadorNegocioTest {
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     public void testIniciarSesionIncorrect() throws Exception {
         System.out.println("iniciarSesionIncorrect");
         String usuario = "Test Usuario";
