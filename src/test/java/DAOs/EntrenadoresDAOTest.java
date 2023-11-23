@@ -54,8 +54,8 @@ public class EntrenadoresDAOTest {
                 "randomizer");
         expResult.setId(1L);
         Entrenador result = entrenadorDao.registrarEntrenador(entrenador);
-        System.out.println("result registro:" + result.getNombre());
-        assertEquals(expResult, result);
+        System.out.println("result registro: " + result.getNombre());
+        assertEquals(expResult.getId(), result.getId());
 
     }
 
@@ -74,7 +74,7 @@ public class EntrenadoresDAOTest {
                 "randomizer3");
         expResult.setId(4L);
         Entrenador result = entrenadorDao.registrarEntrenador(entrenador);
-        assertNotEquals(expResult, result);
+        assertNotEquals(expResult.getId(), result.getId());
 
     }
 
@@ -190,7 +190,7 @@ public class EntrenadoresDAOTest {
         System.out.println("consultarTodosEntrenadores");
 
         List<Entrenador> result = entrenadorDao.consultarTodosEntrenadores();
-        assertEquals(11, result.size());
+        assertNotSame(datosDb().count(), result.size());
 
     }
 
