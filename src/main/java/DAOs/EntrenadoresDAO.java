@@ -1,5 +1,5 @@
 /*
- * .java
+ * EntrenadoresDAO.java
  */
 package DAOs;
 
@@ -15,25 +15,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Clase que implementa operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * para la entidad Entrenador en la base de datos.
  *
- * @author brawun
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class EntrenadoresDAO implements BaseDAO {
 
-    private String persitenceUnit;
+    private String persistenceUnit;
 
-    public EntrenadoresDAO(String persitenceUnit) {
-        this.persitenceUnit = persitenceUnit;
+    /**
+     * Constructor que recibe la unidad de persistencia.
+     *
+     * @param persistenceUnit La unidad de persistencia a utilizar.
+     */
+    public EntrenadoresDAO(String persistenceUnit) {
+        this.persistenceUnit = persistenceUnit;
     }
 
+    /**
+     * Obtiene un EntityManager para realizar operaciones en la base de datos.
+     *
+     * @return EntityManager para la unidad de persistencia actual.
+     */
     @Override
     public EntityManager getEntityManager() {
-        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory(this.persitenceUnit);
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory(this.persistenceUnit);
         EntityManager entityManager = managerFactory.createEntityManager();
         return entityManager;
     }
 
     // Métodos de acceso
+    /**
+     * Registra un nuevo entrenador en la base de datos.
+     *
+     * @param entrenador El entrenador a registrar.
+     * @return El entrenador registrado.
+     */
     public Entrenador registrarEntrenador(Entrenador entrenador) {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
@@ -43,7 +61,14 @@ public class EntrenadoresDAO implements BaseDAO {
         return entrenador;
     }
 
-    // Metodo de eliminacion
+    // Método de eliminación
+    /**
+     * Elimina un entrenador de la base de datos por su ID.
+     *
+     * @param id El ID del entrenador a eliminar.
+     * @throws EntityNotFoundException Si no se encuentra el entrenador con el
+     * ID proporcionado.
+     */
     public void eliminarEntrenador(Long id) {
         if (verificarEntrenador(id)) {
             EntityManager entityManager = this.getEntityManager();
@@ -57,8 +82,14 @@ public class EntrenadoresDAO implements BaseDAO {
             throw new EntityNotFoundException("No se puede encontrar el entrenador con ID: " + id);
         }
     }
-    
-    // Métodos de edicion
+
+    // Métodos de edición
+    /**
+     * Edita un entrenador en la base de datos.
+     *
+     * @param entrenador El entrenador a editar.
+     * @return El entrenador editado.
+     */
     public Entrenador editarEntrenador(Entrenador entrenador) {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
@@ -68,7 +99,15 @@ public class EntrenadoresDAO implements BaseDAO {
         return entrenador;
     }
 
-    // Metodo de consultac
+    // Método de consulta
+    /**
+     * Consulta un entrenador de la base de datos por su ID.
+     *
+     * @param id El ID del entrenador a consultar.
+     * @return El entrenador consultado.
+     * @throws EntityNotFoundException Si no se encuentra el entrenador con el
+     * ID proporcionado.
+     */
     public Entrenador consultarEntrenador(Long id) {
         if (verificarEntrenador(id)) {
             EntityManager entityManager = this.getEntityManager();
@@ -82,7 +121,13 @@ public class EntrenadoresDAO implements BaseDAO {
         }
     }
 
-    // Métodos de verificacion 
+    // Métodos de verificación
+    /**
+     * Verifica la existencia de un entrenador por su ID.
+     *
+     * @param id El ID del entrenador a verificar.
+     * @return True si el entrenador existe, False en caso contrario.
+     */
     public Boolean verificarEntrenador(Long id) {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
@@ -93,6 +138,16 @@ public class EntrenadoresDAO implements BaseDAO {
     }
 
     // Métodos de inicio de sesión
+    /**
+     * Inicia sesión para un entrenador con el usuario y contraseña dados.
+     *
+     * @param usuario El nombre de usuario del entrenador.
+     * @param contrasena La contraseña del entrenador.
+     * @return El entrenador si la autenticación es exitosa, null en caso
+     * contrario.
+     * @throws Exception Si ocurre un error durante el proceso de inicio de
+     * sesión.
+     */
     public Entrenador iniciarSesionEntrenador(String usuario, String contrasena) throws Exception {
         if (verificarUsuarioEntrenador(usuario)) {
             EntityManager entityManager = this.getEntityManager();
@@ -113,7 +168,13 @@ public class EntrenadoresDAO implements BaseDAO {
         }
     }
 
-    // Verificar que exista en la base de datos, regresa verdadero si el usuario ha sido encontrado en la base de datos
+    /**
+     * Verifica la existencia de un usuario entrenador por su nombre de usuario.
+     *
+     * @param usuario El nombre de usuario a verificar.
+     * @return True si el usuario existe, False en caso contrario.
+     * @throws Exception Si ocurre un error durante la verificación.
+     */
     public boolean verificarUsuarioEntrenador(String usuario) throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
@@ -132,7 +193,15 @@ public class EntrenadoresDAO implements BaseDAO {
         return true;
     }
 
-    // Verifica que el usuario dado y la contrasena dado correspondan entre si, regresa verdadero si el usuario y la contrasena corresponden
+    /**
+     * Verifica que el usuario y la contraseña proporcionados coincidan.
+     *
+     * @param usuario El nombre de usuario.
+     * @param contrasena La contraseña.
+     * @return True si el usuario y la contraseña coinciden, False en caso
+     * contrario.
+     * @throws Exception Si ocurre un error durante la verificación.
+     */
     public boolean verificarContrasenaUsuario(String usuario, String contrasena) throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
@@ -143,7 +212,14 @@ public class EntrenadoresDAO implements BaseDAO {
         return entrenador.getContrasena().equals(contrasena);
     }
 
-    // Consulta de la base de datos un objeto de tipo Entrenador, solamente solicitando el usuario, regresa un objeto si se halla un entrenador en la base de datos con el usuario dado
+    /**
+     * Consulta de la base de datos un objeto de tipo Entrenador por su nombre
+     * de usuario.
+     *
+     * @param usuario El nombre de usuario del entrenador a consultar.
+     * @return El entrenador consultado.
+     * @throws Exception Si ocurre un error durante la consulta.
+     */
     public Entrenador consultarEntrenadoresUsuario(String usuario) throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
@@ -157,20 +233,32 @@ public class EntrenadoresDAO implements BaseDAO {
         return entrenador;
     }
 
-    // Metodo que regresa una lista con todos los entrenadores registrados en la base de datos
+    /**
+     * Consulta la base de datos para obtener una lista de todos los
+     * entrenadores registrados.
+     *
+     * @return Lista de todos los entrenadores registrados.
+     * @throws Exception Si ocurre un error durante la consulta.
+     */
     public List<Entrenador> consultarTodosEntrenadores() throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Entrenador> query;
         String jpql = "SELECT e FROM Entrenador e";
         query = entityManager.createQuery(jpql, Entrenador.class);
-        List<Entrenador> entrenador = query.getResultList();
+        List<Entrenador> entrenadores = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
-        return entrenador;
+        return entrenadores;
     }
-    
-    // Metodo que regresa una lista con todos los nombres de los entrenadores registrados en la base de datos
+
+    /**
+     * Consulta la base de datos para obtener una lista de nombres completos de
+     * todos los entrenadores registrados.
+     *
+     * @return Lista de nombres completos de todos los entrenadores registrados.
+     * @throws Exception Si ocurre un error durante la consulta.
+     */
     public List<String[]> consultarNombresEntrenadores() throws Exception {
         EntityManager entityManager = this.getEntityManager();
         entityManager.getTransaction().begin();

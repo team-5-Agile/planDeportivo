@@ -14,9 +14,7 @@ import java.util.GregorianCalendar;
  * Esta clase permite encapsular herramientas útiles a la hora de querer
  * implementar fechas.
  *
- * @author Brandon Figueroa Ugalde - ID: 00000233295
- * @author Guimel Naely Rubio Morillon - ID: 00000229324
- * @since Pruebas de Software Prof. María de los Ángeles Germán ITSON
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class Fecha {
 
@@ -72,11 +70,17 @@ public class Fecha {
         return diferenciaDias;
     }
     
+    /**
+     * Crea un objeto Calendar con la fecha especificada.
+     *
+     * @param dia Día.
+     * @param mes Mes.
+     * @param anho Año.
+     * @return Objeto Calendar representando la fecha especificada.
+     */
     public Calendar crearFecha(Integer dia, Integer mes, Integer anho) {
         // Se desplaza el mes -1
         mes = mes - 1;
         return new GregorianCalendar(anho, mes, dia);
-    }
-    
-    
+    }   
 }

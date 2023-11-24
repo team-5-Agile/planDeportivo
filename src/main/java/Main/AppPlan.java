@@ -3,6 +3,7 @@
  */
 package Main;
 
+// Importaciones
 import DAOs.AdministradorDAO;
 import Dominio.Administrador;
 import GUI.Login.Login;
@@ -11,7 +12,7 @@ import GUI.Login.Login;
  * La clase AppPlan es la clase principal del programa.
  * Sirve como punto de entrada para la aplicación Plan Deportivo.
  * 
- * @author Equipo 5
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class AppPlan {
 
