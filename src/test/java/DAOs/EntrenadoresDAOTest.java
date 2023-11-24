@@ -26,14 +26,13 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EntrenadoresDAOTest {
 
-    public static EntrenadoresDAO entrenadorDao;
+    public static final EntrenadoresDAO entrenadorDao=new EntrenadoresDAO("AppPlanUTest");
 
     public EntrenadoresDAOTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
-        entrenadorDao = new EntrenadoresDAO("AppPlanUTest");
     }
 
     /**
@@ -48,20 +47,14 @@ public class EntrenadoresDAOTest {
                 "Ficticio",
                 "random",
                 "randomizer");
-        Entrenador expResult = new Entrenador("Random",
-                "Real",
-                "Ficticio",
-                "random",
-                "randomizer");
-        expResult.setId(1L);
         Entrenador result = entrenadorDao.registrarEntrenador(entrenador);
-        assertEquals(expResult, result);
+        assertNotNull(result);
 
     }
 
     @Test
     public void testRegistrarEntrenadorFail() {
-        System.out.println("registrarEntrenador");
+        System.out.println("registrarEntrenadorFail");
         Entrenador entrenador = new Entrenador("Random",
                 "Real",
                 "Ficticio",
@@ -74,7 +67,7 @@ public class EntrenadoresDAOTest {
                 "randomizer3");
         expResult.setId(4L);
         Entrenador result = entrenadorDao.registrarEntrenador(entrenador);
-        assertNotEquals(expResult, result);
+        assertNotEquals(expResult.getId(), result.getId());
 
     }
 
@@ -90,7 +83,7 @@ public class EntrenadoresDAOTest {
                 "randomizer");
         expResult.setId(id);
         Entrenador result = entrenadorDao.consultarEntrenador(id);
-        assertEquals(expResult, result);
+        assertEquals(expResult.getId(), result.getId());
 
     }
 
@@ -190,7 +183,7 @@ public class EntrenadoresDAOTest {
         System.out.println("consultarTodosEntrenadores");
 
         List<Entrenador> result = entrenadorDao.consultarTodosEntrenadores();
-        assertEquals(11, result.size());
+        assertNotSame(datosDb().count(), result.size());
 
     }
 

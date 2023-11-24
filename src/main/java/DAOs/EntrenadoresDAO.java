@@ -246,10 +246,35 @@ public class EntrenadoresDAO implements BaseDAO {
         TypedQuery<Entrenador> query;
         String jpql = "SELECT e FROM Entrenador e";
         query = entityManager.createQuery(jpql, Entrenador.class);
-        List<Entrenador> entrenadores = query.getResultList();
+        List<Entrenador> entrenador = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
-        return entrenadores;
+        return entrenador;
+    }
+    
+    // Metodo que regresa una lista con todos los nombres de los entrenadores registrados en la base de datos
+    public List<String[]> consultarNombresEntrenadores() throws Exception {
+        EntityManager entityManager = this.getEntityManager();
+        entityManager.getTransaction().begin();
+        TypedQuery<Object[]> query;
+        // Modificar la JPQL para seleccionar solo los campos necesarios
+        String jpql = "SELECT e.nombre, e.apellidoPaterno, e.apellidoMaterno FROM Entrenador e";
+        query = entityManager.createQuery(jpql, Object[].class);
+        List<Object[]> resultados = query.getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        // Convertir los resultados en lista de String[]
+        List<String[]> nombresCompletos = new ArrayList<>();
+        for (Object[] resultado : resultados) {
+            String nombre = (String) resultado[0];
+            String apellidoPaterno = (String) resultado[1];
+            String apellidoMaterno = (String) resultado[2];
+
+            // Concatenar los campos en un solo String y agregar a la lista
+            String nombreCompleto = nombre + " " + apellidoPaterno + " " + apellidoMaterno;
+            nombresCompletos.add(new String[]{nombreCompleto});
+        }
+        return nombresCompletos;
     }
 
     /**

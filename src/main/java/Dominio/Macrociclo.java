@@ -183,6 +183,15 @@ public class Macrociclo implements Serializable {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
+    
+    public Macrociclo(String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Entrenador entrenadores) {
+        this.deporte = deporte;
+        this.jefeRama = jefeRama;
+        this.rama = rama;
+        this.metodologo = metodologo;
+        this.preparadorFisico = preparadorFisico;
+        this.entrenadores = entrenadores;
+    }
 
     /**
      * Constructor con parámetros.
@@ -365,6 +374,7 @@ public class Macrociclo implements Serializable {
         this.etapas = etapas;
     }
 
+
     /**
      * Obtiene el entrenador asociado al macrociclo.
      *
@@ -373,6 +383,7 @@ public class Macrociclo implements Serializable {
     public Entrenador getEntrenador() {
         return entrenadores;
     }
+
 
     /**
      * Establece el entrenador asociado al macrociclo.

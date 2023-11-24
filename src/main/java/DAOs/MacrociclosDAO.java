@@ -64,6 +64,7 @@ public class MacrociclosDAO implements BaseDAO {
         return macrociclo;
     }
 
+
     /**
      * Inserta fechas en un macrociclo existente y lo actualiza en la base de
      * datos.
@@ -90,6 +91,7 @@ public class MacrociclosDAO implements BaseDAO {
         // Devolver el Macrociclo actualizado
         return macrocicloActualizado;
     }
+
 
     /**
      * Elimina un macrociclo de la base de datos.
@@ -162,6 +164,7 @@ public class MacrociclosDAO implements BaseDAO {
     }
 
     // CONSULTAS TOMANDO EN CUENTA EL ENTRENADOR
+
     /**
      * Consulta todos los macrociclos vigentes asociados a un entrenador.
      *
@@ -177,7 +180,9 @@ public class MacrociclosDAO implements BaseDAO {
                 + ":fechaActual BETWEEN m.fechaInicio AND m.fechaFin";
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
-        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
+        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
+
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -199,7 +204,8 @@ public class MacrociclosDAO implements BaseDAO {
                 + ":fechaActual NOT BETWEEN m.fechaInicio AND m.fechaFin";
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
-        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
+        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -221,7 +227,9 @@ public class MacrociclosDAO implements BaseDAO {
                 + "m.fechaInicio > :fechaActual";
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
-        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
+        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
+
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -243,7 +251,8 @@ public class MacrociclosDAO implements BaseDAO {
                 + "m.fechaFin < :fechaActual";
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
-        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
+        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -272,6 +281,7 @@ public class MacrociclosDAO implements BaseDAO {
     }
 
     // CONSULTAS SIN TOMAR EN CUENTA EL ENTRENADOR
+
     /**
      * Consulta todos los macrociclos registrados en el sistema.
      *
@@ -289,6 +299,7 @@ public class MacrociclosDAO implements BaseDAO {
         entityManager.close();
         return macrociclos;
     }
+
 
     /**
      * Consulta todos los macrociclos vigentes registrados en el sistema.
@@ -348,6 +359,7 @@ public class MacrociclosDAO implements BaseDAO {
         entityManager.close();
         return macrociclos;
     }
+
 
     /**
      * Consulta todos los macrociclos pasados registrados en el sistema.

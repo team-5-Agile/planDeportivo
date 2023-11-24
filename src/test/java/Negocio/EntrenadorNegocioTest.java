@@ -25,7 +25,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EntrenadorNegocioTest {
 
-    public static EntrenadoresDAO entrenadorDao;
+    public static final EntrenadoresDAO entrenadorDao =new EntrenadoresDAO("AppPlanUTest");;
 
     public EntrenadorNegocioTest() {
 
@@ -33,14 +33,14 @@ public class EntrenadorNegocioTest {
 
     @BeforeAll
     public static void setUpClass() {
-        entrenadorDao = new EntrenadoresDAO("AppPlanUTest");
         Entrenador entrenador = new Entrenador();
         entrenador.setNombre("Test Nombre");
         entrenador.setApellidoPaterno("Test ApellidoP");
         entrenador.setApellidoMaterno("Test ApellidoM");
         entrenador.setUsuario("Test Usuario");
         entrenador.setContrasena("TestContrasena");
-        entrenadorDao.registrarEntrenador(entrenador);
+       Entrenador e= entrenadorDao.registrarEntrenador(entrenador);
+        System.out.println(e.getNombre());
 
     }
 
@@ -49,7 +49,7 @@ public class EntrenadorNegocioTest {
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void testIniciarSesion() throws Exception {
         System.out.println("iniciarSesion");
         String usuario = "Test Usuario";
@@ -65,7 +65,7 @@ public class EntrenadorNegocioTest {
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     public void testIniciarSesionIncorrect() throws Exception {
         System.out.println("iniciarSesionIncorrect");
         String usuario = "Test Usuario";

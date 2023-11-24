@@ -104,6 +104,7 @@ public class ComboBoxUtils {
         return arreglo; // Devuelve el arreglo de palabras recién creado
     }
 
+
     /**
      * Devuelve un arreglo de nombres de deportes predefinidos.
      *
@@ -208,6 +209,7 @@ public class ComboBoxUtils {
 
         return arreglo; // Devuelve el arreglo de palabras recién creado
     }
+
 
     /**
      * Devuelve un arreglo de nombres de metodólogos predefinidos.
