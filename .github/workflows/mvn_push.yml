@@ -3,17 +3,15 @@ name: Java continuous integration
 permissions:
         contents: write
 on:
-  workflow_run:
-    workflows: ["Test and Merge PR to main"]
-    types:
-      - completed
-  push:
+  pull_request: 
     branches:
       - main
+    types: [closed]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
     - name: Checkout
       uses: actions/checkout@v3
