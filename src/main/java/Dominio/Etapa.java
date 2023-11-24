@@ -1,5 +1,5 @@
 /*
- * .java
+ * Etapa.java
  */
 package Dominio;
 
@@ -19,111 +19,229 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
+ * Descripción general de la clase: Esta clase representa una etapa en el
+ * sistema, que puede ser parte de un macrociclo. Cada etapa tiene un tipo, una
+ * duración en semanas, una proporción y puede estar asociada a varios medios.
  *
- * @author brawun
+ * Atributos: - id: Identificador único de la etapa. - tipo: Tipo de etapa (por
+ * ejemplo, preparatoria, competencia). - duracionSemanas: Duración en semanas
+ * de la etapa. - proporcion: Proporción de la etapa. - medios: Lista de medios
+ * asociados a la etapa. - macrociclo: Macrociclo al que pertenece la etapa
+ * (clave foránea).
+ *
+ * Autor: Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 @Entity
 @Table(name = "etapas")
 public class Etapa implements Serializable {
 
+    /**
+     * Identificador único de la etapa.
+     */
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Tipo de etapa (por ejemplo, preparatoria, competencia).
+     */
     @Column(name = "TipoEtapa", nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoEtapa tipo;
 
+    /**
+     * Duración en semanas de la etapa.
+     */
     @Column(name = "DuracionSemanas", nullable = true)
     private Integer duracionSemanas = 1;
 
+    /**
+     * Proporción de la etapa.
+     */
     @Column(name = "Proporcion", nullable = true)
     private Integer proporcion = 0;
-    
-    // Una etapa puede tener muchos medios
+
+    /**
+     * Lista de medios asociados a la etapa.
+     */
     @OneToMany(mappedBy = "etapas")
     private List<Medio> medios;
-    
-    // Llave foránea
-    // Muchas etapas pueden componer un macrociclo
+
+    /**
+     * Macrociclo al que pertenece la etapa (clave foránea).
+     */
     @ManyToOne()
     @JoinColumn(name = "idMacrociclo", referencedColumnName = "ID", nullable = true)
-    private Macrociclo macrociclos;
+    private Macrociclo macrociclo;
 
+    /**
+     * Constructor predeterminado.
+     */
     public Etapa() {
     }
-    
-    public Etapa(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion, List<Medio> medios, Macrociclo macrociclo) {
+
+    /**
+     * Constructor con parámetros.
+     *
+     * @param id Identificador único de la etapa.
+     * @param tipo Tipo de etapa.
+     * @param duracionSemanas Duración en semanas de la etapa.
+     * @param proporcion Proporción de la etapa.
+     * @param medios Lista de medios asociados a la etapa.
+     * @param macrociclo Macrociclo al que pertenece la etapa.
+     */
+    public Etapa(Long id, TipoEtapa tipo, Integer duracionSemanas, Integer proporcion, List<Medio> medios, Macrociclo macrociclo) {
         this.id = id;
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
         this.proporcion = proporcion;
         this.medios = medios;
-        this.macrociclos = macrociclo;
+        this.macrociclo = macrociclo;
     }
 
-    public Etapa(Long id, TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
+    /**
+     * Constructor con parámetros.
+     *
+     * @param id Identificador único de la etapa.
+     * @param tipo Tipo de etapa.
+     * @param duracionSemanas Duración en semanas de la etapa.
+     * @param proporcion Proporción de la etapa.
+     */
+    public Etapa(Long id, TipoEtapa tipo, Integer duracionSemanas, Integer proporcion) {
         this.id = id;
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
         this.proporcion = proporcion;
     }
 
-    public Etapa(TipoEtapa tipo, Integer deudaTotal, Integer duracionSemanas, Integer proporcion) {
+    /**
+     * Constructor con parámetros.
+     *
+     * @param tipo Tipo de etapa.
+     * @param duracionSemanas Duración en semanas de la etapa.
+     * @param proporcion Proporción de la etapa.
+     */
+    public Etapa(TipoEtapa tipo, Integer duracionSemanas, Integer proporcion) {
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
         this.proporcion = proporcion;
     }
 
+    /**
+     * Método que devuelve el identificador único de la etapa.
+     *
+     * @return Identificador único de la etapa.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Método que establece el identificador único de la etapa.
+     *
+     * @param id Identificador único de la etapa.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Método que devuelve el tipo de etapa.
+     *
+     * @return Tipo de etapa.
+     */
     public TipoEtapa getTipo() {
         return tipo;
     }
 
+    /**
+     * Método que establece el tipo de etapa.
+     *
+     * @param tipo Tipo de etapa.
+     */
     public void setTipo(TipoEtapa tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * Método que devuelve la duración en semanas de la etapa.
+     *
+     * @return Duración en semanas de la etapa.
+     */
     public Integer getDuracionSemanas() {
         return duracionSemanas;
     }
 
+    /**
+     * Método que establece la duración en semanas de la etapa.
+     *
+     * @param duracionSemanas Duración en semanas de la etapa.
+     */
     public void setDuracionSemanas(Integer duracionSemanas) {
         this.duracionSemanas = duracionSemanas;
     }
 
+    /**
+     * Método que devuelve la proporción de la etapa.
+     *
+     * @return Proporción de la etapa.
+     */
     public Integer getProporcion() {
         return proporcion;
     }
 
+    /**
+     * Método que establece la proporción de la etapa.
+     *
+     * @param proporcion Proporción de la etapa.
+     */
     public void setProporcion(Integer proporcion) {
         this.proporcion = proporcion;
     }
 
+    /**
+     * Método que devuelve la lista de medios asociados a la etapa.
+     *
+     * @return Lista de medios asociados a la etapa.
+     */
     public List<Medio> getMedios() {
         return medios;
     }
 
+    /**
+     * Método que establece la lista de medios asociados a la etapa.
+     *
+     * @param medios Lista de medios asociados a la etapa.
+     */
     public void setMedios(List<Medio> medios) {
         this.medios = medios;
     }
 
+    /**
+     * Método que devuelve el macrociclo al que pertenece la etapa.
+     *
+     * @return Macrociclo al que pertenece la etapa.
+     */
     public Macrociclo getMacrociclo() {
-        return macrociclos;
+        return macrociclo;
     }
 
+    /**
+     * Método que establece el macrociclo al que pertenece la etapa.
+     *
+     * @param macrociclo Macrociclo al que pertenece la etapa.
+     */
     public void setMacrociclo(Macrociclo macrociclo) {
-        this.macrociclos = macrociclo;
+        this.macrociclo = macrociclo;
     }
 
+    /**
+     * Método que genera un código hash basado en el identificador único de la
+     * etapa.
+     *
+     * @return Código hash.
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -131,21 +249,42 @@ public class Etapa implements Serializable {
         return hash;
     }
 
+    /**
+     * Método que compara el objeto actual con otro objeto.
+     *
+     * @param obj Objeto a comparar.
+     * @return `true` si los objetos son iguales, `false` en caso contrario.
+     */
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Etapa)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Etapa other = (Etapa) object;
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Etapa other = (Etapa) obj;
+        // Si los identificadores son nulos, los objetos no son iguales
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
 
+    /**
+     * Método que devuelve una representación en cadena del objeto Etapa.
+     *
+     * @return Cadena que representa a la etapa.
+     */
     @Override
     public String toString() {
-        return "Etapas{" + "id=" + id + ", tipo=" + tipo + ", duracionSemanas=" + duracionSemanas + ", proporcion=" + proporcion + ", medios=" + medios + ", macrociclo=" + macrociclos.getId() + '}';
+        return "Etapa{"
+                + "id=" + id
+                + ", tipo=" + tipo + '\''
+                + ", duracionSemanas=" + duracionSemanas + '\''
+                + ", proporcion=" + proporcion + '\''
+                + ", medios=" + medios + '\''
+                + ", macrociclo=" + macrociclo.getId()
+                + '}';
     }
 }

@@ -1,5 +1,5 @@
 /*
- * .java
+ * Validaciones.java
  */
 package Herramientas;
 
@@ -16,10 +16,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 /**
- * <b>Validaciones Clase que contiene métodos para realizar validaciones
- * necesarias en el paquete negocio.</b>
+ * Validaciones Clase que contiene métodos para realizar validaciones necesarias
+ * en el paquete negocio.
  *
- * @author José Alfredo Núñez
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class Validaciones {
 
@@ -46,29 +46,50 @@ public class Validaciones {
 
     }
 
+    /**
+     * Valida si el porcentaje dado no es mayor que 100.
+     *
+     * @param porcentaje El porcentaje a validar.
+     * @return Verdadero si el porcentaje es válido, de lo contrario, se lanza
+     * una excepción.
+     * @throws Exception Si el porcentaje es mayor que 100.
+     */
     public boolean isPorcentajeValido(double porcentaje) throws Exception {
-
         if (porcentaje > 100) {
-            throw new Exception("Error, El numero no debe superar el 100%");
+            throw new Exception("Error, El número no debe superar el 100%");
         }
         return true;
-
     }
+
+    /**
+     * Valida si el número dado no es negativo.
+     *
+     * @param n El número a validar.
+     * @return Verdadero si el número no es negativo, de lo contrario, se lanza
+     * una excepción.
+     * @throws Exception Si el número es negativo.
+     */
     public boolean isNegativo(double n) throws Exception {
-
-        if (0>n) {
-            throw new Exception("Error, El numero no debe ser menor a 0%");
+        if (0 > n) {
+            throw new Exception("Error, El número no debe ser menor a 0%");
         }
         return true;
-
     }
-    public boolean isMenor(int semanas, int n) throws Exception {
 
-        if (n>semanas) {
-            throw new Exception("Error, El numero no debe ser menor a las semanas");
+    /**
+     * Valida si el segundo parámetro no es mayor que el primer parámetro.
+     *
+     * @param semanas El primer parámetro.
+     * @param n El segundo parámetro.
+     * @return Verdadero si el segundo parámetro no es mayor que el primero, de
+     * lo contrario, se lanza una excepción.
+     * @throws Exception Si el segundo parámetro es mayor que el primero.
+     */
+    public boolean isMenor(int semanas, int n) throws Exception {
+        if (n > semanas) {
+            throw new Exception("Error, El número no debe ser menor a las semanas");
         }
         return true;
-
     }
 
     /**

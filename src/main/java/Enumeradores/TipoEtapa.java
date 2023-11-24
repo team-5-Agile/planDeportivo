@@ -4,9 +4,9 @@
 package Enumeradores;
 
 /**
- * Esta clase de tipo Enum permite asignar uno de tres tipos a etapas.
+ * Enumeración que representa los posibles tipos de una etapa.
  *
- * @author Equipo 5 
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public enum TipoEtapa {
     GENERAL, ESPECIAL, COMPETITIVA

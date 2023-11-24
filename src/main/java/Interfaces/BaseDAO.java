@@ -1,8 +1,9 @@
 /*
- * .java
+ * BaseDAO.java
  */
 package Interfaces;
 
+// Importaciones
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -10,7 +11,7 @@ import jakarta.persistence.Persistence;
 
 /**
  * Interface base para clases concretas de acceso a datos
- * @author el_fr
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public interface BaseDAO {
     /**
@@ -23,6 +24,5 @@ public interface BaseDAO {
      */
      EntityManager getEntityManager();
       
-
     /// Agregar métodos que pueden ser reutilizados.
 }
