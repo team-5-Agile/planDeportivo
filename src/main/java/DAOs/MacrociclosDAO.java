@@ -181,7 +181,7 @@ public class MacrociclosDAO implements BaseDAO {
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
-        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
 
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
@@ -205,7 +205,7 @@ public class MacrociclosDAO implements BaseDAO {
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
-        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -228,7 +228,7 @@ public class MacrociclosDAO implements BaseDAO {
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
-        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
 
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
@@ -252,7 +252,7 @@ public class MacrociclosDAO implements BaseDAO {
         query = entityManager.createQuery(jpql, Macrociclo.class);
         query.setParameter("entrenador", entrenador);
         // Configurar el parámetro de fecha actual con TemporalType.TIMESTAMP
-        query.setParameter("fechaActual", Fecha.fechaAhora(), TemporalType.TIMESTAMP);
+        query.setParameter("fechaActual", fecha.fechaAhora(), TemporalType.TIMESTAMP);
         List<Macrociclo> macrociclos = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();

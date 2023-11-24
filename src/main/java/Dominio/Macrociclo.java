@@ -97,7 +97,7 @@ public class Macrociclo implements Serializable {
     /**
      * Lista de etapas asociadas al macrociclo.
      */
-    @OneToMany(mappedBy = "macrociclos")
+    @OneToMany(mappedBy = "macrociclo")
     private List<Etapa> etapas;
 
     /**
@@ -184,14 +184,7 @@ public class Macrociclo implements Serializable {
         this.fechaFin = fechaFin;
     }
     
-    public Macrociclo(String deporte, String jefeRama, Ramas rama, String metodologo, String preparadorFisico, Entrenador entrenadores) {
-        this.deporte = deporte;
-        this.jefeRama = jefeRama;
-        this.rama = rama;
-        this.metodologo = metodologo;
-        this.preparadorFisico = preparadorFisico;
-        this.entrenadores = entrenadores;
-    }
+   
 
     /**
      * Constructor con parámetros.
