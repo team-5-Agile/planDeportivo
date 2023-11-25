@@ -6,6 +6,8 @@ package Herramientas;
 // Importaciones
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -69,7 +71,7 @@ public class Fecha {
         // Retornar la diferencia en días
         return diferenciaDias;
     }
-    
+
     /**
      * Crea un objeto Calendar con la fecha especificada.
      *
@@ -82,5 +84,19 @@ public class Fecha {
         // Se desplaza el mes -1
         mes = mes - 1;
         return new GregorianCalendar(anho, mes, dia);
-    }   
+    }
+
+    /**
+     * Convierte un objeto LocalDate a un objeto Date.
+     *
+     * @param localDate Objeto LocalDate a convertir.
+     * @return Objeto Date resultante de la conversión.
+     */
+    public Date convertirLocalDateADate(LocalDate localDate) {
+        // Se utiliza atStartOfDay para obtener un LocalDateTime con la hora de inicio del día.
+        // Se obtiene la zona horaria predeterminada del sistema.
+        // Se convierte el LocalDateTime a un Instant.
+        // Se crea un objeto Date a partir del Instant.
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
 }

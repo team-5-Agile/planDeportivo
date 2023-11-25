@@ -535,4 +535,17 @@ public class Validaciones {
         // Validar que la cadena es un número flotante
         return str;
     }
+    
+    /**
+     * Elimina espacios en blanco consecutivos de una cadena, aplicando también trim() para eliminar espacios
+     * al principio y al final.
+     * 
+     * @param cadena La cadena de entrada.
+     * @return La cadena resultante sin espacios en blanco consecutivos y sin espacios al principio y al final.
+     */
+    public static String eliminarEspaciosRepetidos(String cadena) {
+        // Aplica trim() para eliminar espacios en blanco al principio y al final de la cadena,
+        // luego utiliza una expresión regular para reemplazar espacios en blanco consecutivos con un solo espacio.
+        return cadena.trim().replaceAll("\\s+", " ");
+    }
 }

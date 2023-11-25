@@ -246,11 +246,13 @@ public class EntrenadoresDAO implements BaseDAO {
         TypedQuery<Entrenador> query;
         String jpql = "SELECT e FROM Entrenador e";
         query = entityManager.createQuery(jpql, Entrenador.class);
-        List<Entrenador> entrenadores = query.getResultList();
+        List<Entrenador> entrenador = query.getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();
-        return entrenadores;
+        return entrenador;
     }
+    
+   
 
     /**
      * Consulta la base de datos para obtener una lista de nombres completos de

@@ -60,7 +60,7 @@ public class Etapa implements Serializable {
      * Proporción de la etapa.
      */
     @Column(name = "Proporcion", nullable = true)
-    private Integer proporcion = 0;
+    private Double proporcion = 0.0;
 
     /**
      * Lista de medios asociados a la etapa.
@@ -91,12 +91,27 @@ public class Etapa implements Serializable {
      * @param medios Lista de medios asociados a la etapa.
      * @param macrociclo Macrociclo al que pertenece la etapa.
      */
-    public Etapa(Long id, TipoEtapa tipo, Integer duracionSemanas, Integer proporcion, List<Medio> medios, Macrociclo macrociclo) {
+    public Etapa(Long id, TipoEtapa tipo, Integer duracionSemanas, Double proporcion, List<Medio> medios, Macrociclo macrociclo) {
         this.id = id;
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
         this.proporcion = proporcion;
         this.medios = medios;
+        this.macrociclo = macrociclo;
+    }
+    
+    /**
+     * Constructor con parámetros.
+     *
+     * @param tipo Tipo de etapa.
+     * @param duracionSemanas Duración en semanas de la etapa.
+     * @param proporcion Proporción de la etapa.
+     * @param macrociclo Macrociclo al que pertenece la etapa.
+     */
+    public Etapa(TipoEtapa tipo, Integer duracionSemanas, Double proporcion, Macrociclo macrociclo) {
+        this.tipo = tipo;
+        this.duracionSemanas = duracionSemanas;
+        this.proporcion = proporcion;
         this.macrociclo = macrociclo;
     }
 
@@ -108,7 +123,7 @@ public class Etapa implements Serializable {
      * @param duracionSemanas Duración en semanas de la etapa.
      * @param proporcion Proporción de la etapa.
      */
-    public Etapa(Long id, TipoEtapa tipo, Integer duracionSemanas, Integer proporcion) {
+    public Etapa(Long id, TipoEtapa tipo, Integer duracionSemanas, Double proporcion) {
         this.id = id;
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
@@ -122,7 +137,7 @@ public class Etapa implements Serializable {
      * @param duracionSemanas Duración en semanas de la etapa.
      * @param proporcion Proporción de la etapa.
      */
-    public Etapa(TipoEtapa tipo, Integer duracionSemanas, Integer proporcion) {
+    public Etapa(TipoEtapa tipo, Integer duracionSemanas, Double proporcion) {
         this.tipo = tipo;
         this.duracionSemanas = duracionSemanas;
         this.proporcion = proporcion;
@@ -187,7 +202,7 @@ public class Etapa implements Serializable {
      *
      * @return Proporción de la etapa.
      */
-    public Integer getProporcion() {
+    public Double getProporcion() {
         return proporcion;
     }
 
@@ -196,7 +211,7 @@ public class Etapa implements Serializable {
      *
      * @param proporcion Proporción de la etapa.
      */
-    public void setProporcion(Integer proporcion) {
+    public void setProporcion(Double proporcion) {
         this.proporcion = proporcion;
     }
 

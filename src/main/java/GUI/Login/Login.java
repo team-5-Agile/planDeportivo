@@ -1,5 +1,9 @@
+/**
+ * Login.java
+ */
 package GUI.Login;
 
+// Importaciones
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Exceptions.InputException;
@@ -8,22 +12,35 @@ import GUI.Entrenador.PanelEntrenador;
 import Negocio.AdministradorNegocio;
 import Negocio.EntrenadorNegocio;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 /**
- *
- * @author ceria
+ * Clase que representa la interfaz gráfica para iniciar sesión.
+ * 
+ * Atributos:
+ * - administradorNegocio: Objeto para manejar la lógica de negocio relacionada con los administradores.
+ * - entrenadorNegocio: Objeto para manejar la lógica de negocio relacionada con los entrenadores.
+ * 
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class Login extends javax.swing.JFrame {
 
+    // Atributos
+    private AdministradorNegocio administradorNegocio;
+    private EntrenadorNegocio entrenadorNegocio;
+
     /**
-     * Creates new form Login
+     * Constructor de la clase Login.
+     * Inicializa la interfaz gráfica y establece la ubicación relativa al centro de la pantalla.
      */
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+
+        // Inicialización de objetos de negocio
+        administradorNegocio = new AdministradorNegocio();
+        entrenadorNegocio = new EntrenadorNegocio();
     }
 
     /**
@@ -225,98 +242,152 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (i == JOptionPane.YES_OPTION) {
-            this.dispose();
-        } else {
-            this.setVisible(true);
-        }
-    }//GEN-LAST:event_btnSalirActionPerformed
+/**
+ * Método invocado al hacer clic en el botón de salir.
+ * Muestra una ventana de confirmación y cierra la aplicación si el usuario elige salir.
+ * 
+ * @param evt Objeto que representa el evento de clic.
+ */
+private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea salir?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+    if (i == JOptionPane.YES_OPTION) {
+        this.dispose();
+    } else {
+        this.setVisible(true);
+    }
+}//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        try {
-            if (!txtUsuario.getText().equals("admin")) {
-                EntrenadorNegocio en = new EntrenadorNegocio();
-                Entrenador entrenador = en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
-                if (entrenador != null) {
-                    this.dispose();
-                    new PanelEntrenador(entrenador).setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario y/o contraseña de incorrectas (Intente de nuevo).", "¡Error!", JOptionPane.ERROR_MESSAGE);
-                    txtUsuario.setBorder(new LineBorder(Color.RED));
-                    txtPassword.setBorder(new LineBorder(Color.RED));
-                }
+/**
+ * Método invocado al hacer clic en el botón de iniciar sesión.
+ * Intenta iniciar sesión con el usuario y la contraseña proporcionados.
+ * Abre la interfaz correspondiente al tipo de usuario.
+ * 
+ * @param evt Objeto que representa el evento de clic.
+ */
+private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+    try {
+        // Verifica si el usuario no es "admin"
+        if (!txtUsuario.getText().equals("admin")) {
+            EntrenadorNegocio en = new EntrenadorNegocio();
+            Entrenador entrenador = en.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+            if (entrenador != null) {
+                this.dispose();
+                new PanelEntrenador(entrenador).setVisible(true);
             } else {
-                AdministradorNegocio an = new AdministradorNegocio();
-                Administrador administrador = an.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
-                if (administrador != null) {
-                    this.dispose();
-                    new PanelAdministrador(administrador).setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario y/o contraseña de incorrectas (Intente de nuevo).", "¡Error!", JOptionPane.ERROR_MESSAGE);
-                    txtUsuario.setBorder(new LineBorder(Color.RED));
-                    txtPassword.setBorder(new LineBorder(Color.RED));
-                }
+                // Mensaje de error
+                JOptionPane.showMessageDialog(null, "Usuario y/o contraseña de incorrectas (Intente de nuevo).", "¡Error!", JOptionPane.ERROR_MESSAGE);
+                // Marcado de campos erróneos
+                txtUsuario.setBorder(new LineBorder(Color.RED));
+                txtPassword.setBorder(new LineBorder(Color.RED));
             }
-        } catch (Exception e) {
-            if (e instanceof InputException) {
-                InputException ex = (InputException) e;
-                if (ex.getTextField().equals("usuario")) {
-                    txtUsuario.setBorder(new LineBorder(Color.RED));
-                }
-                if (ex.getTextField().equals("contrasena")) {
-                    txtPassword.setBorder(new LineBorder(Color.RED));
-                }
-            }
-            JOptionPane.showMessageDialog(this, e.getMessage());
-            return;
-        }
-
-    }//GEN-LAST:event_btnIniciarActionPerformed
-
-    private void txtUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusGained
-        txtUsuario.setBorder(new LineBorder(Color.GRAY));
-    }//GEN-LAST:event_txtUsuarioFocusGained
-
-    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        txtPassword.setBorder(new LineBorder(Color.GRAY));
-    }//GEN-LAST:event_txtPasswordFocusGained
-
-    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
-        // Verifica si la tecla presionada es un espacio
-        if (evt.getKeyChar() == ' ') {
-            // Si es un espacio, consume el evento para evitar que se escriba en el TextField
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtUsuarioKeyTyped
-
-    private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
-        // Verifica si la tecla presionada es un espacio
-        if (evt.getKeyChar() == ' ') {
-            // Si es un espacio, consume el evento para evitar que se escriba en el TextField
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtPasswordKeyTyped
-
-    private void lblLogoISWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoISWMouseClicked
-        JOptionPane.showMessageDialog(null, "Autores: \n"
-                + " - Brandon Figueroa Ugalde \n"
-                + " - Jesus Omar Hernandez Iturbe \n"
-                + " - Jose Alfredo Núñez Aguirre \n"
-                + "\nProf. Gilberto Borrego \n"
-                + "Metodologías Ágiles de Desarrollo "
-                + "ISW ITSON",
-                "Acerca de", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_lblLogoISWMouseClicked
-
-    private void checkVisiblePasswordStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkVisiblePasswordStateChanged
-        if (this.checkVisiblePassword.isSelected()) {
-            this.txtPassword.setEchoChar((char) 0);
         } else {
-            this.txtPassword.setEchoChar('•');
+            AdministradorNegocio an = new AdministradorNegocio();
+            Administrador administrador = an.iniciarSesion(txtUsuario.getText(), String.valueOf(txtPassword.getPassword()));
+            if (administrador != null) {
+                this.dispose();
+                new PanelAdministrador(administrador).setVisible(true);
+            } else {
+                // Mensaje de error
+                JOptionPane.showMessageDialog(null, "Usuario y/o contraseña de incorrectas (Intente de nuevo).", "¡Error!", JOptionPane.ERROR_MESSAGE);
+                // Marcado de campos erróneos
+                txtUsuario.setBorder(new LineBorder(Color.RED));
+                txtPassword.setBorder(new LineBorder(Color.RED));
+            }
         }
-    }//GEN-LAST:event_checkVisiblePasswordStateChanged
+    } catch (Exception e) {
+        // Manejo de excepciones
+        if (e instanceof InputException) {
+            InputException ex = (InputException) e;
+            if (ex.getTextField().equals("usuario")) {
+                txtUsuario.setBorder(new LineBorder(Color.RED));
+            }
+            if (ex.getTextField().equals("contrasena")) {
+                txtPassword.setBorder(new LineBorder(Color.RED));
+            }
+        }
+        // Mensaje de error
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+}//GEN-LAST:event_btnIniciarActionPerformed
+
+/**
+ * Método invocado cuando el TextField de usuario obtiene el foco.
+ * Restaura el borde del TextField a su estado original.
+ * 
+ * @param evt Objeto que representa el evento de obtención del foco.
+ */
+private void txtUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusGained
+    txtUsuario.setBorder(new LineBorder(Color.GRAY));
+}//GEN-LAST:event_txtUsuarioFocusGained
+
+/**
+ * Método invocado cuando el TextField de contraseña obtiene el foco.
+ * Restaura el borde del TextField a su estado original.
+ * 
+ * @param evt Objeto que representa el evento de obtención del foco.
+ */
+private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+    txtPassword.setBorder(new LineBorder(Color.GRAY));
+}//GEN-LAST:event_txtPasswordFocusGained
+
+/**
+ * Método invocado al escribir en el TextField de usuario.
+ * Evita la entrada de espacios en blanco.
+ * 
+ * @param evt Objeto que representa el evento de tecla presionada.
+ */
+private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+    // Verifica si la tecla presionada es un espacio
+    if (evt.getKeyChar() == ' ') {
+        // Si es un espacio, consume el evento para evitar que se escriba en el TextField
+        evt.consume();
+    }
+}//GEN-LAST:event_txtUsuarioKeyTyped
+
+/**
+ * Método invocado al escribir en el TextField de contraseña.
+ * Evita la entrada de espacios en blanco.
+ * 
+ * @param evt Objeto que representa el evento de tecla presionada.
+ */
+private void txtPasswordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyTyped
+    // Verifica si la tecla presionada es un espacio
+    if (evt.getKeyChar() == ' ') {
+        // Si es un espacio, consume el evento para evitar que se escriba en el TextField
+        evt.consume();
+    }
+}//GEN-LAST:event_txtPasswordKeyTyped
+
+/**
+ * Método invocado al hacer clic en el logo del sistema.
+ * Muestra una ventana con información acerca del sistema y sus autores.
+ * 
+ * @param evt Objeto que representa el evento de clic.
+ */
+private void lblLogoISWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoISWMouseClicked
+    JOptionPane.showMessageDialog(null, "Autores: \n"
+            + " - Brandon Figueroa Ugalde \n"
+            + " - Jesus Omar Hernandez Iturbe \n"
+            + " - Jose Alfredo Núñez Aguirre \n"
+            + "\nProf. Gilberto Borrego \n"
+            + "Metodologías Ágiles de Desarrollo "
+            + "ISW ITSON",
+            "Acerca de", JOptionPane.INFORMATION_MESSAGE);
+}//GEN-LAST:event_lblLogoISWMouseClicked
+
+/**
+ * Método invocado al cambiar el estado del checkbox para mostrar la contraseña.
+ * Cambia el carácter de la contraseña entre visible y oculto.
+ * 
+ * @param evt Objeto que representa el evento de cambio de estado.
+ */
+private void checkVisiblePasswordStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkVisiblePasswordStateChanged
+    if (this.checkVisiblePassword.isSelected()) {
+        this.txtPassword.setEchoChar((char) 0);
+    } else {
+        this.txtPassword.setEchoChar('•');
+    }
+}//GEN-LAST:event_checkVisiblePasswordStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
