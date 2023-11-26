@@ -4,17 +4,14 @@
  */
 package GUI.Entrenador;
 
-import GUI.Administrador.PanelAdministrador;
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
-import Dominio.Administrador;
 import Dominio.Entrenador;
 import Dominio.Macrociclo;
 import Herramientas.Fecha;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,6 +38,10 @@ public class VerMacrociclo extends javax.swing.JFrame {
 
     public void llenarTextos() throws ParseException {
         // Insercion de datos a mostrar
+        this.lblDeporteTitulo.setText(this.macrociclo.getDeporte());
+        this.lblRamaTitulo.setText(this.macrociclo.getRama().name());
+        this.lblIDTitulo.setText(this.macrociclo.getId().toString());
+        this.txtID.setText(this.macrociclo.getId().toString());
         this.txtJefeRama.setText(this.macrociclo.getJefeRama());
         this.txtNombreEntrenador.setText(this.entrenador.getNombre() + " " + this.entrenador.getApellidoPaterno() + " " + this.entrenador.getApellidoMaterno());
         this.txtDeporte.setText(this.macrociclo.getDeporte());
@@ -64,8 +65,14 @@ public class VerMacrociclo extends javax.swing.JFrame {
         lblTitulo1 = new javax.swing.JLabel();
         lblEncabezadoMacro = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
+        lblGuion2 = new javax.swing.JLabel();
+        lblRamaTitulo = new javax.swing.JLabel();
+        lblDeporteTitulo = new javax.swing.JLabel();
+        lblNum = new javax.swing.JLabel();
+        lblIDTitulo = new javax.swing.JLabel();
+        lblGuion1 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
-        txtNombreEntrenador = new javax.swing.JTextField();
+        btnVerEtapas = new javax.swing.JButton();
         lblJefeRama = new javax.swing.JLabel();
         lblEntrenador = new javax.swing.JLabel();
         lblDeporte = new javax.swing.JLabel();
@@ -75,8 +82,10 @@ public class VerMacrociclo extends javax.swing.JFrame {
         lblMetodologo = new javax.swing.JLabel();
         lblFechaInicio = new javax.swing.JLabel();
         lblFechaFin = new javax.swing.JLabel();
-        btnVerEtapas = new javax.swing.JButton();
+        lblID = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
         txtJefeRama = new javax.swing.JTextField();
+        txtNombreEntrenador = new javax.swing.JTextField();
         txtDeporte = new javax.swing.JTextField();
         txtRama = new javax.swing.JTextField();
         txtPreparador = new javax.swing.JTextField();
@@ -114,6 +123,24 @@ public class VerMacrociclo extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo.setText("Ver Macrociclo");
 
+        lblGuion2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblGuion2.setText("-");
+
+        lblRamaTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblRamaTitulo.setText("Rama");
+
+        lblDeporteTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDeporteTitulo.setText("Deporte");
+
+        lblNum.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNum.setText("#");
+
+        lblIDTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIDTitulo.setText("ID");
+
+        lblGuion1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblGuion1.setText("-");
+
         javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
         lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);
         lblEncabezadoMacroLayout.setHorizontalGroup(
@@ -121,13 +148,33 @@ public class VerMacrociclo extends javax.swing.JFrame {
             .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDeporteTitulo)
+                .addGap(32, 32, 32)
+                .addComponent(lblGuion1)
+                .addGap(35, 35, 35)
+                .addComponent(lblRamaTitulo)
+                .addGap(37, 37, 37)
+                .addComponent(lblGuion2)
+                .addGap(35, 35, 35)
+                .addComponent(lblNum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIDTitulo)
+                .addGap(20, 20, 20))
         );
         lblEncabezadoMacroLayout.setVerticalGroup(
             lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo)
+                .addGroup(lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addGroup(lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDeporteTitulo)
+                        .addComponent(lblRamaTitulo)
+                        .addComponent(lblIDTitulo)
+                        .addComponent(lblNum)
+                        .addComponent(lblGuion1)
+                        .addComponent(lblGuion2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -142,9 +189,16 @@ public class VerMacrociclo extends javax.swing.JFrame {
             }
         });
 
-        txtNombreEntrenador.setEditable(false);
-        txtNombreEntrenador.setText("Nombre Entrenador");
-        txtNombreEntrenador.setToolTipText("Apellido Paterno del entrenador");
+        btnVerEtapas.setBackground(new java.awt.Color(153, 153, 255));
+        btnVerEtapas.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnVerEtapas.setText("Ver Etapas");
+        btnVerEtapas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerEtapas.setOpaque(true);
+        btnVerEtapas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerEtapasActionPerformed(evt);
+            }
+        });
 
         lblJefeRama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblJefeRama.setText("Jefe de Rama:");
@@ -173,20 +227,20 @@ public class VerMacrociclo extends javax.swing.JFrame {
         lblFechaFin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblFechaFin.setText("Fecha Fin:");
 
-        btnVerEtapas.setBackground(new java.awt.Color(153, 153, 255));
-        btnVerEtapas.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        btnVerEtapas.setText("Ver Etapas");
-        btnVerEtapas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVerEtapas.setOpaque(true);
-        btnVerEtapas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerEtapasActionPerformed(evt);
-            }
-        });
+        lblID.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblID.setText("ID:");
+
+        txtID.setEditable(false);
+        txtID.setText("ID");
+        txtID.setToolTipText("Apellido Paterno del entrenador");
 
         txtJefeRama.setEditable(false);
         txtJefeRama.setText("Jefe de Rama");
         txtJefeRama.setToolTipText("Apellido Paterno del entrenador");
+
+        txtNombreEntrenador.setEditable(false);
+        txtNombreEntrenador.setText("Nombre Entrenador");
+        txtNombreEntrenador.setToolTipText("Apellido Paterno del entrenador");
 
         txtDeporte.setEditable(false);
         txtDeporte.setText("Deporte");
@@ -227,26 +281,30 @@ public class VerMacrociclo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVerEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIngreseDatos)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtMetodologo, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPreparador, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRama, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDeporte, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtJefeRama, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(69, 69, 69))
             .addGroup(layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblID)
                     .addComponent(lblEntrenador)
                     .addComponent(lblFechaFin)
                     .addComponent(lblFechaInicio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFin, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFin, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMetodologo, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreparador, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRama, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDeporte, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtJefeRama, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,9 +314,7 @@ public class VerMacrociclo extends javax.swing.JFrame {
                                 .addComponent(lblDeporte)
                                 .addComponent(lblJefeRama))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblIngreseDatos)
-                                .addComponent(txtNombreEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtNombreEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(69, 69, 69)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -274,7 +330,13 @@ public class VerMacrociclo extends javax.swing.JFrame {
                 .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIngreseDatos)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblID)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(txtJefeRama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblEntrenador)
@@ -286,7 +348,7 @@ public class VerMacrociclo extends javax.swing.JFrame {
                 .addComponent(txtPreparador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtMetodologo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFechaInicio)
                     .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -301,9 +363,7 @@ public class VerMacrociclo extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(123, 123, 123)
-                    .addComponent(lblIngreseDatos)
-                    .addGap(18, 18, 18)
+                    .addGap(158, 158, 158)
                     .addComponent(lblJefeRama)
                     .addGap(18, 18, 18)
                     .addComponent(txtNombreEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +392,12 @@ public class VerMacrociclo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnVerEtapasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEtapasActionPerformed
-        // Panel para ver el desglose de las etapas del macrociclo en particular, VerEtapas
+        this.dispose();
+        try {
+            new VerEtapas(this.entrenador, this.macrociclo).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(VerMacrociclo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVerEtapasActionPerformed
 
 
@@ -340,20 +405,28 @@ public class VerMacrociclo extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnVerEtapas;
     private javax.swing.JLabel lblDeporte;
+    private javax.swing.JLabel lblDeporteTitulo;
     private javax.swing.JPanel lblEncabezadoMacro;
     private javax.swing.JPanel lblEncabezadoTitulo;
     private javax.swing.JLabel lblEntrenador;
     private javax.swing.JLabel lblFechaFin;
     private javax.swing.JLabel lblFechaInicio;
+    private javax.swing.JLabel lblGuion1;
+    private javax.swing.JLabel lblGuion2;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblIDTitulo;
     private javax.swing.JLabel lblIngreseDatos;
     private javax.swing.JLabel lblJefeRama;
     private javax.swing.JLabel lblMetodologo;
+    private javax.swing.JLabel lblNum;
     private javax.swing.JLabel lblPreparador;
     private javax.swing.JLabel lblRama;
+    private javax.swing.JLabel lblRamaTitulo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JTextField txtDeporte;
     private javax.swing.JTextField txtFin;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtInicio;
     private javax.swing.JTextField txtJefeRama;
     private javax.swing.JTextField txtMetodologo;

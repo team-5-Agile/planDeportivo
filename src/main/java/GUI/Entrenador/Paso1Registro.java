@@ -4,10 +4,8 @@
  */
 package GUI.Entrenador;
 
-import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
 import DAOs.MacrociclosDAO;
-import Dominio.Administrador;
 import Dominio.Entrenador;
 import Dominio.Macrociclo;
 import Enumeradores.Ramas;
@@ -43,7 +41,8 @@ public class Paso1Registro extends javax.swing.JFrame {
         llenarTextos();
     }
 
-    public void llenarTextos() {
+    public void llenarTextos() throws ParseException {
+        this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
         this.txtNombreEntrenador.setText(this.entrenador.getNombre() + " " + this.entrenador.getApellidoPaterno() + " " + this.entrenador.getApellidoMaterno());
     }
 
@@ -83,6 +82,7 @@ public class Paso1Registro extends javax.swing.JFrame {
 
         lblEncabezadoTitulo = new javax.swing.JPanel();
         lblTitulo1 = new javax.swing.JLabel();
+        lblFechaHoy = new javax.swing.JLabel();
         lblEncabezadoMacro = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblJefeRama = new javax.swing.JLabel();
@@ -109,6 +109,9 @@ public class Paso1Registro extends javax.swing.JFrame {
         lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitulo1.setText("Paso #1: Registro del Macrociclo");
 
+        lblFechaHoy.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        lblFechaHoy.setText("Fecha Hoy");
+
         javax.swing.GroupLayout lblEncabezadoTituloLayout = new javax.swing.GroupLayout(lblEncabezadoTitulo);
         lblEncabezadoTitulo.setLayout(lblEncabezadoTituloLayout);
         lblEncabezadoTituloLayout.setHorizontalGroup(
@@ -116,14 +119,18 @@ public class Paso1Registro extends javax.swing.JFrame {
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo1)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFechaHoy)
+                .addGap(14, 14, 14))
         );
         lblEncabezadoTituloLayout.setVerticalGroup(
             lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo1)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo1)
+                    .addComponent(lblFechaHoy, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
@@ -201,52 +208,56 @@ public class Paso1Registro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(lblIngreseDatos))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(lblJefeRama)
-                .addGap(6, 6, 6)
-                .addComponent(cbxJefeRama, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(lblEntrenador)
-                .addGap(6, 6, 6)
-                .addComponent(txtNombreEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(lblDeporte)
-                .addGap(6, 6, 6)
-                .addComponent(cbxDeporte, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(172, 172, 172)
-                .addComponent(lblRama)
-                .addGap(6, 6, 6)
-                .addComponent(cbxRama, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(lblPreparador)
-                .addGap(6, 6, 6)
-                .addComponent(cbxPreparador, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(lblMetodologo)
-                .addGap(6, 6, 6)
-                .addComponent(cbxMetodologo, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(378, 378, 378)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(377, 377, 377)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(lblIngreseDatos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(lblJefeRama)
+                        .addGap(6, 6, 6)
+                        .addComponent(cbxJefeRama, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(lblEntrenador)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtNombreEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(lblDeporte)
+                        .addGap(6, 6, 6)
+                        .addComponent(cbxDeporte, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(lblRama)
+                        .addGap(6, 6, 6)
+                        .addComponent(cbxRama, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lblPreparador)
+                        .addGap(6, 6, 6)
+                        .addComponent(cbxPreparador, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(lblMetodologo)
+                        .addGap(6, 6, 6)
+                        .addComponent(cbxMetodologo, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(31, 31, 31)
                 .addComponent(lblIngreseDatos)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,10 +295,11 @@ public class Paso1Registro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(cbxMetodologo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar)
-                    .addComponent(btnGuardar)))
+                    .addComponent(btnGuardar))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -319,7 +331,8 @@ public class Paso1Registro extends javax.swing.JFrame {
                 this.entrenador));
         // LOS CAMPOS DE FECHA SE TIENEN QUE GUARAR EN LA SIGUIENTE PANTALLA
         if (macrociclo.getId() != null) {
-            JOptionPane.showMessageDialog(null, "Se registró exitosamente el macrociclo: " + macrociclo.getDeporte() + " - Rama: " + macrociclo.getRama().name() + " - Preparador Fisico: " + macrociclo.getPreparadorFisico() + "\n Continue al siguiente paso...", "Registro de entrenador exitoso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se registró exitosamente el macrociclo: " + macrociclo.getDeporte() + " - Rama: " + macrociclo.getRama().name() + " - Preparador Fisico: " + macrociclo.getPreparadorFisico() + ". ☺"
+                    + "\n Continue al siguiente paso...", "Registro de entrenador exitoso", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             try {
                 new Paso2Proporciones(this.entrenador, macrociclo).setVisible(true);
@@ -344,6 +357,7 @@ public class Paso1Registro extends javax.swing.JFrame {
     private javax.swing.JPanel lblEncabezadoMacro;
     private javax.swing.JPanel lblEncabezadoTitulo;
     private javax.swing.JLabel lblEntrenador;
+    private javax.swing.JLabel lblFechaHoy;
     private javax.swing.JLabel lblIngreseDatos;
     private javax.swing.JLabel lblJefeRama;
     private javax.swing.JLabel lblMetodologo;

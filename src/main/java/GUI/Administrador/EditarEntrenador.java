@@ -1,34 +1,49 @@
- /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * EditarEntrenador.java
  */
 package GUI.Administrador;
 
+// Importaciones
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
 import Dominio.Administrador;
 import Dominio.Entrenador;
 import Herramientas.Fecha;
+import Herramientas.Validaciones;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Ventana de edición de entrenador.
  *
- * @author brawun
+ * Atributos: - administrador: Objeto de la clase Administrador. - entrenador:
+ * Objeto de la clase Entrenador. - AdministradorDAO: Objeto de la clase
+ * AdministradorDAO, inicializado con el nombre "AppPlanU". - EntrenadoresDAO:
+ * Objeto de la clase EntrenadoresDAO, inicializado con el nombre "AppPlanU". -
+ * Fecha: Objeto de la clase Fecha.
+ *
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class EditarEntrenador extends javax.swing.JFrame {
 
-    //Atributos
+    // Atributos
     Administrador administrador;
     Entrenador entrenador;
     AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
     EntrenadoresDAO EntrenadoresDAO = new EntrenadoresDAO("AppPlanU");
     Fecha Fecha = new Fecha();
+    Validaciones Validaciones = new Validaciones();
 
     /**
-     * Creates new form RegistrarEntrenador
+     * Constructor de la clase EditarEntrenador.
+     *
+     * @param administrador Objeto de la clase Administrador que representa al
+     * administrador actual.
+     * @param entrenador Objeto de la clase Entrenador que se va a editar.
+     * @throws ParseException Si ocurre un error al parsear la fecha.
      */
     public EditarEntrenador(Administrador administrador, Entrenador entrenador) throws ParseException {
         this.administrador = administrador;
@@ -37,8 +52,21 @@ public class EditarEntrenador extends javax.swing.JFrame {
         llenarTextos();
     }
     
+    public void eliminarEspaciosRepetidos() {
+        this.txtApellidoMaterno.setText(Validaciones.eliminarEspaciosRepetidos(this.txtApellidoMaterno.getText()));
+        this.txtApellidoPaterno.setText(Validaciones.eliminarEspaciosRepetidos(this.txtApellidoPaterno.getText()));
+        this.txtNombre.setText(Validaciones.eliminarEspaciosRepetidos(this.txtNombre.getText()));
+        this.txtUsuario.setText(Validaciones.eliminarEspaciosRepetidos(this.txtUsuario.getText()));
+        this.txtContrasena.setText(Validaciones.eliminarEspaciosRepetidos(this.txtContrasena.getText()));
+    }
+
+    /**
+     * Llena los campos de texto con la información del entrenador.
+     *
+     * @throws ParseException Si ocurre un error al parsear la fecha.
+     */
     public void llenarTextos() throws ParseException {
-        // Insercion de datos a mostrar
+        // Inserción de datos a mostrar
         this.txtID.setText(this.entrenador.getId().toString());
         this.txtFechaRegistro.setText(Fecha.formatoFecha(this.entrenador.getFechaRegistro()));
         this.txtNombre.setText(this.entrenador.getNombre());
@@ -161,6 +189,11 @@ public class EditarEntrenador extends javax.swing.JFrame {
 
         txtNombre.setText("Nombre del entrenador");
         txtNombre.setToolTipText("Nombre(s) del entrenador");
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtApellidoPaterno.setText("Apellido paterno del entrenador");
         txtApellidoPaterno.setToolTipText("Apellido Paterno del entrenador");
@@ -304,6 +337,11 @@ public class EditarEntrenador extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción realizada al hacer clic en el botón Cancelar.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar la edicion?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (i == JOptionPane.YES_OPTION) {
@@ -318,39 +356,149 @@ public class EditarEntrenador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Editar.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (!this.txtApellidoMaterno.getText().isEmpty()
-            && !this.txtApellidoPaterno.getText().isEmpty()
-            && !this.txtContrasena.getText().isEmpty()
-            && !this.txtNombre.getText().isEmpty()
-            && !this.txtUsuario.getText().isEmpty()) {
-            // Se edita el nuevo entrenador en la base de datos segun los datos seleccionados en el los TextField
-            Entrenador entrenador = EntrenadoresDAO.editarEntrenador(new Entrenador(
-                this.entrenador.getId(),
-                this.txtNombre.getText(),
-                this.txtApellidoPaterno.getText(),
-                this.txtApellidoMaterno.getText(),
-                this.txtContrasena.getText(),
-                this.txtUsuario.getText(),
-                this.entrenador.getFechaRegistro(),
-                this.entrenador.getMacrociclos(),
-                this.entrenador.getAdministrador()));
-        if (entrenador.getId() != null) {
-            JOptionPane.showMessageDialog(null, "Se editó exitosamente la cuenta del entrenador: " + this.txtNombre.getText() + " " + this.txtApellidoPaterno.getText() + " " + this.txtApellidoMaterno.getText() + " - ID: " + this.entrenador.getId() + ". ☺", "Registro de entrenador exitoso", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-            try {
-                new PanelAdministrador(this.administrador).setVisible(true);
-            } catch (Exception ex) {
-                Logger.getLogger(RegistrarEntrenador.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            if (!this.txtApellidoMaterno.getText().isBlank()
+                    && !this.txtApellidoPaterno.getText().isBlank()
+                    && !this.txtContrasena.getText().isBlank()
+                    && !this.txtNombre.getText().isBlank()
+                    && !this.txtUsuario.getText().isBlank()) {
+                eliminarEspaciosRepetidos();
+                // Se edita el nuevo entrenador en la base de datos segun los datos seleccionados en el los TextField
+                Entrenador entrenador = EntrenadoresDAO.editarEntrenador(new Entrenador(
+                        this.entrenador.getId(),
+                        this.txtNombre.getText(),
+                        this.txtApellidoPaterno.getText(),
+                        this.txtApellidoMaterno.getText(),
+                        this.txtContrasena.getText(),
+                        this.txtUsuario.getText(),
+                        this.entrenador.getFechaRegistro(),
+                        this.entrenador.getMacrociclos(),
+                        this.entrenador.getAdministrador()));
+                if (entrenador.getId() != null) {
+                    JOptionPane.showMessageDialog(null, "Se editó exitosamente la cuenta del entrenador: " + this.txtNombre.getText() + " " + this.txtApellidoPaterno.getText() + " " + this.txtApellidoMaterno.getText() + " - ID: " + this.entrenador.getId() + ". ☺", "Registro de entrenador exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                    try {
+                        new PanelAdministrador(this.administrador).setVisible(true);
+                    } catch (Exception ex) {
+                        Logger.getLogger(RegistrarEntrenador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer registrar la cuenta de entrenador.", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ningun campo de registro puede estar vacio.", "¡Error!", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer registrar la cuenta de entrenador.", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
-        }
-        } else {
-            JOptionPane.showMessageDialog(null, "Ningun campo de registro puede estar vacio.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ya existe un usuario " + this.txtUsuario.getText() + ", intente con otro usuario.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            this.txtUsuario.setText("");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Método para limitar la entrada de caracteres en el campo de nombre.
+     *
+     * @param evt Evento de teclado generado al escribir en el campo de nombre.
+     */
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char c = evt.getKeyChar();
+        // Verificar si la tecla presionada es una letra y no es un espacio
+        if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+            evt.consume(); // Consumir la tecla (evita que se escriba en el TextField)
+        }
+        // Verificar la longitud del texto
+        if (txtNombre.getText().length() >= 100) {
+            evt.consume(); // Consumir la tecla si se alcanza la longitud máxima
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    /**
+     * Método para limitar la entrada de caracteres en el campo de apellido
+     * paterno.
+     *
+     * @param evt Evento de teclado generado al escribir en el campo de apellido
+     * paterno.
+     */
+    private void txtApellidoPaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPaternoKeyTyped
+        char c = evt.getKeyChar();
+        // Verificar si la tecla presionada es una letra y no es un espacio
+        if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+            evt.consume(); // Consumir la tecla (evita que se escriba en el TextField)
+        }
+        // Verificar la longitud del texto
+        if (txtNombre.getText().length() >= 100) {
+            evt.consume(); // Consumir la tecla si se alcanza la longitud máxima
+        }
+    }//GEN-LAST:event_txtApellidoPaternoKeyTyped
+
+    /**
+     * Método para limitar la entrada de caracteres en el campo de apellido
+     * materno.
+     *
+     * @param evt Evento de teclado generado al escribir en el campo de apellido
+     * materno.
+     */
+    private void txtApellidoMaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMaternoKeyTyped
+        char c = evt.getKeyChar();
+        // Verificar si la tecla presionada es una letra y no es un espacio
+        if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+            evt.consume(); // Consumir la tecla (evita que se escriba en el TextField)
+        }
+        // Verificar la longitud del texto
+        if (txtNombre.getText().length() >= 100) {
+            evt.consume(); // Consumir la tecla si se alcanza la longitud máxima
+        }
+    }//GEN-LAST:event_txtApellidoMaternoKeyTyped
+
+    /**
+     * Método para limitar la entrada de caracteres en el campo de usuario.
+     *
+     * @param evt Evento de teclado generado al escribir en el campo de usuario.
+     */
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        char c = evt.getKeyChar();
+        // Verificar si la tecla presionada es una letra y no es un espacio
+        if (Character.isWhitespace(c)) {
+            evt.consume(); // Consumir la tecla (evita que se escriba en el TextField)
+        }
+        // Verificar la longitud del texto
+        if (txtNombre.getText().length() >= 30) {
+            evt.consume(); // Consumir la tecla si se alcanza la longitud máxima
+        }
+        // Deshabilita Ctrl+C (Copiar) y Ctrl+V (Pegar)
+        if ((evt.getKeyCode() == KeyEvent.VK_C && evt.isControlDown())
+                || (evt.getKeyCode() == KeyEvent.VK_V && evt.isControlDown())) {
+            evt.consume(); // Consume el evento para evitar que se complete la acción
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    /**
+     * Método para limitar la entrada de caracteres en el campo de contraseña.
+     *
+     * @param evt Evento de teclado generado al escribir en el campo de
+     * contraseña.
+     */
+    private void txtContrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContrasenaKeyTyped
+        char c = evt.getKeyChar();
+        // Verificar si la tecla presionada es una letra y no es un espacio
+        if (Character.isWhitespace(c)) {
+            evt.consume(); // Consumir la tecla (evita que se escriba en el TextField)
+        }
+        // Verificar la longitud del texto
+        if (txtNombre.getText().length() >= 30) {
+            evt.consume(); // Consumir la tecla si se alcanza la longitud máxima
+        }
+        // Deshabilita Ctrl+C (Copiar) y Ctrl+V (Pegar)
+        if ((evt.getKeyCode() == KeyEvent.VK_C && evt.isControlDown())
+                || (evt.getKeyCode() == KeyEvent.VK_V && evt.isControlDown())) {
+            evt.consume(); // Consume el evento para evitar que se complete la acción
+        }
+    }//GEN-LAST:event_txtContrasenaKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

@@ -1,9 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * PanelAdministrador.java
  */
 package GUI.Administrador;
 
+// Importaciones
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
 import Dominio.Administrador;
@@ -20,12 +20,20 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Panel principal para la gestión de entrenadores por parte del administrador.
  *
- * @author brawun
+ * Atributos: - administrador: Objeto de la clase Administrador que representa
+ * al administrador actual. - seleccion: Objeto de la clase Entrenador
+ * seleccionado. - AdministradorDAO: Objeto de la clase AdministradorDAO,
+ * inicializado con el nombre "AppPlanU". - EntrenadoresDAO: Objeto de la clase
+ * EntrenadoresDAO, inicializado con el nombre "AppPlanU". - Validaciones:
+ * Objeto de la clase Validaciones. - Fecha: Objeto de la clase Fecha.
+ *
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class PanelAdministrador extends javax.swing.JFrame {
 
-    //Atributos
+    // Atributos
     Administrador administrador;
     Entrenador seleccion = null;
     AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
@@ -34,7 +42,12 @@ public class PanelAdministrador extends javax.swing.JFrame {
     Fecha Fecha = new Fecha();
 
     /**
-     * Creates new form PanelAdministrador
+     * Constructor de la clase PanelAdministrador.
+     *
+     * @param administrador Objeto de la clase Administrador que representa al
+     * administrador actual.
+     * @throws ParseException Si ocurre un error al parsear la fecha.
+     * @throws Exception Si ocurre una excepción.
      */
     public PanelAdministrador(Administrador administrador) throws ParseException, Exception {
         this.administrador = administrador;
@@ -43,14 +56,30 @@ public class PanelAdministrador extends javax.swing.JFrame {
         cargarTablaEntrenadores();
     }
 
+    /**
+     * Carga la tabla de entrenadores con la información de la base de datos.
+     *
+     * @throws Exception Si ocurre una excepción.
+     */
     private void cargarTablaEntrenadores() throws Exception {
         llenarTabla(EntrenadoresDAO.consultarTodosEntrenadores());
     }
 
+    /**
+     * Llena los textos correspondientes en la interfaz gráfica.
+     *
+     * @throws ParseException Si ocurre un error al parsear la fecha.
+     */
     public void llenarTextos() throws ParseException {
         this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
     }
 
+    /**
+     * Llena la tabla de entrenadores con la lista proporcionada.
+     *
+     * @param listaEntrenadores Lista de entrenadores a mostrar en la tabla.
+     * @throws ParseException Si ocurre un error al parsear la fecha.
+     */
     public void llenarTabla(List<Entrenador> listaEntrenadores) throws ParseException {
         if (!listaEntrenadores.isEmpty()) {
             DefaultTableModel modeloTablaEntrenadores = (DefaultTableModel) this.tblEntrenadores.getModel();
@@ -63,13 +92,19 @@ public class PanelAdministrador extends javax.swing.JFrame {
                     entrenador.getApellidoMaterno(),
                     entrenador.getUsuario(),
                     entrenador.getContrasena(),
-                    Fecha.formatoFecha(entrenador.getFechaRegistro())};
+                    Fecha.formatoFecha(entrenador.getFechaRegistro())
+                };
                 modeloTablaEntrenadores.addRow(filaNueva);
             }
             Validaciones.centrarTabla(tblEntrenadores);
         }
     }
 
+    /**
+     * Obtiene la fila seleccionada en la tabla.
+     *
+     * @return Número de fila seleccionada.
+     */
     public int obtenerFila() {
         try {
             int fila = tblEntrenadores.getSelectedRow();
@@ -433,6 +468,11 @@ public class PanelAdministrador extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción realizada al hacer clic en el botón Seleccionar.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         try {
             int fila = obtenerFila();
@@ -445,15 +485,25 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error: Seleccione un entrenador. (De la tabla 'Entrenadores Registrados').", "¡Error!", JOptionPane.ERROR_MESSAGE);
             }
         } catch (EntityNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer seleccionar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al querer seleccionar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Nuevo Entrenador.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnNuevoEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEntrenadorActionPerformed
         this.dispose();
         new RegistrarEntrenador(this.administrador).setVisible(true);
     }//GEN-LAST:event_btnNuevoEntrenadorActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Ver Entrenador.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnVerEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEntrenadorActionPerformed
         if (seleccion != null) {
             try {
@@ -467,16 +517,21 @@ public class PanelAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVerEntrenadorActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Eliminar Entrenador.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnEliminarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEntrenadorActionPerformed
         if (seleccion != null) {
-            int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el entrenador? (Se eliminaran todos los macrociclos y relacionados registrados por este entrenador)", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar el entrenador? (Se eliminarán todos los macrociclos y relacionados registrados por este entrenador)", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (i == JOptionPane.YES_OPTION) {
                 try {
                     EntrenadoresDAO.eliminarEntrenador(this.seleccion.getId());
-                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente la cuenta del entrenador: " + this.seleccion.getNombre() + " " + this.seleccion.getApellidoPaterno() + " " + this.seleccion.getApellidoMaterno() + " - ID: " + seleccion.getId() + ".", "Eliminacion de entrenador exitosa.", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se eliminó exitosamente la cuenta del entrenador: " + this.seleccion.getNombre() + " " + this.seleccion.getApellidoPaterno() + " " + this.seleccion.getApellidoMaterno() + " - ID: " + seleccion.getId() + ".", "Eliminación de entrenador exitosa.", JOptionPane.INFORMATION_MESSAGE);
                     cargarTablaEntrenadores();
                 } catch (EntityNotFoundException e) {
-                    JOptionPane.showMessageDialog(null, "Ocurrió un errror al querer eliminar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ocurrió un error al querer eliminar al entrenador. Intente de nuevo", "¡Error interno!", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
                     Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -486,44 +541,74 @@ public class PanelAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarEntrenadorActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Administrar Macrociclos.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnAdminMacrociclosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminMacrociclosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAdminMacrociclosActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Configurar Acentos.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnConfigAcentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigAcentosActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
-                + "\n La funcion seleccionada esta por ser \n"
+        JOptionPane.showMessageDialog(null, "Función por agregar: \n"
+                + "\n La función seleccionada está por ser \n"
                 + "agregada en futuras versiones del sistema. \n"
-                + "\n Agradecemos su comprension \n",
+                + "\n Agradecemos su comprensión. \n",
                 "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfigAcentosActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Configurar Personal.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnConfigPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigPersonalActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
-                + "\n La funcion seleccionada esta por ser \n"
+        JOptionPane.showMessageDialog(null, "Función por agregar: \n"
+                + "\n La función seleccionada está por ser \n"
                 + "agregada en futuras versiones del sistema. \n"
-                + "\n Agradecemos su comprension \n",
+                + "\n Agradecemos su comprensión. \n",
                 "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfigPersonalActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Configurar Medios.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnConfigMediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigMediosActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
-                + "\n La funcion seleccionada esta por ser \n"
+        JOptionPane.showMessageDialog(null, "Función por agregar: \n"
+                + "\n La función seleccionada está por ser \n"
                 + "agregada en futuras versiones del sistema. \n"
-                + "\n Agradecemos su comprension \n",
+                + "\n Agradecemos su comprensión. \n",
                 "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfigMediosActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Configurar Deportes.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnConfigDeportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigDeportesActionPerformed
-        JOptionPane.showMessageDialog(null, "Funcion por agregar: \n"
-                + "\n La funcion seleccionada esta por ser \n"
+        JOptionPane.showMessageDialog(null, "Función por agregar: \n"
+                + "\n La función seleccionada está por ser \n"
                 + "agregada en futuras versiones del sistema. \n"
-                + "\n Agradecemos su comprension \n",
+                + "\n Agradecemos su comprensión. \n",
                 "¡Oops!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnConfigDeportesActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Cerrar Sesión.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cerrar sesion?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cerrar sesión?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (i == JOptionPane.YES_OPTION) {
             this.dispose();
             new Login().setVisible(true);
@@ -532,6 +617,11 @@ public class PanelAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Editar Entrenador.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnEditarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEntrenadorActionPerformed
         if (seleccion != null) {
             try {
@@ -545,20 +635,30 @@ public class PanelAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarEntrenadorActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Refrescar Tabla.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnRefrescarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarTablaActionPerformed
         try {
-            JOptionPane.showMessageDialog(null, "Tabla refrescada con exito.", "Tabla refrescada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tabla refrescada con éxito.", "Tabla refrescada", JOptionPane.INFORMATION_MESSAGE);
             this.cargarTablaEntrenadores();
         } catch (Exception ex) {
             Logger.getLogger(PanelAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRefrescarTablaActionPerformed
 
+    /**
+     * Acción realizada al hacer clic en el botón Ayuda.
+     *
+     * @param evt Evento de acción.
+     */
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         JOptionPane.showMessageDialog(null, "Botones y funciones: \n"
                 + " - Configurar Deportes: Registrar y eliminar nuevos deportes. \n"
                 + " - Configurar Personal: Registrar y eliminar personal p.e. metodólogos, jefes de rama, etc.\n"
-                + " - Configurar Acentos: Editar la distribucion de acentos para todos los entrenadores. \n"
+                + " - Configurar Acentos: Editar la distribución de acentos para todos los entrenadores. \n"
                 + " - Configurar Medios: Registrar y eliminar nuevos medios de trabajo en el sistema. \n"
                 + " - Administrar Macrociclos: Consultar, eliminar y editar todos los macrociclos en el sistema. \n"
                 + " - Refrescar Tabla: Refrescar la tabla de Entrenadores Registrados. \n"

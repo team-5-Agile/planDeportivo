@@ -26,66 +26,72 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="lblEncabezadoTitulo" max="32767" attributes="0"/>
           <Component id="lblEncabezadoMacro" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
-              <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
-              <Component id="lblIngreseDatos" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
-              <Component id="lblJefeRama" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="cbxJefeRama" min="-2" pref="321" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="113" pref="113" max="-2" attributes="0"/>
-              <Component id="lblEntrenador" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="txtNombreEntrenador" min="-2" pref="321" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="145" pref="145" max="-2" attributes="0"/>
-              <Component id="lblDeporte" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="cbxDeporte" min="-2" pref="321" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="172" pref="172" max="-2" attributes="0"/>
-              <Component id="lblRama" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="cbxRama" min="-2" pref="320" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
-              <Component id="lblPreparador" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="cbxPreparador" min="-2" pref="320" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="109" pref="109" max="-2" attributes="0"/>
-              <Component id="lblMetodologo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-              <Component id="cbxMetodologo" min="-2" pref="320" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Component id="btnCancelar" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace min="378" pref="378" max="-2" attributes="0"/>
+              <EmptySpace min="377" pref="377" max="-2" attributes="0"/>
               <Component id="btnGuardar" min="-2" pref="120" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="240" pref="240" max="-2" attributes="0"/>
+                      <Component id="lblIngreseDatos" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
+                      <Component id="lblJefeRama" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="cbxJefeRama" min="-2" pref="321" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="113" pref="113" max="-2" attributes="0"/>
+                      <Component id="lblEntrenador" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="txtNombreEntrenador" min="-2" pref="321" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="145" pref="145" max="-2" attributes="0"/>
+                      <Component id="lblDeporte" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="cbxDeporte" min="-2" pref="321" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="172" pref="172" max="-2" attributes="0"/>
+                      <Component id="lblRama" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="cbxRama" min="-2" pref="320" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
+                      <Component id="lblPreparador" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="cbxPreparador" min="-2" pref="320" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="109" pref="109" max="-2" attributes="0"/>
+                      <Component id="lblMetodologo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="cbxMetodologo" min="-2" pref="320" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="lblEncabezadoTitulo" min="-2" max="-2" attributes="0"/>
+              <Component id="lblEncabezadoTitulo" min="-2" pref="48" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="lblEncabezadoMacro" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="lblIngreseDatos" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblJefeRama" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       <Component id="cbxJefeRama" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -93,7 +99,7 @@
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblEntrenador" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       <Component id="txtNombreEntrenador" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -101,7 +107,7 @@
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblDeporte" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       <Component id="cbxDeporte" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -109,7 +115,7 @@
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblRama" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       <Component id="cbxRama" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -117,7 +123,7 @@
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblPreparador" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       <Component id="cbxPreparador" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -125,16 +131,17 @@
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblMetodologo" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       <Component id="cbxMetodologo" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                   <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,7 +160,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblTitulo1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="206" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lblFechaHoy" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -161,8 +170,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblTitulo1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTitulo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFechaHoy" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -174,6 +186,14 @@
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Paso #1: Registro del Macrociclo"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFechaHoy">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="2"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Fecha Hoy"/>
           </Properties>
         </Component>
       </SubComponents>

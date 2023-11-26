@@ -75,6 +75,7 @@ public class EntrenadorNegocioTest {
         expResult.setUsuario(usuario);
         expResult.setContrasena(contrasena);
         expResult.setId(1L);
+        System.out.println("saa".isEmpty());
         Entrenador result = instance.iniciarSesion(usuario, contrasena);
         assertNull(result);
     }

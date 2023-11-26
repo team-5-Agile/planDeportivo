@@ -303,6 +303,9 @@
         <Property name="text" type="java.lang.String" value="Nombre del entrenador"/>
         <Property name="toolTipText" type="java.lang.String" value="Nombre(s) del entrenador"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtApellidoPaterno">
       <Properties>

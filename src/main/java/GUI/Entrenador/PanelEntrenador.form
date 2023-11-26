@@ -24,57 +24,54 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="lblEncabezadoTitulo" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
+              <Component id="lblEncabezadoMacro" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnSeleccionar" max="32767" attributes="0"/>
-                          <Component id="btnCerrarSesion" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                  <Component id="jScrollPanel" min="-2" pref="880" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="btnSeleccionar" min="-2" pref="117" max="-2" attributes="0"/>
+                      <EmptySpace min="72" pref="72" max="-2" attributes="0"/>
                       <Component id="lblSeleccion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="txtSeleccion" min="-2" pref="577" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="359" pref="359" max="-2" attributes="0"/>
+                      <Component id="btnVerMacrociclo" min="-2" pref="191" max="-2" attributes="0"/>
+                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                      <Component id="btnEliminarMacrociclo" min="-2" pref="190" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
-                              <Component id="btnVerMacrociclo" min="-2" pref="191" max="-2" attributes="0"/>
+                              <Component id="chkVigentes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                              <Component id="chkNoVigentes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                              <Component id="chkFuturos" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                              <Component id="chkPasados" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnRefrescarTabla" min="-2" pref="164" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnEliminarMacrociclo" min="-2" pref="190" max="-2" attributes="0"/>
+                              <Component id="btnNuevoMacrociclo" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtSeleccion" min="-2" pref="577" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="chkVigentes" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="chkNoVigentes" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="chkFuturos" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="chkPasados" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnAyuda" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="btnRefrescarTabla" min="-2" pref="164" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnNuevoMacrociclo" min="-2" pref="164" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnAyuda" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jScrollPanel" min="-2" pref="880" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
-          <Component id="lblEncabezadoTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
-          <Component id="lblEncabezadoMacro" alignment="0" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -83,43 +80,48 @@
               <Component id="lblEncabezadoTitulo" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="lblEncabezadoMacro" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAyuda" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnNuevoMacrociclo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chkVigentes" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chkFuturos" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chkPasados" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRefrescarTabla" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chkNoVigentes" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPanel" min="-2" pref="290" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSeleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSeleccion" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="txtSeleccion" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="9" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnVerMacrociclo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEliminarMacrociclo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="chkVigentes" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkNoVigentes" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkFuturos" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkPasados" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAyuda" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnRefrescarTabla" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnNuevoMacrociclo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <Component id="jScrollPanel" min="-2" pref="290" max="-2" attributes="0"/>
+              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                      <Component id="btnSeleccionar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblSeleccion" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="txtSeleccion" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnVerMacrociclo" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEliminarMacrociclo" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -138,9 +140,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblNombreEntrenador" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="447" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="lblFechaHoy" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -189,7 +191,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="684" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="684" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

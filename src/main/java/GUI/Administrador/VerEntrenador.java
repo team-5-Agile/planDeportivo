@@ -1,9 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * VerEntrenador.java
  */
 package GUI.Administrador;
 
+// Importaciones
 import DAOs.AdministradorDAO;
 import DAOs.EntrenadoresDAO;
 import Dominio.Administrador;
@@ -12,15 +12,23 @@ import Herramientas.Fecha;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
+ * Clase que representa la interfaz gráfica para visualizar los detalles de un
+ * entrenador.
  *
- * @author brawun
+ * Atributos: - administrador: Objeto que representa al administrador asociado a
+ * la ventana. - entrenador: Objeto que representa al entrenador cuyos detalles
+ * se están visualizando. - AdministradorDAO: Objeto para acceder a la capa de
+ * acceso a datos de los administradores. - EntrenadoresDAO: Objeto para acceder
+ * a la capa de acceso a datos de los entrenadores. - Fecha: Objeto utilizado
+ * para manejar fechas en el formato deseado.
+ *
+ * @author Equipo #5 - Metodologías Ágiles de Desarrollo
  */
 public class VerEntrenador extends javax.swing.JFrame {
 
-    //Atributos
+    // Atributos
     Administrador administrador;
     Entrenador entrenador;
     AdministradorDAO AdministradorDAO = new AdministradorDAO("AppPlanU");
@@ -28,7 +36,12 @@ public class VerEntrenador extends javax.swing.JFrame {
     Fecha Fecha = new Fecha();
 
     /**
-     * Creates new form RegistrarEntrenador
+     * Constructor de la clase VerEntrenador.
+     *
+     * @param administrador Objeto Administrador asociado a la ventana.
+     * @param entrenador Objeto Entrenador cuyos detalles se visualizarán.
+     * @throws ParseException Excepción lanzada en caso de error de formato de
+     * fecha.
      */
     public VerEntrenador(Administrador administrador, Entrenador entrenador) throws ParseException {
         this.administrador = administrador;
@@ -36,9 +49,15 @@ public class VerEntrenador extends javax.swing.JFrame {
         initComponents();
         llenarTextos();
     }
-    
+
+    /**
+     * Método que llena los campos de texto con los detalles del entrenador.
+     *
+     * @throws ParseException Excepción lanzada en caso de error de formato de
+     * fecha.
+     */
     public void llenarTextos() throws ParseException {
-        // Insercion de datos a mostrar
+        // Inserción de datos a mostrar
         this.txtID.setText(this.entrenador.getId().toString());
         this.txtFechaRegistro.setText(Fecha.formatoFecha(this.entrenador.getFechaRegistro()));
         this.txtNombre.setText(this.entrenador.getNombre());
@@ -292,11 +311,18 @@ public class VerEntrenador extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método invocado al hacer clic en el botón de regresar. Cierra la ventana
+     * actual y abre el panel del administrador.
+     *
+     * @param evt Objeto que representa el evento de clic.
+     */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
         try {
             new PanelAdministrador(this.administrador).setVisible(true);
         } catch (Exception ex) {
+            // Manejo de excepciones y registro en el log en caso de error
             Logger.getLogger(VerEntrenador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRegresarActionPerformed
