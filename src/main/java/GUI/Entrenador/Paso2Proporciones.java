@@ -26,7 +26,8 @@ import javax.swing.JOptionPane;
  * @author el_fr
  */
 public class Paso2Proporciones extends javax.swing.JFrame {
-
+    
+    
     Entrenador entrenador;
     Macrociclo macrociclo;
     Etapa etapaGeneral;
@@ -47,6 +48,8 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         llenarTextos();
         setLocationRelativeTo(null);
     }
+    
+    
 
     public void llenarTextos() throws ParseException {
         this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));

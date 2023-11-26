@@ -101,7 +101,6 @@ public class Etapa implements Serializable {
     }
     
     /**
-     * Constructor con parámetros.
      *
      * @param tipo Tipo de etapa.
      * @param duracionSemanas Duración en semanas de la etapa.
@@ -115,9 +114,7 @@ public class Etapa implements Serializable {
         this.macrociclo = macrociclo;
     }
 
-    /**
-     * Constructor con parámetros.
-     *
+     /*
      * @param id Identificador único de la etapa.
      * @param tipo Tipo de etapa.
      * @param duracionSemanas Duración en semanas de la etapa.

@@ -71,7 +71,7 @@ public class Fecha {
         // Retornar la diferencia en días
         return diferenciaDias;
     }
-
+    
     /**
      * Crea un objeto Calendar con la fecha especificada.
      *

@@ -680,14 +680,14 @@ public class VerEtapas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerMediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMediosActionPerformed
+    private void btnVerMediosActionPerformed(java.awt.event.ActionEvent evt) {                                             
         try {
             this.dispose();
             new VerMedios(this.entrenador, this.macrociclo, this.etapaGeneral, this.etapaEspecial, this.etapaCompetitiva, this.totalSemanasMacrociclo).setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(VerMacrociclo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnVerMediosActionPerformed
+    }
 
     private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
         try {

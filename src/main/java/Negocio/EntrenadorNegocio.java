@@ -61,10 +61,10 @@ public class EntrenadorNegocio {
     public Entrenador iniciarSesion(String usuario, String contrasena) throws Exception {
         try {
             Entrenador entrenador;
-            if (usuario.isBlank()) {
+            if (usuario.isEmpty()) {
                 throw new InputException("Debe llenar el campo usuario", "usuario"); // Valida entrada de usuario.
             }
-            if (contrasena.isBlank()) {
+            if (contrasena.isEmpty()) {
                 throw new InputException("Debe llenar el campo contraseña", "contrasena"); // Valida entrada de contraseña.
             }
             entrenador = dao.iniciarSesionEntrenador(usuario, contrasena); // Llama a la capa DAO para iniciar sesión.
