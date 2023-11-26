@@ -5,11 +5,14 @@ package DAOs;
 
 import Interfaces.BaseDAO;
 import Dominio.Etapa;
+import Dominio.Macrociclo;
 import Herramientas.Fecha;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * Clase que implementa operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
@@ -127,5 +130,26 @@ public class EtapasDAO implements BaseDAO {
         entityManager.getTransaction().commit();
         entityManager.close();
         return etapa != null;
-    }   
+    } 
+    
+    /**
+     * Consulta todos los macrociclos asociados a un entrenador en particular,
+     * sin tener en cuenta la vigencia.
+     *
+     * @param macrociclo El macrociclo para el cual se consulta.
+     * @return Lista de todos las etapas asociadas al macrociclo.
+     * @throws Exception Si hay algún error en la consulta.
+     */
+    public List<Etapa> consultarEtapasMacrociclo(Macrociclo macrociclo) throws Exception {
+        EntityManager entityManager = this.getEntityManager();
+        entityManager.getTransaction().begin();
+        TypedQuery<Etapa> query;
+        String jpql = "SELECT e FROM Etapa e WHERE e.macrociclo = :macrociclo";
+        query = entityManager.createQuery(jpql, Etapa.class);
+        query.setParameter("macrociclo", macrociclo);
+        List<Etapa> etapas = query.getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return etapas;
+    }
 }

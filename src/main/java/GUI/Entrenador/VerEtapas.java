@@ -4,17 +4,111 @@
  */
 package GUI.Entrenador;
 
+import DAOs.EtapasDAO;
+import DAOs.MacrociclosDAO;
+import Dominio.Entrenador;
+import Dominio.Etapa;
+import Dominio.Macrociclo;
+import static Enumeradores.TipoEtapa.COMPETITIVA;
+import static Enumeradores.TipoEtapa.ESPECIAL;
+import static Enumeradores.TipoEtapa.GENERAL;
+import Herramientas.Fecha;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author brawun
  */
 public class VerEtapas extends javax.swing.JFrame {
 
+    Integer totalSemanasMacrociclo;
+    Calendar fechaActual;
+    Entrenador entrenador;
+    Macrociclo macrociclo;
+    Etapa etapaGeneral;
+    Etapa etapaEspecial;
+    Etapa etapaCompetitiva;
+    EtapasDAO EtapasDAO = new EtapasDAO("AppPlanU");
+    MacrociclosDAO MacrociclosDAO = new MacrociclosDAO("AppPlanU");
+    Fecha Fecha = new Fecha();
+
     /**
      * Creates new form VerEtapas
      */
-    public VerEtapas() {
+    public VerEtapas(Entrenador entrenador, Macrociclo macrociclo) throws Exception {
+        this.entrenador = entrenador;
+        this.macrociclo = macrociclo;
+        this.fechaActual = this.macrociclo.getFechaInicio();
         initComponents();
+        asignarEtapas();
+        calcularTotalSemanas();
+        llenarTextos();
+    }
+
+    public void llenarTextos() throws ParseException {
+        // Insercion de titulo
+        this.lblDeporteTitulo.setText(this.macrociclo.getDeporte());
+        this.lblRamaTitulo.setText(this.macrociclo.getRama().name());
+        this.lblIDTitulo.setText(this.macrociclo.getId().toString());
+        this.lblTotalSemanas.setText(this.totalSemanasMacrociclo.toString());
+        // Panel Etapa General
+        this.txtIDGeneral.setText(this.etapaGeneral.getId().toString());
+        this.txtPorcentajeGeneral.setText(this.etapaGeneral.getProporcion().toString());
+        this.txtSemanasGeneral.setText(this.etapaGeneral.getDuracionSemanas().toString());
+        this.txtInicioGeneral.setText(Fecha.formatoFecha(this.fechaActual));
+        sumarSemanasFechaActual(this.etapaGeneral.getDuracionSemanas());
+        this.txtFinGeneral.setText(Fecha.formatoFecha(this.fechaActual));
+        // Panel Etapa Especial
+        this.txtIDEspecial.setText(this.etapaEspecial.getId().toString());
+        this.txtPorcentajeEspecial.setText(this.etapaEspecial.getProporcion().toString());
+        this.txtSemanasEspecial.setText(this.etapaEspecial.getDuracionSemanas().toString());
+        this.txtInicioEspecial.setText(Fecha.formatoFecha(this.fechaActual));
+        sumarSemanasFechaActual(this.etapaEspecial.getDuracionSemanas());
+        this.txtFinEspecial.setText(Fecha.formatoFecha(this.fechaActual));
+        // Panel Etapa Competitiva
+        this.txtIDCompetitiva.setText(this.etapaCompetitiva.getId().toString());
+        this.txtPorcentajeCompetitiva.setText(this.etapaCompetitiva.getProporcion().toString());
+        this.txtSemanasCompetitiva.setText(this.etapaCompetitiva.getDuracionSemanas().toString());
+        this.txtInicioCompetitiva.setText(Fecha.formatoFecha(this.fechaActual));
+        sumarSemanasFechaActual(this.etapaCompetitiva.getDuracionSemanas());
+        this.txtFinCompetitiva.setText(Fecha.formatoFecha(this.fechaActual));
+    }
+    
+    public void sumarSemanasFechaActual(Integer semanas) {
+        this.fechaActual = Fecha.sumarSemanas(this.fechaActual, semanas);
+    }
+    
+    public void calcularTotalSemanas() {
+        Integer semanasGeneral = this.etapaGeneral.getDuracionSemanas();
+        Integer semanasEspecial = this.etapaEspecial.getDuracionSemanas();
+        Integer semanasCompetitiva = this.etapaCompetitiva.getDuracionSemanas();
+        this.totalSemanasMacrociclo = semanasCompetitiva + semanasEspecial + semanasGeneral;
+    }
+
+    public void asignarEtapas() throws Exception {
+        List<Etapa> Etapas = EtapasDAO.consultarEtapasMacrociclo(this.macrociclo);
+        for (int i = 0; i < 3; i++) {
+            asignarEtapasSwitch(Etapas.get(i));
+        }
+    }
+
+    public void asignarEtapasSwitch(Etapa etapa) {
+        // Asignar tipo de etapas
+        switch (etapa.getTipo()) {
+            case GENERAL:
+                this.etapaGeneral = etapa;
+                break;
+            case ESPECIAL:
+                this.etapaEspecial = etapa;
+                break;
+            case COMPETITIVA:
+                this.etapaCompetitiva = etapa;
+                break;
+        }
     }
 
     /**
@@ -26,23 +120,641 @@ public class VerEtapas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lblEncabezadoTitulo = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        lblEncabezadoMacro = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblGuion1 = new javax.swing.JLabel();
+        lblGuion2 = new javax.swing.JLabel();
+        lblRamaTitulo = new javax.swing.JLabel();
+        lblNum = new javax.swing.JLabel();
+        lblDeporteTitulo = new javax.swing.JLabel();
+        lblIDTitulo = new javax.swing.JLabel();
+        pnlGeneral = new javax.swing.JPanel();
+        pnlTituloGeneral = new javax.swing.JPanel();
+        lblEtapaGeneral = new javax.swing.JLabel();
+        txtPorcentajeGeneral = new javax.swing.JTextField();
+        txtIDGeneral = new javax.swing.JTextField();
+        txtSemanasGeneral = new javax.swing.JTextField();
+        txtInicioGeneral = new javax.swing.JTextField();
+        txtFinGeneral = new javax.swing.JTextField();
+        lblFinGeneral = new javax.swing.JLabel();
+        lblPorcentajeGeneral = new javax.swing.JLabel();
+        lblInicioGeneral = new javax.swing.JLabel();
+        lblSemanasGeneral = new javax.swing.JLabel();
+        lblPorcientoGeneral = new javax.swing.JLabel();
+        lblIDGeneral = new javax.swing.JLabel();
+        pnlEspecial = new javax.swing.JPanel();
+        pnlTituloEspecial = new javax.swing.JPanel();
+        lblEtapaEspecial = new javax.swing.JLabel();
+        txtPorcentajeEspecial = new javax.swing.JTextField();
+        txtIDEspecial = new javax.swing.JTextField();
+        txtSemanasEspecial = new javax.swing.JTextField();
+        txtInicioEspecial = new javax.swing.JTextField();
+        txtFinEspecial = new javax.swing.JTextField();
+        lblFinEspecial = new javax.swing.JLabel();
+        lblPorcentajeEspecial = new javax.swing.JLabel();
+        lblInicioEspecial = new javax.swing.JLabel();
+        lblSemanasEspecial = new javax.swing.JLabel();
+        lblPorcientoEspecial = new javax.swing.JLabel();
+        lblIDEspecial = new javax.swing.JLabel();
+        pnlComopetitiva = new javax.swing.JPanel();
+        pnlTituloCompetitiva = new javax.swing.JPanel();
+        lblEtapaCompetitiva = new javax.swing.JLabel();
+        txtPorcentajeCompetitiva = new javax.swing.JTextField();
+        txtIDCompetitiva = new javax.swing.JTextField();
+        txtSemanasCompetitiva = new javax.swing.JTextField();
+        txtInicioCompetitiva = new javax.swing.JTextField();
+        txtFinCompetitiva = new javax.swing.JTextField();
+        lblFinCompetitiva = new javax.swing.JLabel();
+        lblPorcentajeCompetitiva = new javax.swing.JLabel();
+        lblInicioCompetitiva = new javax.swing.JLabel();
+        lblSemanasCompetitiva = new javax.swing.JLabel();
+        lblPorcientoCompetitiva = new javax.swing.JLabel();
+        lblIDCompetitiva = new javax.swing.JLabel();
+        btnVerMedios = new javax.swing.JButton();
+        btnVerDatos = new javax.swing.JButton();
+        lblTotalSemanas = new javax.swing.JLabel();
+        txtTotalSemanas = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Ver Etapas");
+
+        lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo1.setText("Etapas del Macrociclo");
+
+        javax.swing.GroupLayout lblEncabezadoTituloLayout = new javax.swing.GroupLayout(lblEncabezadoTitulo);
+        lblEncabezadoTitulo.setLayout(lblEncabezadoTituloLayout);
+        lblEncabezadoTituloLayout.setHorizontalGroup(
+            lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        lblEncabezadoTituloLayout.setVerticalGroup(
+            lblEncabezadoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo1)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitulo.setText("Ver Etapas");
+
+        lblGuion1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblGuion1.setText("-");
+
+        lblGuion2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblGuion2.setText("-");
+
+        lblRamaTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblRamaTitulo.setText("Rama");
+
+        lblNum.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNum.setText("#");
+
+        lblDeporteTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDeporteTitulo.setText("Deporte");
+
+        lblIDTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIDTitulo.setText("ID");
+
+        javax.swing.GroupLayout lblEncabezadoMacroLayout = new javax.swing.GroupLayout(lblEncabezadoMacro);
+        lblEncabezadoMacro.setLayout(lblEncabezadoMacroLayout);
+        lblEncabezadoMacroLayout.setHorizontalGroup(
+            lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 409, Short.MAX_VALUE)
+                .addComponent(lblDeporteTitulo)
+                .addGap(32, 32, 32)
+                .addComponent(lblGuion1)
+                .addGap(35, 35, 35)
+                .addComponent(lblRamaTitulo)
+                .addGap(37, 37, 37)
+                .addComponent(lblGuion2)
+                .addGap(35, 35, 35)
+                .addComponent(lblNum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIDTitulo)
+                .addGap(17, 17, 17))
+        );
+        lblEncabezadoMacroLayout.setVerticalGroup(
+            lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lblEncabezadoMacroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(lblDeporteTitulo)
+                    .addComponent(lblRamaTitulo)
+                    .addComponent(lblIDTitulo)
+                    .addComponent(lblNum)
+                    .addComponent(lblGuion1)
+                    .addComponent(lblGuion2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlGeneral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        pnlTituloGeneral.setBackground(new java.awt.Color(105, 209, 80));
+
+        lblEtapaGeneral.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEtapaGeneral.setText("Etapa General");
+
+        javax.swing.GroupLayout pnlTituloGeneralLayout = new javax.swing.GroupLayout(pnlTituloGeneral);
+        pnlTituloGeneral.setLayout(pnlTituloGeneralLayout);
+        pnlTituloGeneralLayout.setHorizontalGroup(
+            pnlTituloGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloGeneralLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblEtapaGeneral)
+                .addGap(55, 55, 55))
+        );
+        pnlTituloGeneralLayout.setVerticalGroup(
+            pnlTituloGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloGeneralLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(lblEtapaGeneral)
+                .addContainerGap())
+        );
+
+        txtPorcentajeGeneral.setEditable(false);
+        txtPorcentajeGeneral.setText("Gen.");
+
+        txtIDGeneral.setEditable(false);
+        txtIDGeneral.setText("ID General");
+
+        txtSemanasGeneral.setEditable(false);
+        txtSemanasGeneral.setText("Semanas Gen.");
+
+        txtInicioGeneral.setEditable(false);
+        txtInicioGeneral.setText("Inicio General");
+
+        txtFinGeneral.setEditable(false);
+        txtFinGeneral.setText("Fin General");
+
+        lblFinGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFinGeneral.setText("Fin:");
+
+        lblPorcentajeGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPorcentajeGeneral.setText("Porcentaje:");
+
+        lblInicioGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblInicioGeneral.setText("Inicio:");
+
+        lblSemanasGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSemanasGeneral.setText("Semanas:");
+
+        lblPorcientoGeneral.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPorcientoGeneral.setText("% ");
+
+        lblIDGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIDGeneral.setText("ID:");
+
+        javax.swing.GroupLayout pnlGeneralLayout = new javax.swing.GroupLayout(pnlGeneral);
+        pnlGeneral.setLayout(pnlGeneralLayout);
+        pnlGeneralLayout.setHorizontalGroup(
+            pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlGeneralLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPorcentajeGeneral)
+                    .addComponent(lblSemanasGeneral)
+                    .addComponent(lblIDGeneral)
+                    .addComponent(lblInicioGeneral)
+                    .addComponent(lblFinGeneral))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtFinGeneral)
+                        .addComponent(txtInicioGeneral)
+                        .addComponent(txtSemanasGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlGeneralLayout.createSequentialGroup()
+                        .addComponent(txtPorcentajeGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPorcientoGeneral))
+                    .addComponent(txtIDGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+            .addComponent(pnlTituloGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnlGeneralLayout.setVerticalGroup(
+            pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGeneralLayout.createSequentialGroup()
+                .addComponent(pnlTituloGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlGeneralLayout.createSequentialGroup()
+                        .addComponent(lblIDGeneral)
+                        .addGap(13, 13, 13)
+                        .addComponent(lblPorcentajeGeneral)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSemanasGeneral)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblInicioGeneral)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFinGeneral))
+                    .addGroup(pnlGeneralLayout.createSequentialGroup()
+                        .addComponent(txtIDGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPorcentajeGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPorcientoGeneral))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSemanasGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtInicioGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFinGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
+        );
+
+        pnlEspecial.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        pnlTituloEspecial.setBackground(new java.awt.Color(209, 203, 80));
+
+        lblEtapaEspecial.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEtapaEspecial.setText("Etapa Especial");
+
+        javax.swing.GroupLayout pnlTituloEspecialLayout = new javax.swing.GroupLayout(pnlTituloEspecial);
+        pnlTituloEspecial.setLayout(pnlTituloEspecialLayout);
+        pnlTituloEspecialLayout.setHorizontalGroup(
+            pnlTituloEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloEspecialLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblEtapaEspecial)
+                .addGap(55, 55, 55))
+        );
+        pnlTituloEspecialLayout.setVerticalGroup(
+            pnlTituloEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloEspecialLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(lblEtapaEspecial)
+                .addContainerGap())
+        );
+
+        txtPorcentajeEspecial.setEditable(false);
+        txtPorcentajeEspecial.setText("Esp.");
+
+        txtIDEspecial.setEditable(false);
+        txtIDEspecial.setText("ID Especial");
+
+        txtSemanasEspecial.setEditable(false);
+        txtSemanasEspecial.setText("Semanas Esp.");
+
+        txtInicioEspecial.setEditable(false);
+        txtInicioEspecial.setText("Inicio Especial");
+
+        txtFinEspecial.setEditable(false);
+        txtFinEspecial.setText("Fin Especial");
+
+        lblFinEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFinEspecial.setText("Fin:");
+
+        lblPorcentajeEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPorcentajeEspecial.setText("Porcentaje:");
+
+        lblInicioEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblInicioEspecial.setText("Inicio:");
+
+        lblSemanasEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSemanasEspecial.setText("Semanas:");
+
+        lblPorcientoEspecial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPorcientoEspecial.setText("% ");
+
+        lblIDEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIDEspecial.setText("ID:");
+
+        javax.swing.GroupLayout pnlEspecialLayout = new javax.swing.GroupLayout(pnlEspecial);
+        pnlEspecial.setLayout(pnlEspecialLayout);
+        pnlEspecialLayout.setHorizontalGroup(
+            pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEspecialLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPorcentajeEspecial)
+                    .addComponent(lblSemanasEspecial)
+                    .addComponent(lblIDEspecial)
+                    .addComponent(lblInicioEspecial)
+                    .addComponent(lblFinEspecial))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtFinEspecial)
+                        .addComponent(txtInicioEspecial)
+                        .addComponent(txtSemanasEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEspecialLayout.createSequentialGroup()
+                        .addComponent(txtPorcentajeEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPorcientoEspecial))
+                    .addComponent(txtIDEspecial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+            .addComponent(pnlTituloEspecial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnlEspecialLayout.setVerticalGroup(
+            pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEspecialLayout.createSequentialGroup()
+                .addComponent(pnlTituloEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEspecialLayout.createSequentialGroup()
+                        .addComponent(lblIDEspecial)
+                        .addGap(13, 13, 13)
+                        .addComponent(lblPorcentajeEspecial)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSemanasEspecial)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblInicioEspecial)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFinEspecial))
+                    .addGroup(pnlEspecialLayout.createSequentialGroup()
+                        .addComponent(txtIDEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPorcentajeEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPorcientoEspecial))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSemanasEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtInicioEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFinEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
+        );
+
+        pnlComopetitiva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        pnlTituloCompetitiva.setBackground(new java.awt.Color(209, 80, 80));
+
+        lblEtapaCompetitiva.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEtapaCompetitiva.setText("Etapa Competitiva");
+
+        javax.swing.GroupLayout pnlTituloCompetitivaLayout = new javax.swing.GroupLayout(pnlTituloCompetitiva);
+        pnlTituloCompetitiva.setLayout(pnlTituloCompetitivaLayout);
+        pnlTituloCompetitivaLayout.setHorizontalGroup(
+            pnlTituloCompetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloCompetitivaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblEtapaCompetitiva)
+                .addGap(33, 33, 33))
+        );
+        pnlTituloCompetitivaLayout.setVerticalGroup(
+            pnlTituloCompetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTituloCompetitivaLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(lblEtapaCompetitiva)
+                .addContainerGap())
+        );
+
+        txtPorcentajeCompetitiva.setEditable(false);
+        txtPorcentajeCompetitiva.setText("Com.");
+
+        txtIDCompetitiva.setEditable(false);
+        txtIDCompetitiva.setText("ID Competitiva");
+
+        txtSemanasCompetitiva.setEditable(false);
+        txtSemanasCompetitiva.setText("Semanas Com.");
+
+        txtInicioCompetitiva.setEditable(false);
+        txtInicioCompetitiva.setText("Inicio Com.");
+
+        txtFinCompetitiva.setEditable(false);
+        txtFinCompetitiva.setText("Fin Competitiva");
+
+        lblFinCompetitiva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFinCompetitiva.setText("Fin:");
+
+        lblPorcentajeCompetitiva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPorcentajeCompetitiva.setText("Porcentaje:");
+
+        lblInicioCompetitiva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblInicioCompetitiva.setText("Inicio:");
+
+        lblSemanasCompetitiva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSemanasCompetitiva.setText("Semanas:");
+
+        lblPorcientoCompetitiva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPorcientoCompetitiva.setText("% ");
+
+        lblIDCompetitiva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIDCompetitiva.setText("ID:");
+
+        javax.swing.GroupLayout pnlComopetitivaLayout = new javax.swing.GroupLayout(pnlComopetitiva);
+        pnlComopetitiva.setLayout(pnlComopetitivaLayout);
+        pnlComopetitivaLayout.setHorizontalGroup(
+            pnlComopetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlComopetitivaLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(pnlComopetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPorcentajeCompetitiva)
+                    .addComponent(lblSemanasCompetitiva)
+                    .addComponent(lblIDCompetitiva)
+                    .addComponent(lblInicioCompetitiva)
+                    .addComponent(lblFinCompetitiva))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlComopetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlComopetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtFinCompetitiva)
+                        .addComponent(txtInicioCompetitiva)
+                        .addComponent(txtSemanasCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlComopetitivaLayout.createSequentialGroup()
+                        .addComponent(txtPorcentajeCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPorcientoCompetitiva))
+                    .addComponent(txtIDCompetitiva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+            .addComponent(pnlTituloCompetitiva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnlComopetitivaLayout.setVerticalGroup(
+            pnlComopetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlComopetitivaLayout.createSequentialGroup()
+                .addComponent(pnlTituloCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(pnlComopetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlComopetitivaLayout.createSequentialGroup()
+                        .addComponent(lblIDCompetitiva)
+                        .addGap(13, 13, 13)
+                        .addComponent(lblPorcentajeCompetitiva)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSemanasCompetitiva)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblInicioCompetitiva)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFinCompetitiva))
+                    .addGroup(pnlComopetitivaLayout.createSequentialGroup()
+                        .addComponent(txtIDCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlComopetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPorcentajeCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPorcientoCompetitiva))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSemanasCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtInicioCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFinCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
+        );
+
+        btnVerMedios.setBackground(new java.awt.Color(153, 153, 255));
+        btnVerMedios.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnVerMedios.setText("Ver Medios");
+        btnVerMedios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerMedios.setOpaque(true);
+        btnVerMedios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerMediosActionPerformed(evt);
+            }
+        });
+
+        btnVerDatos.setBackground(new java.awt.Color(153, 153, 255));
+        btnVerDatos.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnVerDatos.setText("Ver Datos");
+        btnVerDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerDatos.setOpaque(true);
+        btnVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerDatosActionPerformed(evt);
+            }
+        });
+
+        lblTotalSemanas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTotalSemanas.setText("Total de semanas:");
+
+        txtTotalSemanas.setEditable(false);
+        txtTotalSemanas.setText("Total Semanas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVerDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTotalSemanas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTotalSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152)
+                        .addComponent(btnVerMedios, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlComopetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlComopetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVerMedios)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnVerDatos)
+                        .addComponent(lblTotalSemanas)
+                        .addComponent(txtTotalSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVerMediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMediosActionPerformed
+        try {
+            this.dispose();
+            new VerMedios(this.entrenador, this.macrociclo, this.etapaGeneral, this.etapaEspecial, this.etapaCompetitiva, this.totalSemanasMacrociclo).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(VerMacrociclo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVerMediosActionPerformed
+
+    private void btnVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDatosActionPerformed
+        try {
+            this.dispose();
+            new VerMacrociclo(this.entrenador, this.macrociclo).setVisible(true);
+        } catch (ParseException ex) {
+            Logger.getLogger(PanelEntrenador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVerDatosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVerDatos;
+    private javax.swing.JButton btnVerMedios;
+    private javax.swing.JLabel lblDeporteTitulo;
+    private javax.swing.JPanel lblEncabezadoMacro;
+    private javax.swing.JPanel lblEncabezadoTitulo;
+    private javax.swing.JLabel lblEtapaCompetitiva;
+    private javax.swing.JLabel lblEtapaEspecial;
+    private javax.swing.JLabel lblEtapaGeneral;
+    private javax.swing.JLabel lblFinCompetitiva;
+    private javax.swing.JLabel lblFinEspecial;
+    private javax.swing.JLabel lblFinGeneral;
+    private javax.swing.JLabel lblGuion1;
+    private javax.swing.JLabel lblGuion2;
+    private javax.swing.JLabel lblIDCompetitiva;
+    private javax.swing.JLabel lblIDEspecial;
+    private javax.swing.JLabel lblIDGeneral;
+    private javax.swing.JLabel lblIDTitulo;
+    private javax.swing.JLabel lblInicioCompetitiva;
+    private javax.swing.JLabel lblInicioEspecial;
+    private javax.swing.JLabel lblInicioGeneral;
+    private javax.swing.JLabel lblNum;
+    private javax.swing.JLabel lblPorcentajeCompetitiva;
+    private javax.swing.JLabel lblPorcentajeEspecial;
+    private javax.swing.JLabel lblPorcentajeGeneral;
+    private javax.swing.JLabel lblPorcientoCompetitiva;
+    private javax.swing.JLabel lblPorcientoEspecial;
+    private javax.swing.JLabel lblPorcientoGeneral;
+    private javax.swing.JLabel lblRamaTitulo;
+    private javax.swing.JLabel lblSemanasCompetitiva;
+    private javax.swing.JLabel lblSemanasEspecial;
+    private javax.swing.JLabel lblSemanasGeneral;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JLabel lblTotalSemanas;
+    private javax.swing.JPanel pnlComopetitiva;
+    private javax.swing.JPanel pnlEspecial;
+    private javax.swing.JPanel pnlGeneral;
+    private javax.swing.JPanel pnlTituloCompetitiva;
+    private javax.swing.JPanel pnlTituloEspecial;
+    private javax.swing.JPanel pnlTituloGeneral;
+    private javax.swing.JTextField txtFinCompetitiva;
+    private javax.swing.JTextField txtFinEspecial;
+    private javax.swing.JTextField txtFinGeneral;
+    private javax.swing.JTextField txtIDCompetitiva;
+    private javax.swing.JTextField txtIDEspecial;
+    private javax.swing.JTextField txtIDGeneral;
+    private javax.swing.JTextField txtInicioCompetitiva;
+    private javax.swing.JTextField txtInicioEspecial;
+    private javax.swing.JTextField txtInicioGeneral;
+    private javax.swing.JTextField txtPorcentajeCompetitiva;
+    private javax.swing.JTextField txtPorcentajeEspecial;
+    private javax.swing.JTextField txtPorcentajeGeneral;
+    private javax.swing.JTextField txtSemanasCompetitiva;
+    private javax.swing.JTextField txtSemanasEspecial;
+    private javax.swing.JTextField txtSemanasGeneral;
+    private javax.swing.JTextField txtTotalSemanas;
     // End of variables declaration//GEN-END:variables
 }

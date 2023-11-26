@@ -80,8 +80,8 @@ public class Paso3Medios extends javax.swing.JFrame {
         lblNum = new javax.swing.JLabel();
         lblGuion1 = new javax.swing.JLabel();
         lblGuion2 = new javax.swing.JLabel();
-        btnSiguiente = new javax.swing.JButton();
-        btnAtras = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,24 +176,24 @@ public class Paso3Medios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnSiguiente.setBackground(new java.awt.Color(204, 255, 204));
-        btnSiguiente.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        btnSiguiente.setText("Finalizar");
-        btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSiguiente.setOpaque(true);
-        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizar.setBackground(new java.awt.Color(204, 255, 204));
+        btnFinalizar.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnFinalizar.setText("Finalizar");
+        btnFinalizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFinalizar.setOpaque(true);
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiguienteActionPerformed(evt);
+                btnFinalizarActionPerformed(evt);
             }
         });
 
-        btnAtras.setBackground(new java.awt.Color(255, 153, 153));
-        btnAtras.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        btnAtras.setText("Cancelar");
-        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(255, 153, 153));
+        btnCancelar.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtrasActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -205,9 +205,9 @@ public class Paso3Medios extends javax.swing.JFrame {
             .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(btnAtras)
+                .addComponent(btnCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSiguiente)
+                .addComponent(btnFinalizar)
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -218,20 +218,21 @@ public class Paso3Medios extends javax.swing.JFrame {
                 .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSiguiente)
-                    .addComponent(btnAtras))
+                    .addComponent(btnFinalizar)
+                    .addComponent(btnCancelar))
                 .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         if (verificarCamposVacios()) {
-            registrarMedios(); //Generar las etapas y relacionarlas al macrociclo
+            registrarMedios(); // Generar los medios y relacionarlos a cada etapa 
             this.dispose(); // Se cierra la ventana actual
             try {
-                // Se abre el panel 
+                // Se abre el panel de entrenador
+                new PanelEntrenador(entrenador).setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(Paso3Medios.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -239,9 +240,9 @@ public class Paso3Medios extends javax.swing.JFrame {
             // Si algún campo está vacío, se muestra un mensaje de error
             JOptionPane.showMessageDialog(null, "Ningún campo de registro puede estar vacío.", "¡Error!", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnSiguienteActionPerformed
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
-    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         int i = JOptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar el registro? (Toda información relacionada a este macrociclo será eliminada)", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (i == JOptionPane.YES_OPTION) {
             this.dispose();
@@ -254,12 +255,12 @@ public class Paso3Medios extends javax.swing.JFrame {
         } else {
             this.setVisible(true);
         }
-    }//GEN-LAST:event_btnAtrasActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JLabel lblDeporte;
     private javax.swing.JPanel lblEncabezadoMacro;
     private javax.swing.JPanel lblEncabezadoTitulo;

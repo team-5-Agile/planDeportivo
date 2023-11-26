@@ -8,8 +8,6 @@ import Dominio.Entrenador;
 import Dominio.Macrociclo;
 import Herramientas.Fecha;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -99,4 +99,21 @@ public class Fecha {
         // Se crea un objeto Date a partir del Instant.
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
+    
+    /**
+     * Suma un número específico de semanas a una fecha inicial y devuelve la nueva fecha.
+     *
+     * @param fechaInicial La fecha inicial a la que se sumarán las semanas.
+     * @param semanas      El número de semanas a sumar.
+     * @return Un nuevo objeto Calendar con la fecha resultante después de sumar las semanas.
+     */
+    public Calendar sumarSemanas(Calendar fechaInicial, int semanas) {
+        // Clonar la fecha inicial para evitar modificar el objeto original
+        Calendar nuevaFecha = (Calendar) fechaInicial.clone();
+
+        // Sumar el número de semanas
+        nuevaFecha.add(Calendar.WEEK_OF_YEAR, semanas);
+
+        return nuevaFecha;
+    }
 }

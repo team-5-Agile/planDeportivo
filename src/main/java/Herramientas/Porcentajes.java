@@ -32,4 +32,22 @@ public class Porcentajes {
         Double resultado = (porcentajeDividido / 100) * porcentajeInicial;
         return resultado;
     }
+    
+    /**
+     * Calcula la cantidad que representa un porcentaje del total.
+     *
+     * @param total El número total del cual se calculará el porcentaje.
+     * @param porcentaje El porcentaje a calcular (debe estar en el rango de 0 a 100).
+     * @return La cantidad que representa el porcentaje del total.
+     * @throws IllegalArgumentException Si el porcentaje está fuera del rango válido.
+     */
+    public static double calcularPorcentaje(int total, int porcentaje) {
+        // Verificar que el porcentaje esté en el rango válido
+        if (porcentaje < 0 || porcentaje > 100) {
+            throw new IllegalArgumentException("El porcentaje debe estar en el rango de 0 a 100.");
+        }
+
+        // Calcular la cantidad que representa el porcentaje del total
+        return (porcentaje / 100.0) * total;
+    }
 }
