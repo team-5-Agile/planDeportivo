@@ -159,6 +159,7 @@ public class PanelEntrenador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Panel Principal Adminsitrador");
+        setResizable(false);
 
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
 
