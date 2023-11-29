@@ -68,6 +68,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
+        setResizable(false);
 
         txtUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         txtUsuario.setToolTipText("Ingrese su usuario");

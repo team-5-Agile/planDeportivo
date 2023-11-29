@@ -76,6 +76,7 @@ public class VerMicrociclos extends javax.swing.JFrame {
         btnRegresarPanel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lblEncabezadoMacro.setBackground(new java.awt.Color(217, 217, 217));
 

@@ -133,8 +133,7 @@ public class EtapasDAO implements BaseDAO {
     } 
     
     /**
-     * Consulta todos los macrociclos asociados a un entrenador en particular,
-     * sin tener en cuenta la vigencia.
+     * Consulta todos las etapas asociadas a un macrociclo en particular.
      *
      * @param macrociclo El macrociclo para el cual se consulta.
      * @return Lista de todos las etapas asociadas al macrociclo.

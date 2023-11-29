@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="title" type="java.lang.String" value="Ver Etapas"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -29,8 +30,8 @@
           <Group type="102" attributes="0">
               <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlGeneral" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnVerDatos" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="pnlGeneral" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnVerDatos" min="-2" pref="120" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -40,10 +41,11 @@
                       <Component id="pnlComopetitiva" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="lblTotalSemanas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="txtTotalSemanas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtTotalSemanas" min="-2" pref="56" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
                       <Component id="btnVerMedios" min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -62,18 +64,22 @@
                   <Component id="pnlEspecial" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="pnlComopetitiva" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblTotalSemanas" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVerMedios" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnVerDatos" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="lblTotalSemanas" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="txtTotalSemanas" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnVerMedios" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>

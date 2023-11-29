@@ -187,6 +187,7 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Seleccionador de Proporciones");
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         lblArrow.setText("<----");
 

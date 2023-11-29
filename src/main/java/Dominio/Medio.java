@@ -3,6 +3,7 @@
  */
 package Dominio;
 
+import Enumeradores.TipoMedio;
 import Enumeradores.Unidades;
 import java.io.Serializable;
 import jakarta.persistence.Column;
@@ -40,9 +41,10 @@ public class Medio implements Serializable {
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column(name = "TipoMedio", nullable = true)
-    public String tipoMedio;
+    @Enumerated(EnumType.STRING)
+    private TipoMedio tipoMedio;
 
     @Column(name = "Unidades", nullable = true)
     @Enumerated(EnumType.STRING)
@@ -89,7 +91,7 @@ public class Medio implements Serializable {
      * @param volumenEtapa Volumen del medio en una etapa.
      * @param etapa Etapa a la que pertenece el medio.
      */
-    public Medio(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa, Etapa etapa) {
+    public Medio(Long id, TipoMedio tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa, Etapa etapa) {
         this.id = id;
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
@@ -113,7 +115,7 @@ public class Medio implements Serializable {
      * @param insitaciones Número de instancias del medio.
      * @param volumenEtapa Volumen del medio en una etapa.
      */
-    public Medio(Long id, String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
+    public Medio(Long id, TipoMedio tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
         this.id = id;
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
@@ -135,7 +137,7 @@ public class Medio implements Serializable {
      * @param insitaciones Número de instancias del medio.
      * @param volumenEtapa Volumen del medio en una etapa.
      */
-    public Medio(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
+    public Medio(TipoMedio tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Float promedio, Integer insitaciones, Float volumenEtapa) {
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
         this.minimo = minimo;
@@ -154,7 +156,7 @@ public class Medio implements Serializable {
      * @param maximo Valor máximo del medio.
      * @param insitaciones Número de instancias del medio.
      */
-    public Medio(String tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Integer insitaciones) {
+    public Medio(TipoMedio tipoMedio, Unidades tipo, Integer minimo, Integer maximo, Integer insitaciones) {
         this.tipoMedio = tipoMedio;
         this.tipo = tipo;
         this.minimo = minimo;
@@ -187,7 +189,7 @@ public class Medio implements Serializable {
      *
      * @return Tipo del medio.
      */
-    public String getTipoMedio() {
+    public TipoMedio getTipoMedio() {
         return tipoMedio;
     }
 
@@ -196,7 +198,7 @@ public class Medio implements Serializable {
      *
      * @param tipoMedio Tipo del medio.
      */
-    public void setTipoMedio(String tipoMedio) {
+    public void setTipoMedio(TipoMedio tipoMedio) {
         this.tipoMedio = tipoMedio;
     }
 

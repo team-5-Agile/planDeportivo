@@ -3,7 +3,7 @@
  */
 package DAOs;
 
-import Dominio.Entrenador;
+import Dominio.Etapa;
 import Interfaces.BaseDAO;
 import Dominio.Medio;
 import Herramientas.Fecha;
@@ -11,9 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.TypedQuery;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -133,4 +131,24 @@ public class MediosDAO implements BaseDAO {
         entityManager.close();
         return medio != null;
     }   
+    
+    /**
+     * Consulta todos los medios asociados a una etapa en particular.
+     *
+     * @param etapa La etapa para el cual se consulta.
+     * @return Lista de todos las etapas asociadas al macrociclo.
+     * @throws Exception Si hay algún error en la consulta.
+     */
+    public List<Medio> consultarMediosEtapa(Etapa etapa) throws Exception {
+        EntityManager entityManager = this.getEntityManager();
+        entityManager.getTransaction().begin();
+        TypedQuery<Medio> query;
+        String jpql = "SELECT m FROM Medio m WHERE m.etapas = :etapas";
+        query = entityManager.createQuery(jpql, Medio.class);
+        query.setParameter("etapas", etapa);
+        List<Medio> medios = query.getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return medios;
+    }
 }
