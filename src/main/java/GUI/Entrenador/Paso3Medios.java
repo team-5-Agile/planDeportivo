@@ -10,11 +10,18 @@ import DAOs.MediosDAO;
 import Dominio.Entrenador;
 import Dominio.Etapa;
 import Dominio.Macrociclo;
+import Dominio.Medio;
+import Enumeradores.TipoMedio;
+import Enumeradores.Unidades;
 import Herramientas.Fecha;
+import Herramientas.Validaciones;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,6 +34,8 @@ public class Paso3Medios extends javax.swing.JFrame {
     Etapa etapaGeneral;
     Etapa etapaEspecial;
     Etapa etapaCompetitiva;
+    TipoMedio RAG, RAE, VEL_GENERAL,VEL_ESPECIAL,RES_VEL_ESP,RES_VEL_GEN,TipoMedio,FUERZA_GEN,FUERZA_ESP,COORD_TECN,FLEXIBILIDAD;
+    Unidades KM, MIN, MTROS, SEG, REP;
     MediosDAO MediosDAO = new MediosDAO("AppPlanU");
     EtapasDAO EtapasDAO = new EtapasDAO("AppPlanU");
     MacrociclosDAO MacrociclosDAO = new MacrociclosDAO("AppPlanU");
@@ -56,15 +65,184 @@ public class Paso3Medios extends javax.swing.JFrame {
         this.lblNumSemanasEspecial.setText(this.etapaEspecial.getDuracionSemanas().toString());
         this.lblNumSemanasCompetitiva.setText(this.etapaCompetitiva.getDuracionSemanas().toString());
     }
-
-    public void registrarMedios() {
-
+    private List<Medio> registrarGeneral(){
+        List<Medio> lista = null;
+        int minimo, maximo,insitaciones;
+        float promedio, volumen;
+        Medio medio =new Medio();
+        Validaciones va= new Validaciones();
+        for (int col = 0; col < 10; col++) {
+            try{
+            medio=eleccionNum(medio, col);
+            String[] rowData1;
+            rowData1 = extraerRow(tblEtapaGeneral, 0);
+            minimo=Integer.parseInt(rowData1[0]);
+            if(va.validarMedio(minimo)){}
+            medio.setMinimo(minimo);
+            maximo=Integer.parseInt(rowData1[1]);
+            if(va.validarMedio(maximo)){}
+            medio.setMaximo(maximo);
+            promedio = (float)((Integer.parseInt(rowData1[0])+(Integer.parseInt(rowData1[1]))/2));
+            medio.setPromedio(promedio);
+            insitaciones=Integer.parseInt(rowData1[3]);
+            medio.setInsitaciones(insitaciones);
+            volumen= (float)(promedio*(Integer.parseInt(rowData1[3]))*this.etapaGeneral.getDuracionSemanas());
+            medio.setVolumenEtapa(volumen);
+            medio.setEtapas(etapaGeneral);
+            lista.add(medio);
+            return lista;
+            }catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+        }
+        return lista;
     }
+    private List<Medio> registrarEspecial(){
+        List<Medio> lista = null;
+        int minimo, maximo,insitaciones;
+        float promedio, volumen;
+        Medio medio =new Medio();
+        Validaciones va= new Validaciones();
+        for (int col = 0; col < 10; col++) {
+            try{
+            medio=eleccionNum(medio, col);
+            String[] rowData1;
+            rowData1 = extraerRow(tblEtapaEspecial, 0);
+            minimo=Integer.parseInt(rowData1[0]);
+            if(va.validarMedio(minimo)){}
+            medio.setMinimo(minimo);
+            maximo=Integer.parseInt(rowData1[1]);
+            if(va.validarMedio(maximo)){}
+            medio.setMaximo(maximo);
+            promedio = (float)((Integer.parseInt(rowData1[0])+(Integer.parseInt(rowData1[1]))/2));
+            medio.setPromedio(promedio);
+            insitaciones=Integer.parseInt(rowData1[3]);
+            medio.setInsitaciones(insitaciones);
+            volumen= (float)(promedio*(Integer.parseInt(rowData1[3]))*this.etapaEspecial.getDuracionSemanas());
+            medio.setVolumenEtapa(volumen);
+            medio.setEtapas(etapaEspecial);
+            lista.add(medio);
+            return lista;
+            }catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+        }
+        return lista;
+    }
+    private List<Medio> registrarCompetitiva(){
+        List<Medio> lista = null;
+        int minimo, maximo,insitaciones;
+        float promedio, volumen;
+        Medio medio =new Medio();
+        Validaciones va= new Validaciones();
+        for (int col = 0; col < 10; col++) {
+            try{
+            medio=eleccionNum(medio, col);
+            String[] rowData1;
+            rowData1 = extraerRow(tblEtapaCompetitiva, 0);
+            minimo=Integer.parseInt(rowData1[0]);
+            if(va.validarMedio(minimo)){}
+            medio.setMinimo(minimo);
+            maximo=Integer.parseInt(rowData1[1]);
+            if(va.validarMedio(maximo)){}
+            medio.setMaximo(maximo);
+            promedio = (float)((Integer.parseInt(rowData1[0])+(Integer.parseInt(rowData1[1]))/2));
+            medio.setPromedio(promedio);
+            insitaciones=Integer.parseInt(rowData1[3]);
+            medio.setInsitaciones(insitaciones);
+            volumen= (float)(promedio*(Integer.parseInt(rowData1[3]))*this.etapaCompetitiva.getDuracionSemanas());
+            medio.setVolumenEtapa(volumen);
+            medio.setEtapas(etapaCompetitiva);
+            lista.add(medio);
+            return lista;
+            }catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 1);
+        }
+        }
+        return lista;
+    }
+    private Medio eleccionNum(Medio medio, int col){
+            
+            TipoMedio tipoMedio;
+            Unidades unidad;
+        switch (col+1) {
+            case 1:
+               medio.setTipoMedio(RAG);
+               medio.setTipo(KM);
+                return medio;
+            case 2:
+               medio.setTipoMedio(RAE);
+               medio.setTipo(MIN);
+                return medio;
+            case 3:
+                medio.setTipo(MTROS);
+                medio.setTipoMedio(VEL_GENERAL);
+                return medio;
+            case 4:
+                medio.setTipoMedio(VEL_ESPECIAL);
+                medio.setTipo(SEG);
+                return medio;
+            case 5:
+                medio.setTipoMedio(RES_VEL_ESP);
+                medio.setTipo(MTROS);
+                return medio;
+            case 6:
+                medio.setTipoMedio(RES_VEL_GEN);
+                medio.setTipo(MIN);
+                return medio;
+            case 7:
+                medio.setTipoMedio(FUERZA_GEN);
+                medio.setTipo(REP);
+                return medio;
+            case 8:
+                medio.setTipoMedio(FUERZA_ESP);
+                medio.setTipo(REP);
+                return medio;
+            case 9:
+                medio.setTipoMedio(COORD_TECN);
+                medio.setTipo(REP);
+                return medio;
+            case 10:
+                medio.setTipoMedio(FLEXIBILIDAD);
+                medio.setTipo(MIN);
+                return medio;
+        }
+        return null;
+    }
+    private void registrarMedios(){
+        List<Medio> listaGeneral= registrarGeneral();
+        List<Medio> listaEspecial=registrarEspecial();
+        List<Medio> listaCompetitiva=registrarCompetitiva();
+        for (Medio medio : listaGeneral) {
+                MediosDAO.registrarMedio(medio);
+            }
+        for (Medio medio : listaEspecial) {
+                MediosDAO.registrarMedio(medio);
+            }
+        for (Medio medio : listaCompetitiva) {
+                MediosDAO.registrarMedio(medio);
+            }
+        
+    }
+
+     private String[] extraerRow(JTable table, int rowIndex) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int colCount = model.getColumnCount();
+        String[] rowData = new String[colCount];
+
+        for (int col = 0; col < colCount; col++) {
+            Object value = model.getValueAt(rowIndex, col);
+            rowData[col] = value != null ? value.toString() : "";
+        }
+
+        return rowData;
+    }
+
 
     public boolean verificarCamposVacios() {
         return true;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -297,6 +475,7 @@ public class Paso3Medios extends javax.swing.JFrame {
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
+                {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)}
             },
             new String [] {
@@ -328,19 +507,18 @@ public class Paso3Medios extends javax.swing.JFrame {
         pnlGeneral.setLayout(pnlGeneralLayout);
         pnlGeneralLayout.setHorizontalGroup(
             pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGeneralLayout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+            .addGroup(pnlGeneralLayout.createSequentialGroup()
+                .addGap(96, 96, 96)
                 .addComponent(jLabel2)
-                .addGap(94, 94, 94))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlGeneralLayout.setVerticalGroup(
             pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGeneralLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
         pnlEspecial.setBackground(new java.awt.Color(255, 204, 51));
@@ -353,6 +531,7 @@ public class Paso3Medios extends javax.swing.JFrame {
         tblEtapaEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblEtapaEspecial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
@@ -400,7 +579,8 @@ public class Paso3Medios extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pnlCompetitiva.setBackground(new java.awt.Color(255, 51, 51));
@@ -413,6 +593,7 @@ public class Paso3Medios extends javax.swing.JFrame {
         tblEtapaCompetitiva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblEtapaCompetitiva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
                 {null, null,  new Double(0.0), null,  new Double(0.0)},
@@ -460,7 +641,8 @@ public class Paso3Medios extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlFrameLayout = new javax.swing.GroupLayout(pnlFrame);
@@ -468,26 +650,27 @@ public class Paso3Medios extends javax.swing.JFrame {
         pnlFrameLayout.setHorizontalGroup(
             pnlFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(pnlFrameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(pnlGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(pnlCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlFrameLayout.setVerticalGroup(
             pnlFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFrameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(pnlFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFrameLayout.createSequentialGroup()
-                        .addComponent(pnlGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
                     .addGroup(pnlFrameLayout.createSequentialGroup()
-                        .addGroup(pnlFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlFrameLayout.createSequentialGroup()
+                        .addComponent(pnlEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlFrameLayout.createSequentialGroup()
+                        .addComponent(pnlGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(12, 12, 12))))
         );
 
@@ -531,10 +714,10 @@ public class Paso3Medios extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(22, 22, 22)
                                     .addComponent(lblResVelEsp)))
-                            .addComponent(lblRAG))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9))
+                            .addComponent(lblRAG))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(pnlFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,16 +773,15 @@ public class Paso3Medios extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(lblCoordTecn)
                         .addGap(0, 0, 0)
-                        .addComponent(lblFlexibilidad)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblFlexibilidad))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)))
+                        .addComponent(pnlFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinalizar)
                     .addComponent(btnCancelar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();

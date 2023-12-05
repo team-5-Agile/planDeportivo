@@ -671,7 +671,7 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         double re = (can * 100) / total;
         return re;
     }
-
+    
     private String rellenarPorcentaje(String valor) {
 
         try {
