@@ -122,7 +122,15 @@ public class Validaciones {
         // Utiliza una expresión regular para verificar si la cadena contiene solo dígitos
         return str.matches("\\d+");
     }
-
+    public static boolean validarMedio(int valor)throws Exception{
+        if(esNumero(valor+"")){
+            if((valor > 0 && valor < 99999)){
+                return true;
+            }
+            throw new Exception("Error, Debe tener datos validos");
+        }
+        throw new Exception("Error, Debe tener datos validos");
+    }
     /**
      * Método qué válida si la fecha ingresada es anterior a la fecha actual
      *

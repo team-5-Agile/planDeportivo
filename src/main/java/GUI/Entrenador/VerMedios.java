@@ -66,6 +66,7 @@ public class VerMedios extends javax.swing.JFrame {
     }
 
     public void llenarTablaEtapaGeneral(List<Medio> mediosEtapaGeneral) {
+        
         if (!mediosEtapaGeneral.isEmpty()) {
             DefaultTableModel modeloTablaEtapaGeneral = (DefaultTableModel) this.tblEtapaGeneral.getModel();
             modeloTablaEtapaGeneral.setRowCount(9);
