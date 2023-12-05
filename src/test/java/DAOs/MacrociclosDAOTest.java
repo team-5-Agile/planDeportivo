@@ -4,16 +4,8 @@
  */
 package DAOs;
 
-import Dominio.Entrenador;
 import Dominio.Macrociclo;
 import Enumeradores.Ramas;
-import jakarta.persistence.EntityManager;
-import java.util.Calendar;
-import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,25 +19,6 @@ public class MacrociclosDAOTest {
     public MacrociclosDAOTest() {
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
-    
-
-   
     @Test
     public void testRegistrarMacrociclo() {
         System.out.println("registrarMacrociclo");
