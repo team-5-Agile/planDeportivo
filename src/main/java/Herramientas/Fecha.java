@@ -71,7 +71,7 @@ public class Fecha {
         // Retornar la diferencia en días
         return diferenciaDias;
     }
-    
+
     /**
      * Crea un objeto Calendar con la fecha especificada.
      *
@@ -99,13 +99,15 @@ public class Fecha {
         // Se crea un objeto Date a partir del Instant.
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
-    
+
     /**
-     * Suma un número específico de semanas a una fecha inicial y devuelve la nueva fecha.
+     * Suma un número específico de semanas a una fecha inicial y devuelve la
+     * nueva fecha.
      *
      * @param fechaInicial La fecha inicial a la que se sumarán las semanas.
-     * @param semanas      El número de semanas a sumar.
-     * @return Un nuevo objeto Calendar con la fecha resultante después de sumar las semanas.
+     * @param semanas El número de semanas a sumar.
+     * @return Un nuevo objeto Calendar con la fecha resultante después de sumar
+     * las semanas.
      */
     public Calendar sumarSemanas(Calendar fechaInicial, int semanas) {
         // Clonar la fecha inicial para evitar modificar el objeto original
@@ -115,5 +117,34 @@ public class Fecha {
         nuevaFecha.add(Calendar.WEEK_OF_YEAR, semanas);
 
         return nuevaFecha;
+    }
+
+    /**
+     * Calcula el número de semanas redondeado entre dos fechas dadas.
+     *
+     * @param fechaInicio Objeto Calendar que representa la fecha de inicio.
+     * @param fechaFin Objeto Calendar que representa la fecha de fin.
+     * @return El número de semanas redondeado entre las dos fechas.
+     */
+    public int calcularSemanasEntreFechas(Calendar fechaInicio, Calendar fechaFin) {
+        // Obtener la diferencia en milisegundos entre las dos fechas
+        long diferenciaEnMillis = fechaFin.getTimeInMillis() - fechaInicio.getTimeInMillis();
+
+        // Calcular el número de semanas redondeado
+        int semanas = (int) Math.ceil((double) diferenciaEnMillis / (7 * 24 * 60 * 60 * 1000));
+
+        return semanas;
+    }
+
+    /**
+     * Verifica si una fecha dada está antes que otra fecha dada.
+     *
+     * @param fecha1 Objeto Calendar que representa la primera fecha.
+     * @param fecha2 Objeto Calendar que representa la segunda fecha.
+     * @return true si la primera fecha está antes que la segunda, false en caso
+     * contrario.
+     */
+    public boolean esFechaAntes(Calendar fecha1, Calendar fecha2) {
+        return fecha1.before(fecha2);
     }
 }

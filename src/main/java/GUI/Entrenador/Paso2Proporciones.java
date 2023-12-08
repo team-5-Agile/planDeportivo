@@ -26,8 +26,7 @@ import javax.swing.JOptionPane;
  * @author el_fr
  */
 public class Paso2Proporciones extends javax.swing.JFrame {
-    
-    
+
     Entrenador entrenador;
     Macrociclo macrociclo;
     Etapa etapaGeneral;
@@ -48,16 +47,21 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         llenarTextos();
         setLocationRelativeTo(null);
     }
-    
-    
 
     public void llenarTextos() throws ParseException {
         this.lblFechaHoy.setText(Fecha.formatoFecha(Fecha.fechaAhora()));
         this.lblDeporte.setText(this.macrociclo.getDeporte());
         this.lblRama.setText(this.macrociclo.getRama().name());
         this.lblID.setText(this.macrociclo.getId().toString());
-        this.txtPorcientoPreparatorio.setText("80");
-        this.txtPorcientoCompetitivo.setText("20");
+        this.txtPorcientoPreparatorio.setText("50");
+        this.txtPorcientoCompetitivo.setText("50");
+        this.txtPorcientoGeneral.setText("50");
+        this.txtPorcientoEspecial.setText("50");
+        this.txtNumSemanasMacro.setText("52");
+        this.txtNumSemanasCompetitivo.setText("26");
+        this.txtNumSemanasPreparatorio.setText("26");
+        this.txtNumSemanasGeneral.setText("13");
+        this.txtNumSemanasEspecial.setText("13");
     }
 
     public void insertarFechasMacro() {
@@ -106,7 +110,7 @@ public class Paso2Proporciones extends javax.swing.JFrame {
                 && !this.txtPorcientoGeneral.getText().isBlank()
                 && !this.txtPorcientoPreparatorio.getText().isBlank();
     }
-    
+
     /**
      * Cierra la ventana ConsultarAcentos si está abierta en el sistema.
      */
@@ -120,6 +124,33 @@ public class Paso2Proporciones extends javax.swing.JFrame {
                 // Cierra la ventana si es una instancia de ConsultarAcentos
                 frame.dispose();
             }
+        }
+    }
+
+    public void validarSemanasMacro() {
+        if (Integer.valueOf(this.txtNumSemanasMacro.getText()) > 52) {
+            // Mensaje de error
+            JOptionPane.showMessageDialog(null, "La duración máxima para un macrociclo es de 52 semanas.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            this.txtNumSemanasMacro.setText("");
+        }
+    }
+
+    public void validarSemanasEtapas() {
+        if (Integer.valueOf(this.txtNumSemanasPreparatorio.getText()) + Integer.valueOf(this.txtNumSemanasCompetitivo.getText()) > 52) {
+            // Mensaje de error
+            JOptionPane.showMessageDialog(null, "La duración máxima para un macrociclo es de 52 semanas.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            this.txtNumSemanasPreparatorio.setText("");
+            this.txtNumSemanasCompetitivo.setText("");
+            this.txtNumSemanasMacro.setText("");
+        }
+    }
+
+    public void validarSemanasSubEtapas() {
+        if (Integer.valueOf(this.txtNumSemanasGeneral.getText()) + Integer.valueOf(this.txtNumSemanasEspecial.getText()) != Integer.valueOf(this.txtNumSemanasPreparatorio.getText())) {
+            // Mensaje de error
+            JOptionPane.showMessageDialog(null, "La duración para las sub-etapas General y Especial tiene que ser igual a la duracion de la Etapa Preparatoria.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            this.txtNumSemanasGeneral.setText("");
+            this.txtNumSemanasEspecial.setText("");
         }
     }
 
@@ -168,7 +199,9 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         lblPorciento4 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnConsultarAcentos = new javax.swing.JButton();
-        btnCalcularPorcentajes = new javax.swing.JButton();
+        btnCalcularPorcentajesEtapas = new javax.swing.JButton();
+        btnCalcularPorcentajesSubetapas = new javax.swing.JButton();
+        btnCalcularTotalSemanas = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtFechaInicioMacro = new com.toedter.calendar.JDateChooser();
         txtFechaFinMacro = new com.toedter.calendar.JDateChooser();
@@ -233,11 +266,6 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             }
         });
 
-        txtPorcientoPreparatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPorcientoPreparatorioActionPerformed(evt);
-            }
-        });
         txtPorcientoPreparatorio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPorcientoPreparatorioKeyPressed(evt);
@@ -299,7 +327,7 @@ public class Paso2Proporciones extends javax.swing.JFrame {
                                 .addComponent(txtNumSemanasPreparatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlPeriodosLayout.createSequentialGroup()
                                 .addComponent(lblPorciento6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(12, 12, 12)
                                 .addComponent(txtNumSemanasCompetitivo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlPeriodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,14 +486,36 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             }
         });
 
-        btnCalcularPorcentajes.setBackground(new java.awt.Color(51, 204, 255));
-        btnCalcularPorcentajes.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        btnCalcularPorcentajes.setText("Calcular");
-        btnCalcularPorcentajes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCalcularPorcentajes.setOpaque(true);
-        btnCalcularPorcentajes.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcularPorcentajesEtapas.setBackground(new java.awt.Color(51, 204, 255));
+        btnCalcularPorcentajesEtapas.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnCalcularPorcentajesEtapas.setText("Calcular");
+        btnCalcularPorcentajesEtapas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcularPorcentajesEtapas.setOpaque(true);
+        btnCalcularPorcentajesEtapas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcularPorcentajesActionPerformed(evt);
+                btnCalcularPorcentajesEtapasActionPerformed(evt);
+            }
+        });
+
+        btnCalcularPorcentajesSubetapas.setBackground(new java.awt.Color(51, 204, 255));
+        btnCalcularPorcentajesSubetapas.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnCalcularPorcentajesSubetapas.setText("Calcular");
+        btnCalcularPorcentajesSubetapas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcularPorcentajesSubetapas.setOpaque(true);
+        btnCalcularPorcentajesSubetapas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularPorcentajesSubetapasActionPerformed(evt);
+            }
+        });
+
+        btnCalcularTotalSemanas.setBackground(new java.awt.Color(51, 204, 255));
+        btnCalcularTotalSemanas.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        btnCalcularTotalSemanas.setText("Calcular");
+        btnCalcularTotalSemanas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcularTotalSemanas.setOpaque(true);
+        btnCalcularTotalSemanas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularTotalSemanasActionPerformed(evt);
             }
         });
 
@@ -573,42 +623,51 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblMensajeMacro)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(520, 520, 520)
-                            .addComponent(btnConsultarAcentos))
-                        .addComponent(jLabel3)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblFechaFinMacro)
-                                .addComponent(lblFechaInicioMacro))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                            .addGap(55, 55, 55)
-                            .addComponent(lblDuracionMacro)
-                            .addGap(12, 12, 12)
-                            .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(14, 14, 14)
-                            .addComponent(lblSemanasMacro)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lblArrow)
-                            .addGap(16, 16, 16)
-                            .addComponent(pnlEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(148, 148, 148)
-                            .addComponent(btnCalcularPorcentajes))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnCancelar)
-                            .addGap(506, 506, 506)
-                            .addComponent(btnSiguiente))))
-                .addGap(44, 44, 44))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblMensajeMacro)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(520, 520, 520)
+                                    .addComponent(btnConsultarAcentos))
+                                .addComponent(jLabel3)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblFechaFinMacro)
+                                        .addComponent(lblFechaInicioMacro))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnCancelar)
+                                    .addGap(506, 506, 506)
+                                    .addComponent(btnSiguiente))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDuracionMacro)
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(14, 14, 14)
+                                                .addComponent(lblSemanasMacro))
+                                            .addComponent(btnCalcularTotalSemanas)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblArrow)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(pnlEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(44, 44, 44))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(btnCalcularPorcentajesEtapas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCalcularPorcentajesSubetapas)
+                        .addGap(166, 166, 166))))
             .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -618,27 +677,36 @@ public class Paso2Proporciones extends javax.swing.JFrame {
                 .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnConsultarAcentos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMensajeMacro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDuracionMacro)
-                    .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSemanasMacro)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMensajeMacro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFechaInicioMacro)
-                            .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFechaInicioMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFechaFinMacro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                                .addComponent(lblFechaFinMacro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDuracionMacro)
+                                    .addComponent(txtNumSemanasMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSemanasMacro))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCalcularTotalSemanas)
+                                .addGap(42, 42, 42)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(pnlPeriodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -647,15 +715,14 @@ public class Paso2Proporciones extends javax.swing.JFrame {
                                     .addComponent(lblArrow))
                                 .addComponent(pnlEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCalcularPorcentajes)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCalcularPorcentajesEtapas)
+                            .addComponent(btnCalcularPorcentajesSubetapas))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSiguiente)
                             .addComponent(btnCancelar))
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFechaFinMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(29, 29, 29))))
         );
 
         pack();
@@ -698,12 +765,6 @@ public class Paso2Proporciones extends javax.swing.JFrame {
             Validaciones val = new Validaciones();
             if (!valor.equals("")) {
                 return ((Integer.parseInt(total) - Integer.parseInt(valor)) + "");
-                //  AQUI DABA ERROR
-//                if (val.isNegativo(Double.parseDouble(valor))) {
-////                }
-//                if (val.isMenor(Integer.parseInt(total), Integer.parseInt(valor))) {
-//                }
-
             }
 
         } catch (Exception ex) {
@@ -715,6 +776,17 @@ public class Paso2Proporciones extends javax.swing.JFrame {
     private void txtNumSemanasMacroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasMacroKeyPressed
         String fechaInicio = this.txtFechaInicioMacro.getDateFormatString();
         String numSemanas = this.txtNumSemanasMacro.getText();
+
+        char c = evt.getKeyChar();
+        // Validar si es un dígito y la longitud actual es menor que 2
+        if (!Character.isDigit(c) || txtNumSemanasMacro.getText().length() >= 2) {
+            if (c != '\b') {
+                if (c != '\b') {
+                    evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+                }
+            }
+        }
+
         if (evt.getKeyCode() != 10) {
             return;
         }
@@ -734,12 +806,10 @@ public class Paso2Proporciones extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtNumSemanasMacroKeyPressed
 
-    private void btnCalcularPorcentajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesActionPerformed
-
-
-    }//GEN-LAST:event_btnCalcularPorcentajesActionPerformed
-
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        this.btnCalcularTotalSemanasActionPerformed(evt);
+        this.btnCalcularPorcentajesEtapasActionPerformed(evt);
+        this.btnCalcularPorcentajesSubetapasActionPerformed(evt);
         if (verificarCamposVacios()) {
             cerrarSiAbierto();
             insertarFechasMacro(); //Asignar fechas de inicio y fin a macrociclo
@@ -773,6 +843,15 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         String numSemanas = this.txtNumSemanasPreparatorio.getText();
         String porPre = this.txtPorcientoGeneral.getText();
 
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtPorcientoGeneral.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
+
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
             return;
@@ -795,6 +874,15 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         String numSemanas = this.txtNumSemanasPreparatorio.getText();
         String porPre = this.txtPorcientoEspecial.getText();
 
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtPorcientoEspecial.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
+
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
             return;
@@ -815,6 +903,15 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         String sem = this.txtNumSemanasGeneral.getText();
         String numSemanas = this.txtNumSemanasPreparatorio.getText();
 
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtNumSemanasGeneral.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
+
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
             return;
@@ -834,6 +931,15 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         String sem = this.txtNumSemanasEspecial.getText();
         String numSemanas = this.txtNumSemanasPreparatorio.getText();
 
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtNumSemanasEspecial.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
+
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
             return;
@@ -852,6 +958,15 @@ public class Paso2Proporciones extends javax.swing.JFrame {
     private void txtPorcientoCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcientoCompetitivoKeyPressed
         String porPre = this.txtPorcientoCompetitivo.getText();
         String numSemanas = this.txtNumSemanasMacro.getText();
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtPorcientoCompetitivo.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
 
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
@@ -873,6 +988,15 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         String porPre = this.txtPorcientoPreparatorio.getText();
         String numSemanas = this.txtNumSemanasMacro.getText();
 
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtPorcientoPreparatorio.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
+
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
             return;
@@ -888,13 +1012,18 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPorcientoPreparatorioKeyPressed
 
-    private void txtPorcientoPreparatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPorcientoPreparatorioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPorcientoPreparatorioActionPerformed
-
     private void txtNumSemanasCompetitivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasCompetitivoKeyPressed
         String sem = this.txtNumSemanasCompetitivo.getText();
         String numSemanas = this.txtNumSemanasMacro.getText();
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtNumSemanasCompetitivo.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
 
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
@@ -914,6 +1043,15 @@ public class Paso2Proporciones extends javax.swing.JFrame {
     private void txtNumSemanasPreparatorioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumSemanasPreparatorioKeyPressed
         String sem = this.txtNumSemanasPreparatorio.getText();
         String numSemanas = this.txtNumSemanasMacro.getText();
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c) && txtNumSemanasPreparatorio.getText().length() < 2) {
+            // Permitir ingreso de dígitos si la longitud actual es menor que 2
+        } else if (c == '\b') {
+            // Permitir borrar con la tecla de retroceso ('\b')
+        } else {
+            evt.consume();  // Ignorar el evento si no es un dígito o la longitud es mayor o igual a 2
+        }
 
         // validar si se a presionado enter
         if (evt.getKeyCode() != 10) {
@@ -946,9 +1084,72 @@ public class Paso2Proporciones extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnCalcularPorcentajesEtapasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesEtapasActionPerformed
+        if (!this.txtNumSemanasMacro.getText().isBlank()) {
+            if (!this.txtPorcientoPreparatorio.getText().isBlank() || !this.txtPorcientoPreparatorio.getText().isBlank()) {
+                int totalSemanas = Integer.parseInt(this.txtNumSemanasMacro.getText());
+                int porcentajePrepatorio = Integer.parseInt(this.txtPorcientoPreparatorio.getText());
+                int porcentajeCompetitivo = Integer.parseInt(this.txtPorcientoCompetitivo.getText());
+                this.txtNumSemanasPreparatorio.setText(String.valueOf(Math.round(Math.ceil(Porcentajes.calcularPorcentaje(totalSemanas, porcentajePrepatorio)))));
+                this.txtNumSemanasCompetitivo.setText(String.valueOf(Math.round(Math.floor(Porcentajes.calcularPorcentaje(totalSemanas, porcentajeCompetitivo)))));
+                validarSemanasEtapas();
+            } else {
+                // Mensaje de error
+                JOptionPane.showMessageDialog(null, "Seleccione porcentajes válidos para las etapas.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Mensaje de error
+            JOptionPane.showMessageDialog(null, "Seleccione una duración total de semanas para el macrociclo.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnCalcularPorcentajesEtapasActionPerformed
+
+    private void btnCalcularPorcentajesSubetapasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularPorcentajesSubetapasActionPerformed
+        if (!this.txtNumSemanasPreparatorio.getText().isBlank()) {
+            if (!this.txtPorcientoGeneral.getText().isBlank() || !this.txtPorcientoEspecial.getText().isBlank()) {
+                int totalSemanas = Integer.parseInt(this.txtNumSemanasPreparatorio.getText());
+                int porcentajeGeneral = Integer.parseInt(this.txtPorcientoGeneral.getText());
+                int porcentajeEspecial = Integer.parseInt(this.txtPorcientoEspecial.getText());
+                this.txtNumSemanasGeneral.setText(String.valueOf(Math.round(Math.ceil(Porcentajes.calcularPorcentaje(totalSemanas, porcentajeGeneral)))));
+                this.txtNumSemanasEspecial.setText(String.valueOf(Math.round(Math.floor(Porcentajes.calcularPorcentaje(totalSemanas, porcentajeEspecial)))));
+                validarSemanasSubEtapas();
+            } else {
+                // Mensaje de error
+                JOptionPane.showMessageDialog(null, "Seleccione porcentajes válidos para las sub-etapas.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Mensaje de error
+            JOptionPane.showMessageDialog(null, "Seleccione una duración total de semanas para la etapa Preparatoria.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCalcularPorcentajesSubetapasActionPerformed
+
+    private void btnCalcularTotalSemanasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTotalSemanasActionPerformed
+        try {
+            if (!this.txtFechaInicioMacro.getCalendar().equals(null) && !this.txtFechaFinMacro.getCalendar().equals(null)) {
+                if (Fecha.esFechaAntes(this.txtFechaInicioMacro.getCalendar(), this.txtFechaFinMacro.getCalendar())) {
+                    int totalSemanas = Fecha.calcularSemanasEntreFechas(this.txtFechaInicioMacro.getCalendar(), this.txtFechaFinMacro.getCalendar());
+                    this.txtNumSemanasMacro.setText(String.valueOf(totalSemanas));
+                    validarSemanasMacro();
+                } else {
+                    // Mensaje de error
+                    JOptionPane.showMessageDialog(null, "La fecha inicio tiene que ser antes a la fecha fin.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                // Mensaje de error
+                JOptionPane.showMessageDialog(null, "Seleccione una fecha de inicio y una fecha de fin.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            // Mensaje de error
+            JOptionPane.showMessageDialog(null, "Error al querer calcular la duración total del macrociclo, intente de nuevo.", "¡Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnCalcularTotalSemanasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCalcularPorcentajes;
+    private javax.swing.JButton btnCalcularPorcentajesEtapas;
+    private javax.swing.JButton btnCalcularPorcentajesSubetapas;
+    private javax.swing.JButton btnCalcularTotalSemanas;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsultarAcentos;
     private javax.swing.JButton btnSiguiente;

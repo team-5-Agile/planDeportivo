@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -121,6 +122,45 @@ public class Validaciones {
     public static boolean esNumero(String str) {
         // Utiliza una expresión regular para verificar si la cadena contiene solo dígitos
         return str.matches("\\d+");
+    }
+
+    public static boolean validarMedio(int valor) throws Exception {
+        if (esNumero(valor + "")) {
+            if ((valor > 0 && valor < 999)) {
+                return true;
+            }
+            throw new Exception("Error, Debe tener datos validos");
+        }
+        throw new Exception("Error, Debe tener datos validos");
+    }
+
+    /**
+     * Elimina las filas vacías de una tabla.
+     *
+     * @param tabla La tabla (JTable) de la cual se eliminarán las filas vacías.
+     */
+    public void eliminarFilasVacias(JTable tabla) {
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+
+        int rowCount = modelo.getRowCount();
+
+        // Iterar desde el final hacia el inicio para evitar problemas al eliminar filas
+        for (int i = rowCount - 1; i >= 0; i--) {
+            boolean filaVacia = true;
+
+            // Verificar si todas las celdas de la fila están vacías
+            for (int j = 0; j < modelo.getColumnCount(); j++) {
+                if (modelo.getValueAt(i, j) != null && !modelo.getValueAt(i, j).toString().isEmpty()) {
+                    filaVacia = false;
+                    break;
+                }
+            }
+
+            // Si la fila está vacía, eliminarla
+            if (filaVacia) {
+                modelo.removeRow(i);
+            }
+        }
     }
 
     /**
@@ -535,13 +575,14 @@ public class Validaciones {
         // Validar que la cadena es un número flotante
         return str;
     }
-    
+
     /**
-     * Elimina espacios en blanco consecutivos de una cadena, aplicando también trim() para eliminar espacios
-     * al principio y al final.
-     * 
+     * Elimina espacios en blanco consecutivos de una cadena, aplicando también
+     * trim() para eliminar espacios al principio y al final.
+     *
      * @param cadena La cadena de entrada.
-     * @return La cadena resultante sin espacios en blanco consecutivos y sin espacios al principio y al final.
+     * @return La cadena resultante sin espacios en blanco consecutivos y sin
+     * espacios al principio y al final.
      */
     public static String eliminarEspaciosRepetidos(String cadena) {
         // Aplica trim() para eliminar espacios en blanco al principio y al final de la cadena,

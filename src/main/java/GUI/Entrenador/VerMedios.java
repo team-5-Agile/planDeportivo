@@ -68,9 +68,11 @@ public class VerMedios extends javax.swing.JFrame {
     public void llenarTablaEtapaGeneral(List<Medio> mediosEtapaGeneral) {
         if (!mediosEtapaGeneral.isEmpty()) {
             DefaultTableModel modeloTablaEtapaGeneral = (DefaultTableModel) this.tblEtapaGeneral.getModel();
-            modeloTablaEtapaGeneral.setRowCount(9);
+            modeloTablaEtapaGeneral.setRowCount(10);
             for (Medio medio : mediosEtapaGeneral) {
                 Object[] filaNueva = {
+                    medio.getTipoMedio().toString(),
+                    medio.getTipo().toString(),
                     medio.getMinimo(),
                     medio.getMaximo(),
                     medio.getPromedio(),
@@ -79,6 +81,7 @@ public class VerMedios extends javax.swing.JFrame {
                 };
                 modeloTablaEtapaGeneral.addRow(filaNueva);
             }
+            Validaciones.eliminarFilasVacias(tblEtapaGeneral);
             Validaciones.centrarTabla(tblEtapaGeneral);
         }
     }
@@ -86,9 +89,11 @@ public class VerMedios extends javax.swing.JFrame {
     public void llenarTablaEtapaEspecial(List<Medio> mediosEtapaEspecial) {
         if (!mediosEtapaEspecial.isEmpty()) {
             DefaultTableModel modeloTablaEtapaEspecial = (DefaultTableModel) this.tblEtapaEspecial.getModel();
-            modeloTablaEtapaEspecial.setRowCount(9);
+            modeloTablaEtapaEspecial.setRowCount(10);
             for (Medio medio : mediosEtapaEspecial) {
                 Object[] filaNueva = {
+                    medio.getTipoMedio().toString(),
+                    medio.getTipo().toString(),
                     medio.getMinimo(),
                     medio.getMaximo(),
                     medio.getPromedio(),
@@ -97,6 +102,7 @@ public class VerMedios extends javax.swing.JFrame {
                 };
                 modeloTablaEtapaEspecial.addRow(filaNueva);
             }
+            Validaciones.eliminarFilasVacias(tblEtapaEspecial);
             Validaciones.centrarTabla(tblEtapaEspecial);
         }
     }
@@ -104,9 +110,11 @@ public class VerMedios extends javax.swing.JFrame {
     public void llenarTablaEtapaCompetitiva(List<Medio> mediosEtapaCompetitiva) {
         if (!mediosEtapaCompetitiva.isEmpty()) {
             DefaultTableModel modeloTablaEtapaCompetitiva = (DefaultTableModel) this.tblEtapaCompetitiva.getModel();
-            modeloTablaEtapaCompetitiva.setRowCount(9);
+            modeloTablaEtapaCompetitiva.setRowCount(10);
             for (Medio medio : mediosEtapaCompetitiva) {
                 Object[] filaNueva = {
+                    medio.getTipoMedio().toString(),
+                    medio.getTipo().toString(),
                     medio.getMinimo(),
                     medio.getMaximo(),
                     medio.getPromedio(),
@@ -115,7 +123,8 @@ public class VerMedios extends javax.swing.JFrame {
                 };
                 modeloTablaEtapaCompetitiva.addRow(filaNueva);
             }
-            Validaciones.centrarTabla(tblEtapaGeneral);
+            Validaciones.eliminarFilasVacias(tblEtapaCompetitiva);
+            Validaciones.centrarTabla(tblEtapaCompetitiva);
         }
     }
 
@@ -140,20 +149,10 @@ public class VerMedios extends javax.swing.JFrame {
         lblIDTitulo = new javax.swing.JLabel();
         btnVerMicrociclos = new javax.swing.JButton();
         btnVerEtapas = new javax.swing.JButton();
-        lblFlexibilidad = new javax.swing.JLabel();
         lblSemanasGeneral = new javax.swing.JLabel();
         lblNumSemanasGeneral = new javax.swing.JLabel();
         lblSemanasEspecial = new javax.swing.JLabel();
         lblNumSemanasEspecial = new javax.swing.JLabel();
-        lblRAG = new javax.swing.JLabel();
-        lblRAE = new javax.swing.JLabel();
-        lblVelGeneral = new javax.swing.JLabel();
-        lblVelEspecial = new javax.swing.JLabel();
-        lblResVelGen = new javax.swing.JLabel();
-        lblResVelEsp = new javax.swing.JLabel();
-        lblFuerzaGen = new javax.swing.JLabel();
-        lblFuerzaEsp = new javax.swing.JLabel();
-        lblCoordTecn = new javax.swing.JLabel();
         pnlFrame = new javax.swing.JPanel();
         pnlGeneral = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -170,7 +169,8 @@ public class VerMedios extends javax.swing.JFrame {
         lblNumSemanasCompetitiva = new javax.swing.JLabel();
         lblSemanasCompetitiva = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Ver Medios");
         setResizable(false);
 
         lblEncabezadoTitulo.setBackground(new java.awt.Color(98, 142, 255));
@@ -225,7 +225,7 @@ public class VerMedios extends javax.swing.JFrame {
             .addGroup(lblEncabezadoMacroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 734, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDeporteTitulo)
                 .addGap(32, 32, 32)
                 .addComponent(lblGuion1)
@@ -276,9 +276,6 @@ public class VerMedios extends javax.swing.JFrame {
             }
         });
 
-        lblFlexibilidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFlexibilidad.setText("Flexibilidad (min)");
-
         lblSemanasGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblSemanasGeneral.setText("Semanas:");
 
@@ -291,60 +288,23 @@ public class VerMedios extends javax.swing.JFrame {
         lblNumSemanasEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblNumSemanasEspecial.setText("##");
 
-        lblRAG.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRAG.setText("RAG (km)");
-
-        lblRAE.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRAE.setText("RAE (min)");
-
-        lblVelGeneral.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVelGeneral.setText("Vel. General (mtros)");
-
-        lblVelEspecial.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblVelEspecial.setText("Vel. Especial (seg)");
-
-        lblResVelGen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblResVelGen.setText("Res. Vel. Gen. (mtros)");
-
-        lblResVelEsp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblResVelEsp.setText("Res. Vel. Esp. (min)");
-
-        lblFuerzaGen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFuerzaGen.setText("Fuerza Gen. (rep)");
-
-        lblFuerzaEsp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblFuerzaEsp.setText("Fuerza Esp. (rep)");
-
-        lblCoordTecn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCoordTecn.setText("Coord. Tecn. (rep)");
-
-        pnlFrame.setBackground(new java.awt.Color(0, 0, 0));
-
         pnlGeneral.setBackground(new java.awt.Color(51, 153, 0));
 
         tblEtapaGeneral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tblEtapaGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tblEtapaGeneral.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         tblEtapaGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)}
+
             },
             new String [] {
-                "Min.", "Max.", "Prom.", "Ins.", "Vol."
+                "Tipo", "Unidad", "Min.", "Max.", "Prom.", "Ins.", "Vol."
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -365,11 +325,11 @@ public class VerMedios extends javax.swing.JFrame {
         pnlGeneral.setLayout(pnlGeneralLayout);
         pnlGeneralLayout.setHorizontalGroup(
             pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGeneralLayout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+            .addGroup(pnlGeneralLayout.createSequentialGroup()
+                .addGap(148, 148, 148)
                 .addComponent(jLabel2)
-                .addGap(94, 94, 94))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlGeneralLayout.setVerticalGroup(
             pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,7 +337,8 @@ public class VerMedios extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pnlEspecial.setBackground(new java.awt.Color(255, 204, 51));
@@ -387,28 +348,20 @@ public class VerMedios extends javax.swing.JFrame {
         jLabel3.setText("Etapa Especial");
 
         tblEtapaEspecial.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tblEtapaEspecial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tblEtapaEspecial.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         tblEtapaEspecial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)}
+
             },
             new String [] {
-                "Min.", "Max.", "Prom.", "Ins.", "Vol."
+                "Tipo", "Unidad", "Min.", "Max.", "Prom.", "Ins.", "Vol."
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -425,11 +378,11 @@ public class VerMedios extends javax.swing.JFrame {
         pnlEspecial.setLayout(pnlEspecialLayout);
         pnlEspecialLayout.setHorizontalGroup(
             pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEspecialLayout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(89, 89, 89))
+                .addGap(149, 149, 149))
         );
         pnlEspecialLayout.setVerticalGroup(
             pnlEspecialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +390,8 @@ public class VerMedios extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pnlCompetitiva.setBackground(new java.awt.Color(255, 51, 51));
@@ -447,28 +401,20 @@ public class VerMedios extends javax.swing.JFrame {
         jLabel4.setText("Etapa Competitiva");
 
         tblEtapaCompetitiva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tblEtapaCompetitiva.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tblEtapaCompetitiva.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         tblEtapaCompetitiva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)},
-                {null, null,  new Double(0.0), null,  new Double(0.0)}
+
             },
             new String [] {
-                "Min.", "Max.", "Prom.", "Ins.", "Vol."
+                "Tipo", "Unidad", "Min.", "Max.", "Prom.", "Ins.", "Vol."
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -485,11 +431,11 @@ public class VerMedios extends javax.swing.JFrame {
         pnlCompetitiva.setLayout(pnlCompetitivaLayout);
         pnlCompetitivaLayout.setHorizontalGroup(
             pnlCompetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCompetitivaLayout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(60, 60, 60))
+                .addGap(126, 126, 126))
         );
         pnlCompetitivaLayout.setVerticalGroup(
             pnlCompetitivaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,7 +443,8 @@ public class VerMedios extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout pnlFrameLayout = new javax.swing.GroupLayout(pnlFrame);
@@ -505,20 +452,19 @@ public class VerMedios extends javax.swing.JFrame {
         pnlFrameLayout.setHorizontalGroup(
             pnlFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFrameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
                 .addComponent(pnlEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
                 .addComponent(pnlCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlFrameLayout.setVerticalGroup(
             pnlFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFrameLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlCompetitiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlEspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
@@ -537,63 +483,30 @@ public class VerMedios extends javax.swing.JFrame {
             .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnVerEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(184, 184, 184)
+                .addComponent(lblSemanasGeneral)
+                .addGap(6, 6, 6)
+                .addComponent(lblNumSemanasGeneral)
+                .addGap(340, 340, 340)
+                .addComponent(lblSemanasEspecial)
+                .addGap(6, 6, 6)
+                .addComponent(lblNumSemanasEspecial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVerMicrociclos)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSemanasCompetitiva)
                 .addGap(6, 6, 6)
                 .addComponent(lblNumSemanasCompetitiva)
-                .addGap(111, 111, 111))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(299, 299, 299)
-                            .addComponent(lblSemanasGeneral)
-                            .addGap(6, 6, 6)
-                            .addComponent(lblNumSemanasGeneral)
-                            .addGap(228, 228, 228)
-                            .addComponent(lblSemanasEspecial)
-                            .addGap(6, 6, 6)
-                            .addComponent(lblNumSemanasEspecial)
-                            .addGap(457, 457, 457))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(99, 99, 99)
-                                        .addComponent(lblRAE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(lblVelGeneral))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(lblVelEspecial))
-                                    .addComponent(lblResVelGen)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(lblFuerzaGen))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
-                                        .addComponent(lblFuerzaEsp))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(lblCoordTecn))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(42, 42, 42)
-                                        .addComponent(lblFlexibilidad))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(22, 22, 22)
-                                        .addComponent(lblResVelEsp)))
-                                .addComponent(lblRAG))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap()))
+                .addGap(171, 171, 171))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVerEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVerMicrociclos)
+                        .addGap(14, 14, 14))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,50 +514,21 @@ public class VerMedios extends javax.swing.JFrame {
                 .addComponent(lblEncabezadoTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(lblEncabezadoMacro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSemanasGeneral)
+                    .addComponent(lblNumSemanasGeneral)
+                    .addComponent(lblSemanasEspecial)
+                    .addComponent(lblNumSemanasEspecial)
                     .addComponent(lblSemanasCompetitiva)
                     .addComponent(lblNumSemanasCompetitiva))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVerMicrociclos)
                     .addComponent(btnVerEtapas))
                 .addGap(15, 15, 15))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(118, 118, 118)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblSemanasGeneral)
-                        .addComponent(lblNumSemanasGeneral)
-                        .addComponent(lblSemanasEspecial)
-                        .addComponent(lblNumSemanasEspecial))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(73, 73, 73)
-                            .addComponent(lblRAG)
-                            .addGap(2, 2, 2)
-                            .addComponent(lblRAE)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblVelGeneral)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblVelEspecial)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblResVelGen)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblResVelEsp)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblFuerzaGen)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblFuerzaEsp)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblCoordTecn)
-                            .addGap(0, 0, 0)
-                            .addComponent(lblFlexibilidad)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(pnlFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(61, Short.MAX_VALUE)))))
         );
 
         pack();
@@ -679,13 +563,9 @@ public class VerMedios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblCoordTecn;
     private javax.swing.JLabel lblDeporteTitulo;
     private javax.swing.JPanel lblEncabezadoMacro;
     private javax.swing.JPanel lblEncabezadoTitulo;
-    private javax.swing.JLabel lblFlexibilidad;
-    private javax.swing.JLabel lblFuerzaEsp;
-    private javax.swing.JLabel lblFuerzaGen;
     private javax.swing.JLabel lblGuion1;
     private javax.swing.JLabel lblGuion2;
     private javax.swing.JLabel lblIDTitulo;
@@ -693,18 +573,12 @@ public class VerMedios extends javax.swing.JFrame {
     private javax.swing.JLabel lblNumSemanasCompetitiva;
     private javax.swing.JLabel lblNumSemanasEspecial;
     private javax.swing.JLabel lblNumSemanasGeneral;
-    private javax.swing.JLabel lblRAE;
-    private javax.swing.JLabel lblRAG;
     private javax.swing.JLabel lblRamaTitulo;
-    private javax.swing.JLabel lblResVelEsp;
-    private javax.swing.JLabel lblResVelGen;
     private javax.swing.JLabel lblSemanasCompetitiva;
     private javax.swing.JLabel lblSemanasEspecial;
     private javax.swing.JLabel lblSemanasGeneral;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
-    private javax.swing.JLabel lblVelEspecial;
-    private javax.swing.JLabel lblVelGeneral;
     private javax.swing.JPanel pnlCompetitiva;
     private javax.swing.JPanel pnlEspecial;
     private javax.swing.JPanel pnlFrame;

@@ -48,8 +48,12 @@ public class VerMacrociclo extends javax.swing.JFrame {
         this.txtRama.setText(this.macrociclo.getRama().name());
         this.txtPreparador.setText(this.macrociclo.getPreparadorFisico());
         this.txtMetodologo.setText(this.macrociclo.getMetodologo());
-        this.txtInicio.setText(Fecha.formatoFecha(this.macrociclo.getFechaInicio()));
-        this.txtFin.setText(Fecha.formatoFecha(this.macrociclo.getFechaFin()));
+        this.txtInicio.setText(macrociclo.getFechaInicio() == null
+                    ? "Fecha de Inicio no registrada"
+                    : Fecha.formatoFecha(macrociclo.getFechaInicio()));
+        this.txtFin.setText(macrociclo.getFechaFin() == null
+                    ? "Fecha de Fin no registrada"
+                    : Fecha.formatoFecha(macrociclo.getFechaFin()));
     }
 
     /**

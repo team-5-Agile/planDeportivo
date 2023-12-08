@@ -333,7 +333,7 @@ public class Paso1Registro extends javax.swing.JFrame {
         // LOS CAMPOS DE FECHA SE TIENEN QUE GUARAR EN LA SIGUIENTE PANTALLA
         if (macrociclo.getId() != null) {
             JOptionPane.showMessageDialog(null, "Se registró exitosamente el macrociclo: " + macrociclo.getDeporte() + " - Rama: " + macrociclo.getRama().name() + " - Preparador Fisico: " + macrociclo.getPreparadorFisico() + ". ☺"
-                    + "\n Continue al siguiente paso...", "Registro de entrenador exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    + "\n Continue al siguiente paso...", "Registro de macrociclo exitoso", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             try {
                 new Paso2Proporciones(this.entrenador, macrociclo).setVisible(true);

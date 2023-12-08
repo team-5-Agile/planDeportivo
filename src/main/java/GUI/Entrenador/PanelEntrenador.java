@@ -101,8 +101,12 @@ public class PanelEntrenador extends javax.swing.JFrame {
                     macrociclo.getJefeRama(),
                     macrociclo.getPreparadorFisico(),
                     macrociclo.getMetodologo(),
-                    Fecha.formatoFecha(macrociclo.getFechaInicio()),
-                    Fecha.formatoFecha(macrociclo.getFechaFin())};
+                    macrociclo.getFechaInicio() == null
+                    ? "Null"
+                    : Fecha.formatoFecha(macrociclo.getFechaInicio()),
+                    macrociclo.getFechaFin() == null
+                    ? "Null"
+                    : Fecha.formatoFecha(macrociclo.getFechaFin())};
                 modeloTablaEntrenadores.addRow(filaNueva);
             }
             Validaciones.centrarTabla(tblMacrociclos);
